@@ -1945,7 +1945,9 @@ body::before {
 .product-gallery-wrap {
   display: flex;
   gap: 0;
-  max-width: 860px;
+  max-width: 1720px;
+  width: 100%;
+  margin: 0 auto;
   border: 1px solid var(--border);
   background: var(--surface);
   position: relative;
@@ -1976,7 +1978,7 @@ body::before {
   display: flex;
   flex-direction: column;
   gap: 0;
-  width: 90px;
+  width: 180px;
   flex-shrink: 0;
   border-right: 1px solid var(--border);
   background: var(--surface2);
