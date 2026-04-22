@@ -927,10 +927,12 @@ body::before {
   overflow: hidden;
   border: 1px solid var(--border);
   position: relative;
+  transition: height 0.35s ease;
 }
 .pb-carousel-track {
   display: flex;
   transition: transform 0.4s ease;
+  align-items: flex-start;
 }
 .pb-carousel-slide {
   min-width: 100%;
@@ -939,6 +941,10 @@ body::before {
 }
 .pb-carousel-slide::before,
 .pb-carousel-slide::after { display: none; }
+.pb-carousel-slide img {
+  width: 100%;
+  display: block;
+}
 .pb-carousel-btn {
   position: absolute;
   top: 50%;
