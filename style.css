@@ -634,6 +634,7 @@ body::before {
 .port-card.placeholder { cursor: default; }
 .port-card:not(.placeholder) { opacity: 1; cursor: pointer; }
 .port-card:not(.placeholder):hover { background: var(--surface2); }
+.port-card:not(.placeholder):hover .pc-thumb img { transform: scale(1.05); }
 
 .pc-thumb {
   aspect-ratio: 16/9;
