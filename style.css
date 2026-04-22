@@ -528,24 +528,31 @@ body::before {
 .online-item:hover .online-arrow { color: var(--accent2); }
 
 .open-to-work-note {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--green);
-  padding: clamp(16px, 1.5vw, 24px);
+  background: rgba(0,232,122,0.05);
+  border: 1px solid rgba(0,232,122,0.3);
+  border-left: 4px solid var(--green);
+  padding: clamp(24px, 2.5vw, 40px) clamp(24px, 2.5vw, 40px);
+  position: relative;
+  margin-top: 16px;
+  animation: blink 3s ease-in-out infinite;
 }
 .otwn-label {
   font-family: 'Share Tech Mono', monospace;
-  font-size: clamp(8px, 0.7vw, 10px);
-  letter-spacing: 3px;
+  font-size: clamp(12px, 1vw, 16px);
+  letter-spacing: 4px;
   color: var(--green);
   text-transform: uppercase;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 .otwn-text {
-  font-size: clamp(12px, 1vw, 14px);
-  color: var(--text);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: clamp(16px, 1.4vw, 22px);
+  color: var(--text-bright);
   line-height: 1.6;
-  font-weight: 300;
+  font-weight: 500;
 }
 
 /* ══════════════════════════════════════════
