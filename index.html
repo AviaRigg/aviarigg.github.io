@@ -16,7 +16,7 @@
     <div class="nav-link active" id="nl-home" onclick="showPage('home')">Home</div>
     <div class="nav-link" id="nl-portfolio" onclick="showPage('portfolio')">Portfolio</div>
     <div class="nav-link" id="nl-library" onclick="showPage('library')">Script Library</div>
-    <div class="nav-link" id="nl-blog" onclick="showPage('blog')">Shop</div>
+    <div class="nav-link" id="nl-shop" onclick="showPage('shop')">Shop</div>
     <div class="nav-link" id="nl-about" onclick="showPage('about')">About</div>
     <div class="nav-link" id="nl-contact" onclick="showPage('contact')">Contact</div>
     <div class="nav-badge" onclick="showPage('contact')">● Open to Work</div>
@@ -129,7 +129,7 @@
           </div>
           <span class="explore-arrow">▶</span>
         </div>
-        <div class="explore-item" onclick="showPage('blog')">
+        <div class="explore-item" onclick="showPage('shop')">
           <div class="explore-item-left">
             <span class="explore-cat">Store</span>
             <span class="explore-name">Shop</span>
@@ -889,7 +889,7 @@ exclude_roots = [
 </div>
 
 <!-- ══ SHOP ══ -->
-<div class="page" id="page-blog">
+<div class="page" id="page-shop">
   <div class="shop-wrap">
     <div class="port-header">
       <div class="eyebrow">Store</div>
@@ -1115,7 +1115,7 @@ function showPage(id) {
 // Handle URL hash on load
 function loadFromHash() {
   const hash = window.location.hash.replace('#', '');
-  const valid = ['home','portfolio','library','blog','about','contact'];
+  const valid = ['home','portfolio','library','shop','about','contact'];
   if (hash && valid.includes(hash)) {
     showPage(hash);
   } else {
