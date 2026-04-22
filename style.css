@@ -653,9 +653,9 @@ body::before {
 
 .pc-cat {
   font-family: 'Share Tech Mono', monospace;
-  font-size: clamp(8px, 0.7vw, 10px);
+  font-size: clamp(10px, 0.85vw, 12px);
   letter-spacing: 3px;
-  color: var(--accent);
+  color: var(--accent2);
   text-transform: uppercase;
   margin-bottom: 6px;
 }
@@ -1589,9 +1589,9 @@ body::before {
 
 .shop-card-cat {
   font-family: 'Share Tech Mono', monospace;
-  font-size: clamp(8px, 0.7vw, 10px);
+  font-size: clamp(10px, 0.85vw, 12px);
   letter-spacing: 3px;
-  color: var(--accent);
+  color: var(--accent2);
   text-transform: uppercase;
   margin-bottom: 6px;
 }
@@ -1605,8 +1605,8 @@ body::before {
 }
 
 .shop-card-desc {
-  font-size: clamp(11px, 0.9vw, 13px);
-  color: var(--text-dim);
+  font-size: clamp(12px, 0.95vw, 14px);
+  color: var(--text);
   line-height: 1.6;
   margin-bottom: 16px;
 }
@@ -1623,29 +1623,29 @@ body::before {
 .shop-card-price {
   font-family: 'Share Tech Mono', monospace;
   font-size: clamp(12px, 1.1vw, 15px);
-  color: var(--text-dim);
+  color: var(--text);
   letter-spacing: 1px;
 }
 
 .shop-card-badge {
   font-family: 'Share Tech Mono', monospace;
-  font-size: clamp(7px, 0.65vw, 9px);
+  font-size: clamp(9px, 0.75vw, 11px);
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--text-dim);
+  color: var(--text);
   border: 1px solid var(--border);
-  padding: 3px 8px;
+  padding: 4px 10px;
 }
 
 .shop-buy-btn {
   font-family: 'Share Tech Mono', monospace;
-  font-size: clamp(9px, 0.85vw, 11px);
+  font-size: clamp(11px, 0.95vw, 13px);
   letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--accent2);
   border: 1px solid var(--accent);
   background: transparent;
-  padding: 8px 18px;
+  padding: 10px 24px;
   text-decoration: none;
   display: inline-block;
   transition: all 0.2s ease;
