@@ -1556,7 +1556,7 @@ body::before {
 
 .shop-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 1px;
   background: var(--border);
   margin-top: 48px;
@@ -1572,7 +1572,7 @@ body::before {
 }
 
 .shop-card-thumb {
-  aspect-ratio: 2/1;
+  aspect-ratio: 16/5;
   background: var(--surface2);
   display: flex;
   align-items: center;
@@ -1585,7 +1585,7 @@ body::before {
   border-bottom: 1px solid var(--border);
 }
 
-.shop-card-body { padding: clamp(16px, 1.5vw, 24px); }
+.shop-card-body { padding: clamp(10px, 0.9vw, 14px); }
 
 .shop-card-cat {
   font-family: 'Share Tech Mono', monospace;
