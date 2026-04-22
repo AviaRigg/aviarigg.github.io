@@ -1744,7 +1744,7 @@ body::before {
 }
 .product-back {
   font-family: 'Share Tech Mono', monospace;
-  font-size: clamp(10px, 0.85vw, 12px);
+  font-size: clamp(13px, 1vw, 18px);
   letter-spacing: 3px;
   color: var(--accent);
   text-transform: uppercase;
@@ -1763,7 +1763,7 @@ body::before {
   margin-bottom: 80px;
 }
 .product-tagline {
-  font-size: clamp(13px, 1vw, 15px);
+  font-size: clamp(15px, 1.1vw, 22px);
   color: var(--text);
   line-height: 1.7;
   margin-bottom: 24px;
@@ -1776,7 +1776,7 @@ body::before {
 }
 .ptag {
   font-family: 'Share Tech Mono', monospace;
-  font-size: clamp(9px, 0.75vw, 11px);
+  font-size: clamp(11px, 0.85vw, 16px);
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--accent2);
@@ -1792,13 +1792,13 @@ body::before {
 }
 .product-price {
   font-family: 'Share Tech Mono', monospace;
-  font-size: clamp(18px, 1.8vw, 26px);
+  font-size: clamp(22px, 2vw, 36px);
   color: var(--text-bright);
   letter-spacing: 2px;
 }
 .product-buy-btn {
   font-family: 'Share Tech Mono', monospace;
-  font-size: clamp(11px, 0.95vw, 13px);
+  font-size: clamp(13px, 1vw, 18px);
   letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--accent2);
@@ -1816,10 +1816,11 @@ body::before {
 }
 .product-license {
   font-family: 'Share Tech Mono', monospace;
-  font-size: clamp(9px, 0.75vw, 11px);
+  font-size: clamp(12px, 0.85vw, 16px);
   letter-spacing: 2px;
-  color: var(--text-dim);
+  color: var(--text-bright);
   text-transform: uppercase;
+  opacity: 0.7;
 }
 .product-hero-img {
   width: 100%;
@@ -1841,19 +1842,19 @@ body::before {
 }
 .product-feature:hover { background: var(--surface2); }
 .pf-icon {
-  font-size: 18px;
+  font-size: clamp(18px, 1.4vw, 26px);
   color: var(--accent);
   margin-bottom: 12px;
 }
 .pf-title {
   font-family: 'Rajdhani', sans-serif;
-  font-size: clamp(14px, 1.2vw, 17px);
+  font-size: clamp(17px, 1.4vw, 26px);
   font-weight: 600;
   color: var(--text-bright);
   margin-bottom: 8px;
 }
 .pf-desc {
-  font-size: clamp(12px, 0.9vw, 13px);
+  font-size: clamp(14px, 1vw, 18px);
   color: var(--text);
   line-height: 1.6;
 }
@@ -1903,7 +1904,7 @@ body::before {
 }
 .pi-label {
   font-family: 'Share Tech Mono', monospace;
-  font-size: clamp(9px, 0.75vw, 11px);
+  font-size: clamp(12px, 0.85vw, 16px);
   letter-spacing: 3px;
   color: var(--accent);
   text-transform: uppercase;
@@ -1911,13 +1912,13 @@ body::before {
 }
 .pi-title {
   font-family: 'Rajdhani', sans-serif;
-  font-size: clamp(15px, 1.2vw, 18px);
+  font-size: clamp(18px, 1.4vw, 26px);
   font-weight: 600;
   color: var(--text-bright);
   margin-bottom: 8px;
 }
 .pi-desc {
-  font-size: clamp(12px, 0.9vw, 13px);
+  font-size: clamp(14px, 1vw, 18px);
   color: var(--text);
   line-height: 1.6;
 }
@@ -1931,11 +1932,12 @@ body::before {
 }
 .product-cta-text {
   font-family: 'Rajdhani', sans-serif;
-  font-size: clamp(20px, 2vw, 28px);
+  font-size: clamp(22px, 2.2vw, 36px);
   font-weight: 600;
   color: var(--text-bright);
   margin-bottom: 24px;
 }
+
 
 
 .about-wrap {
