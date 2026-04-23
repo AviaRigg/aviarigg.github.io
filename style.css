@@ -39,7 +39,7 @@ body::after {
   background-image: url('./assets/images/rig4K.png');
   background-size: cover;
   background-position: center;
-  opacity: 0.10;
+  opacity: 0.15;
   pointer-events: none;
   z-index: 0;
 }
