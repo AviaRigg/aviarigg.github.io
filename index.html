@@ -424,6 +424,15 @@
         </div>
 
         <div>
+          <div class="lib-cat-header open" onclick="toggleLibCat(this, 'lcat-arnold')">
+            <span>Arnold / Viewport</span><span class="arr">▶</span>
+          </div>
+          <div class="lib-cat-items open" id="lcat-arnold">
+            <div class="lni" data-script="fix-arnold-visibility" data-tags="arnold visibility primaryVisibility render invisible transparent" onclick="libShow('fix-arnold-visibility')"><span class="dot"></span>Fix Arnold Mesh Visibility</div>
+          </div>
+        </div>
+
+        <div>
           <div class="lib-cat-header open" onclick="toggleLibCat(this, 'lcat-reference')">
             <span>Reference</span><span class="arr">▶</span>
           </div>
@@ -451,7 +460,7 @@
           <span style="color:var(--accent);" id="lib-bc-sep" style="display:none;">/</span>
           <span id="lib-bc" style="color:var(--text-bright);">HOME</span>
         </div>
-        <div style="margin-left:auto; font-family:'Share Tech Mono',monospace; font-size:10px; color:var(--text-dim); background:var(--surface2); padding:4px 12px; border:1px solid var(--border);">3 SCRIPTS // 1 REF</div>
+        <div style="margin-left:auto; font-family:'Share Tech Mono',monospace; font-size:10px; color:var(--text-dim); background:var(--surface2); padding:4px 12px; border:1px solid var(--border);">4 SCRIPTS // 1 REF</div>
       </div>
       <div class="lib-content">
         <!-- Welcome -->
@@ -464,7 +473,7 @@
       <div class="stats-grid">
         <div class="stat-card">
           <div class="stat-glyph">⌗</div>
-          <div class="stat-number" id="total-count">3</div>
+          <div class="stat-number" id="total-count">4</div>
           <div class="stat-label">Total Scripts</div>
         </div>
         <div class="stat-card">
@@ -489,6 +498,14 @@
           <span class="last-updated">Last updated: April 2026</span>
         </div>
         <div class="recent-list" id="recent-list">
+          <div class="recent-item" onclick="libShow('fix-arnold-visibility')">
+            <span class="recent-item-tag">ARNOLD</span>
+            <div class="recent-item-info">
+              <span class="recent-item-name">Fix Arnold Mesh Visibility</span>
+              <span class="recent-item-desc">Restore Arnold render visibility flags on a mesh that is invisible in the Arnold viewport despite being unhidden.</span>
+            </div>
+            <span class="recent-item-arrow">▶</span>
+          </div>
           <div class="recent-item" onclick="libShow('mirror-nonlinear')">
             <span class="recent-item-tag">DEFORMERS</span>
             <div class="recent-item-info">
@@ -999,6 +1016,131 @@ exclude_roots = [
       </div><!-- end conv-grid -->
 
     </div><!-- end naming conventions card -->
+
+    <!-- Script: Fix Arnold Mesh Visibility -->
+    <div class="script-card" id="script-fix-arnold-visibility">
+      <div class="card-header">
+        <div class="card-category">// Arnold / Viewport</div>
+        <div class="card-title">Fix Arnold<br>Mesh Visibility</div>
+        <div class="card-desc">
+          Restores Arnold render visibility flags on a mesh that appears invisible in the Arnold viewport
+          even though it is not hidden in the outliner. Caused by Arnold's <code style="color:var(--accent);font-family:'Share Tech Mono',monospace">primaryVisibility</code>,
+          <code style="color:var(--accent);font-family:'Share Tech Mono',monospace">visibleInReflections</code>, and <code style="color:var(--accent);font-family:'Share Tech Mono',monospace">visibleInRefractions</code> flags
+          being silently set to <code style="color:var(--accent);font-family:'Share Tech Mono',monospace">False</code> — commonly triggered by blend shape target editing sessions.
+        </div>
+        <div class="tags">
+          <span class="tag tag-python">Python</span>
+          <span class="tag" style="background:rgba(255,140,0,0.12);color:#ff8c00;border-color:rgba(255,140,0,0.3);">Arnold</span>
+          <span class="tag" style="background:rgba(255,140,0,0.12);color:#ff8c00;border-color:rgba(255,140,0,0.3);">Viewport</span>
+          <span class="tag tag-maya2022">Maya 2022+</span>
+        </div>
+      </div>
+
+      <div class="section-label">// Diagnose — check visibility flags</div>
+      <div class="code-wrap">
+        <div class="code-toolbar">
+          <span class="code-lang">Python</span>
+          <button class="copy-btn" onclick="copyCode('code-arnold-vis-check', this)">Copy</button>
+        </div>
+        <pre id="code-arnold-vis-check"><span class="kw">import</span> maya.cmds <span class="kw">as</span> mc
+
+shape = <span class="str">"Bdt_Body_FinalShape"</span>  <span class="cm"># replace with your shape node name</span>
+<span class="fn">print</span>(<span class="str">"primaryVisibility  :"</span>, mc.<span class="fn">getAttr</span>(shape + <span class="str">".primaryVisibility"</span>))
+<span class="fn">print</span>(<span class="str">"visibleInReflections:"</span>, mc.<span class="fn">getAttr</span>(shape + <span class="str">".visibleInReflections"</span>))
+<span class="fn">print</span>(<span class="str">"visibleInRefractions:"</span>, mc.<span class="fn">getAttr</span>(shape + <span class="str">".visibleInRefractions"</span>))</pre>
+      </div>
+
+      <div class="section-label" style="margin-top:24px;">// Fix — restore flags on a single mesh</div>
+      <div class="code-wrap">
+        <div class="code-toolbar">
+          <span class="code-lang">Python</span>
+          <button class="copy-btn" onclick="copyCode('code-arnold-vis-fix', this)">Copy</button>
+        </div>
+        <pre id="code-arnold-vis-fix"><span class="kw">import</span> maya.cmds <span class="kw">as</span> mc
+
+shape = <span class="str">"Bdt_Body_FinalShape"</span>  <span class="cm"># replace with your shape node name</span>
+mc.<span class="fn">setAttr</span>(shape + <span class="str">".primaryVisibility"</span>,   <span class="nb">True</span>)
+mc.<span class="fn">setAttr</span>(shape + <span class="str">".visibleInReflections"</span>, <span class="nb">True</span>)
+mc.<span class="fn">setAttr</span>(shape + <span class="str">".visibleInRefractions"</span>, <span class="nb">True</span>)
+<span class="fn">print</span>(<span class="str">f"[AviaRigg] Arnold visibility restored on {shape}"</span>)</pre>
+      </div>
+
+      <div class="section-label" style="margin-top:24px;">// Fix All — restore flags on every affected mesh in scene</div>
+      <div style="color:var(--text); font-size:14px; line-height:1.7; margin-bottom:12px;">
+        Run this if multiple meshes were affected at once. Safe to run as a post-blend-shape sanity check.
+      </div>
+      <div class="code-wrap">
+        <div class="code-toolbar">
+          <span class="code-lang">Python</span>
+          <button class="copy-btn" onclick="copyCode('code-arnold-vis-fix-all', this)">Copy</button>
+        </div>
+        <pre id="code-arnold-vis-fix-all"><span class="kw">import</span> maya.cmds <span class="kw">as</span> mc
+
+fixed = []
+<span class="kw">for</span> shape <span class="kw">in</span> mc.<span class="fn">ls</span>(<span class="kv">type</span>=<span class="str">"mesh"</span>):
+    <span class="kw">if</span> mc.<span class="fn">attributeQuery</span>(<span class="str">"primaryVisibility"</span>, <span class="kv">node</span>=shape, <span class="kv">exists</span>=<span class="nb">True</span>):
+        <span class="kw">if</span> <span class="kw">not</span> mc.<span class="fn">getAttr</span>(shape + <span class="str">".primaryVisibility"</span>):
+            mc.<span class="fn">setAttr</span>(shape + <span class="str">".primaryVisibility"</span>,   <span class="nb">True</span>)
+            mc.<span class="fn">setAttr</span>(shape + <span class="str">".visibleInReflections"</span>, <span class="nb">True</span>)
+            mc.<span class="fn">setAttr</span>(shape + <span class="str">".visibleInRefractions"</span>, <span class="nb">True</span>)
+            fixed.<span class="fn">append</span>(shape)
+
+<span class="fn">print</span>(<span class="str">f"[AviaRigg] Fixed {len(fixed)} mesh(es): {fixed}"</span>)</pre>
+      </div>
+
+      <div class="section-label">// Parameters</div>
+      <table class="params-table">
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="param-name">primaryVisibility</td>
+            <td class="param-type">bool</td>
+            <td class="param-desc">Controls whether Arnold renders the mesh at all. False = completely invisible in Arnold viewport and final render.</td>
+          </tr>
+          <tr>
+            <td class="param-name">visibleInReflections</td>
+            <td class="param-type">bool</td>
+            <td class="param-desc">Whether the mesh appears in reflections on other surfaces.</td>
+          </tr>
+          <tr>
+            <td class="param-name">visibleInRefractions</td>
+            <td class="param-type">bool</td>
+            <td class="param-desc">Whether the mesh appears in refractions through transparent materials.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="section-label">// Notes</div>
+      <div class="notes-box">
+        <div class="note-item">
+          <span class="note-bullet">▸</span>
+          <span>These are Arnold-specific attributes — they have no effect in Viewport 2.0. A mesh can look fine in VP2 and be completely invisible in Arnold.</span>
+        </div>
+        <div class="note-item">
+          <span class="note-bullet">▸</span>
+          <span>The flags are silently set to False during blend shape target editing. Exiting edit mode does not restore them.</span>
+        </div>
+        <div class="note-item">
+          <span class="note-bullet">▸</span>
+          <span>Confirmed trigger: entering blend shape target edit mode (Deform → Edit Blend Shape → Edit) on a mesh with MtoA loaded.</span>
+        </div>
+        <div class="note-item">
+          <span class="note-bullet">▸</span>
+          <span>The shape node name is not the same as the transform. Find it in the Attribute Editor — it's the tab ending in "Shape".</span>
+        </div>
+        <div class="note-item">
+          <span class="note-bullet">▸</span>
+          <span>Run the "Fix All" version after any blend shape editing session as a sanity check.</span>
+        </div>
+      </div>
+
+    </div><!-- end script card -->
       </div>
     </div>
   </div>
@@ -1390,6 +1532,10 @@ document.addEventListener('DOMContentLoaded', loadFromHash);
 
 // ── Library ──
 const scripts = {
+    'fix-arnold-visibility': {
+      category: 'Arnold / Viewport',
+      name: 'Fix Arnold Mesh Visibility'
+    },
     'mirror-nonlinear': {
       category: 'Deformers',
       name: 'Mirror NonLinear Deformer Weights'
