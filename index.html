@@ -465,6 +465,15 @@
         </div>
 
         <div>
+          <div class="lib-cat-header open" onclick="toggleLibCat(this, 'lcat-shape-editor')">
+            <span>Shape Editor</span><span class="arr">▶</span>
+          </div>
+          <div class="lib-cat-items open" id="lcat-shape-editor">
+            <div class="lni" data-script="fix-shape-editor" data-tags="shape editor blendshape manager shapeEditorManager broken empty missing fix" onclick="libShow('fix-shape-editor')"><span class="dot"></span>Fix Broken Shape Editor</div>
+          </div>
+        </div>
+
+        <div>
           <div class="lib-cat-header open" onclick="toggleLibCat(this, 'lcat-reference')">
             <span>Reference</span><span class="arr">▶</span>
           </div>
@@ -505,7 +514,7 @@
       <div class="stats-grid">
         <div class="stat-card">
           <div class="stat-glyph">⌗</div>
-          <div class="stat-number" id="total-count">5</div>
+          <div class="stat-number" id="total-count">8</div>
           <div class="stat-label">Total Scripts</div>
         </div>
         <div class="stat-card">
@@ -530,7 +539,7 @@
           <span class="last-updated">Last updated: April 2026</span>
         </div>
         <div class="recent-list" id="recent-list">
-          <div class="recent-item" onclick="libShow('fix-arnold-visibility')">
+          <div class="recent-item" data-script="fix-arnold-visibility" data-tags="arnold visibility primaryVisibility render invisible transparent" onclick="libShow('fix-arnold-visibility')">
             <span class="recent-item-tag">ARNOLD</span>
             <div class="recent-item-info">
               <span class="recent-item-name">Fix Arnold Mesh Visibility</span>
@@ -538,7 +547,7 @@
             </div>
             <span class="recent-item-arrow">▶</span>
           </div>
-          <div class="recent-item" onclick="libShow('mirror-nonlinear')">
+          <div class="recent-item" data-script="mirror-nonlinear" data-tags="deformer mirror weights nonlinear" onclick="libShow('mirror-nonlinear')">
             <span class="recent-item-tag">DEFORMERS</span>
             <div class="recent-item-info">
               <span class="recent-item-name">Mirror NonLinear Deformer Weights</span>
@@ -546,7 +555,7 @@
             </div>
             <span class="recent-item-arrow">▶</span>
           </div>
-          <div class="recent-item" onclick="libShow('add-geo-deformer')">
+          <div class="recent-item" data-script="add-geo-deformer" data-tags="deformer geometry controllers add" onclick="libShow('add-geo-deformer')">
             <span class="recent-item-tag">DEFORMERS</span>
             <div class="recent-item-info">
               <span class="recent-item-name">Add Geometry to Deformer</span>
@@ -554,7 +563,7 @@
             </div>
             <span class="recent-item-arrow">▶</span>
           </div>
-          <div class="recent-item" onclick="libShow('change-default-value')">
+          <div class="recent-item" data-script="change-default-value" data-tags="attribute default value enum" onclick="libShow('change-default-value')">
             <span class="recent-item-tag">ATTRIBUTES</span>
             <div class="recent-item-info">
               <span class="recent-item-name">Change Default Attribute Value</span>
@@ -562,19 +571,35 @@
             </div>
             <span class="recent-item-arrow">▶</span>
           </div>
-          <div class="recent-item" onclick="libShow('transfer-uvs')">
+          <div class="recent-item" data-script="transfer-uvs" data-tags="uv uvs transfer polyTransfer uvset" onclick="libShow('transfer-uvs')">
             <span class="recent-item-tag">UVS</span>
             <div class="recent-item-info">
-              <span class="recent-item-name">Transfer UVs (Blender → Maya)</span>
-              <span class="recent-item-desc">Transfer UVs from a Blender-exported mesh to the original Maya mesh. Includes UV set mismatch fix (UVMap vs map1).</span>
+              <span class="recent-item-name">Transfer UVs</span>
+              <span class="recent-item-desc">Transfer UVs from one mesh to multiple targets using polyTransfer. Select source first, then shift-select targets.</span>
             </div>
             <span class="recent-item-arrow">▶</span>
           </div>
-          <div class="recent-item" onclick="libShow('naming-conventions')">
+          <div class="recent-item" data-script="ikfk-switch" data-tags="ik fk switch match transform arm settings IKFK" onclick="libShow('ikfk-switch')">
+            <span class="recent-item-tag">IK / FK</span>
+            <div class="recent-item-info">
+              <span class="recent-item-name">IK / FK Switch with Match</span>
+              <span class="recent-item-desc">Toggle arm between IK and FK while preserving pose via matchTransform. Assign to a picker button.</span>
+            </div>
+            <span class="recent-item-arrow">▶</span>
+          </div>
+          <div class="recent-item" data-script="fix-shape-editor" data-tags="shape editor blendshape manager shapeEditorManager broken empty missing fix" onclick="libShow('fix-shape-editor')">
+            <span class="recent-item-tag">SHAPE ED.</span>
+            <div class="recent-item-info">
+              <span class="recent-item-name">Fix Broken Shape Editor</span>
+              <span class="recent-item-desc">Fixes a blank Shape Editor caused by a duplicate shapeEditorManager node. Migrates all blendshapes to the primary node.</span>
+            </div>
+            <span class="recent-item-arrow">▶</span>
+          </div>
+          <div class="recent-item" data-script="naming-conventions" data-tags="naming prefix suffix convention node mat shader texture" onclick="libShow('naming-conventions')">
             <span class="recent-item-tag">REFERENCE</span>
             <div class="recent-item-info">
               <span class="recent-item-name">Naming Conventions</span>
-              <span class="recent-item-desc">Full suffix reference for all node types used in AviaRigg rigs.</span>
+              <span class="recent-item-desc">Full suffix reference for all node types used in AviaRigg rigs, including shaders and texture naming.</span>
             </div>
             <span class="recent-item-arrow">▶</span>
           </div>
@@ -1276,12 +1301,93 @@ fixed = []
       </div>
 
     </div><!-- end script card -->
+
+    <!-- Script: Fix Broken Shape Editor -->
+    <div class="script-card" id="script-fix-shape-editor">
+      <div class="card-header">
+        <div class="card-category">// Shape Editor</div>
+        <div class="card-title">Fix Broken<br>Shape Editor</div>
+        <div class="card-desc">
+          Fixes a blank or incomplete Shape Editor caused by a duplicate <code style="color:var(--accent);font-family:'Share Tech Mono',monospace">shapeEditorManager</code> node.
+          Maya's Shape Editor UI only reads from the default node — if a second one exists (from a scene merge, import, or reference),
+          blendshapes registered there will be invisible in the UI. This script reconnects all blendshapes
+          to the correct node via <code style="color:var(--accent);font-family:'Share Tech Mono',monospace">.message</code> and removes the duplicate.
+        </div>
+        <div class="tags">
+          <span class="tag tag-python">Python</span>
+          <span class="tag" style="background:rgba(0,200,255,0.1);color:#00c8ff;border-color:rgba(0,200,255,0.25);">Shape Editor</span>
+          <span class="tag" style="background:rgba(0,200,255,0.1);color:#00c8ff;border-color:rgba(0,200,255,0.25);">BlendShape</span>
+          <span class="tag tag-maya2022">Maya 2022+</span>
+        </div>
+      </div>
+
+      <div class="note-box" style="margin-bottom:24px;">
+        <div class="note-title">// When to use this</div>
+        <div class="note-item"><span class="note-bullet">▸</span><span>Shape Editor opens but shows 0 or only some blendshapes, even though the nodes exist in the scene.</span></div>
+        <div class="note-item"><span class="note-bullet">▸</span><span>Node Editor shows two <code style="color:var(--accent);font-family:'Share Tech Mono',monospace">shapeEditorManager</code> nodes — one connected to all blendshapes, one empty.</span></div>
+        <div class="note-item"><span class="note-bullet">▸</span><span>Caused by scene merges, imports, or references creating a second manager node.</span></div>
+      </div>
+
+      <div class="section-label">// Step 1 — Diagnose: check which manager has which connections</div>
+      <div class="code-wrap">
+        <div class="code-toolbar">
+          <span class="code-lang">Python</span>
+          <button class="copy-btn" onclick="copyCode('code-sem-diagnose', this)">Copy</button>
+        </div>
+        <pre id="code-sem-diagnose"><span class="kw">import</span> maya.cmds <span class="kw">as</span> mc
+
+<span class="kw">for</span> node <span class="kw">in</span> [<span class="str">"shapeEditorManager"</span>, <span class="str">"shapeEditorManager1"</span>]:
+    <span class="kw">if not</span> mc.<span class="fn">objExists</span>(node):
+        <span class="fn">print</span>(<span class="fn">f</span><span class="str">"{node} — does not exist"</span>)
+        <span class="kw">continue</span>
+    indices = mc.<span class="fn">getAttr</span>(node + <span class="str">".blendShapeParent"</span>, multiIndices=<span class="kw">True</span>) <span class="kw">or</span> []
+    <span class="fn">print</span>(<span class="fn">f</span><span class="str">"\n{node} — {len(indices)} blendshapes connected:"</span>)
+    <span class="kw">for</span> i <span class="kw">in</span> indices:
+        conn = mc.<span class="fn">listConnections</span>(<span class="fn">f</span><span class="str">"{node}.blendShapeParent[{i}]"</span>, source=<span class="kw">True</span>, plugs=<span class="kw">True</span>) <span class="kw">or</span> []
+        <span class="fn">print</span>(<span class="fn">f</span><span class="str">"  [{i}]: {conn}"</span>)</pre>
+      </div>
+
+      <div class="section-label" style="margin-top:24px;">// Step 2 — Fix: reconnect all blendshapes via .message to primary manager</div>
+      <div class="code-wrap">
+        <div class="code-toolbar">
+          <span class="code-lang">Python</span>
+          <button class="copy-btn" onclick="copyCode('code-sem-fix', this)">Copy</button>
+        </div>
+        <pre id="code-sem-fix"><span class="kw">import</span> maya.cmds <span class="kw">as</span> mc
+
+node = <span class="str">"shapeEditorManager"</span>
+
+<span class="cm"># Collect blendshapes and disconnect wrong plugs</span>
+indices = mc.<span class="fn">getAttr</span>(node + <span class="str">".blendShapeParent"</span>, multiIndices=<span class="kw">True</span>) <span class="kw">or</span> []
+bs_nodes = []
+
+<span class="kw">for</span> i <span class="kw">in</span> indices:
+    plug = <span class="fn">f</span><span class="str">"{node}.blendShapeParent[{i}]"</span>
+    conns = mc.<span class="fn">listConnections</span>(plug, source=<span class="kw">True</span>, plugs=<span class="kw">True</span>) <span class="kw">or</span> []
+    <span class="kw">for</span> c <span class="kw">in</span> conns:
+        bs_name = c.<span class="fn">split</span>(<span class="str">"."</span>)[<span class="num">0</span>]
+        bs_nodes.<span class="fn">append</span>(bs_name)
+        mc.<span class="fn">disconnectAttr</span>(c, plug)
+
+<span class="cm"># Reconnect via .message — the only plug the Shape Editor reads</span>
+<span class="kw">for</span> i, bs <span class="kw">in</span> <span class="fn">enumerate</span>(bs_nodes):
+    mc.<span class="fn">connectAttr</span>(<span class="fn">f</span><span class="str">"{bs}.message"</span>, <span class="fn">f</span><span class="str">"{node}.blendShapeParent[{i}]"</span>, force=<span class="kw">True</span>)
+    <span class="fn">print</span>(<span class="fn">f</span><span class="str">"Fixed: {bs}.message → {node}.blendShapeParent[{i}]"</span>)
+
+<span class="fn">print</span>(<span class="str">"Done — reopen Shape Editor."</span>)</pre>
+      </div>
+
+      <div class="note-box" style="margin-top:20px;">
+        <div class="note-title">// Notes</div>
+        <div class="note-item"><span class="note-bullet">▸</span><span><code style="color:var(--accent);font-family:'Share Tech Mono',monospace">shapeEditorManager</code> is a protected Maya default node — it cannot be deleted, only the duplicate can be removed.</span></div>
+        <div class="note-item"><span class="note-bullet">▸</span><span>The correct connection is <code style="color:var(--accent);font-family:'Share Tech Mono',monospace">blendShape.message → shapeEditorManager.blendShapeParent[i]</code>. Any other plug (e.g. <code style="color:var(--accent);font-family:'Share Tech Mono',monospace">.midLayerParent</code>) won't register in the UI.</span></div>
+        <div class="note-item"><span class="note-bullet">▸</span><span>Save a backup before running if your scene uses referenced rigs — the duplicate manager may belong to a reference.</span></div>
+      </div>
+    </div><!-- end fix shape editor card -->
       </div>
     </div>
   </div>
 </div>
-
-<!-- ══ SHOP ══ -->
 <div class="page" id="page-shop">
   <div class="shop-wrap">
     <div class="port-header">
@@ -1711,6 +1817,10 @@ const scripts = {
       category: 'Arnold / Viewport',
       name: 'Fix Arnold Mesh Visibility'
     },
+    'fix-shape-editor': {
+      category: 'Shape Editor',
+      name: 'Fix Broken Shape Editor'
+    },
     'mirror-nonlinear': {
       category: 'Deformers',
       name: 'Mirror NonLinear Deformer Weights'
@@ -1776,6 +1886,30 @@ function libFilter(q) {
     const text = item.textContent.toLowerCase();
     item.style.display = (text.includes(q) || tags.includes(q)) ? '' : 'none';
   });
+  syncHomeIndex(q);
+}
+
+function filterScripts(q) {
+  q = q.toLowerCase();
+  document.querySelectorAll('.lni[data-script]').forEach(item => {
+    const tags = item.getAttribute('data-tags') || '';
+    const text = item.textContent.toLowerCase();
+    item.style.display = (text.includes(q) || tags.includes(q)) ? '' : 'none';
+  });
+  syncHomeIndex(q);
+}
+
+function syncHomeIndex(q) {
+  document.querySelectorAll('.recent-item[data-script]').forEach(item => {
+    const tags = item.getAttribute('data-tags') || '';
+    const text = item.textContent.toLowerCase();
+    item.style.display = (!q || text.includes(q) || tags.includes(q)) ? '' : 'none';
+  });
+}
+
+function syncSidebarSearch(val) {
+  const sidebar = document.getElementById('libSearch');
+  if (sidebar) sidebar.value = val;
 }
 
 function copyCode(id, btn) {
