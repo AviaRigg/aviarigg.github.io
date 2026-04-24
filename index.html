@@ -456,6 +456,15 @@
         </div>
 
         <div>
+          <div class="lib-cat-header open" onclick="toggleLibCat(this, 'lcat-shape-editor')">
+            <span>Shape Editor</span><span class="arr">▶</span>
+          </div>
+          <div class="lib-cat-items open" id="lcat-shape-editor">
+            <div class="lni" data-script="fix-shape-editor" data-tags="shape editor blendshape manager shapeEditorManager broken empty missing fix" onclick="libShow('fix-shape-editor')"><span class="dot"></span>Fix Broken Shape Editor</div>
+          </div>
+        </div>
+
+        <div>
           <div class="lib-cat-header open" onclick="toggleLibCat(this, 'lcat-reference')">
             <span>Reference</span><span class="arr">▶</span>
           </div>
@@ -1162,7 +1171,60 @@ mc.<span class="fn">polyUVSet</span>(mesh, <span class="kv">currentUVSet</span>=
           <div class="conv-row"><span class="conv-name">Set</span><span class="conv-suffix">set</span></div>
         </div>
 
+        <div class="conv-section">
+          <div class="conv-section-title">Shaders & Materials</div>
+          <div class="conv-row"><span class="conv-name">Shader / Material</span><span class="conv-suffix">mat</span></div>
+          <div class="conv-row"><span class="conv-name">Shading Group</span><span class="conv-suffix">mat_sg</span></div>
+          <div class="conv-row"><span class="conv-name">File Node</span><span class="conv-suffix">file</span></div>
+          <div class="conv-row"><span class="conv-name">Place2D Texture</span><span class="conv-suffix">p2d</span></div>
+        </div>
+
       </div><!-- end conv-grid -->
+
+      <div style="margin-top:32px;">
+        <div class="conv-section-title" style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);font-family:'Share Tech Mono',monospace;">Texture File Naming — AviaRigg Convention</div>
+        <div style="background:var(--surface);border:1px solid var(--border);padding:20px;">
+          <div style="font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--accent2);margin-bottom:16px;">Pattern</div>
+          <div style="background:rgba(0,0,0,0.4);border:1px solid var(--border);padding:14px 18px;font-family:'Share Tech Mono',monospace;font-size:13px;color:#c084fc;letter-spacing:1px;margin-bottom:20px;">
+            CharacterName_UV_CharacterName_MapType.&lt;UDIM&gt;.ext
+          </div>
+          <div style="font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--accent2);margin-bottom:12px;">Examples</div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px;">
+            <div style="display:flex;align-items:center;gap:12px;font-size:13px;">
+              <span style="font-family:'Share Tech Mono',monospace;color:#c084fc;background:rgba(192,132,252,0.08);padding:3px 10px;border:1px solid rgba(192,132,252,0.2);">Nordic_Bandit_UV_Bandit_BaseColor.1001.png</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;font-size:13px;">
+              <span style="font-family:'Share Tech Mono',monospace;color:#c084fc;background:rgba(192,132,252,0.08);padding:3px 10px;border:1px solid rgba(192,132,252,0.2);">Nordic_Bandit_UV_Bandit_Roughness.&lt;UDIM&gt;.png</span>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+            <div>
+              <div style="font-size:10px;letter-spacing:2px;color:var(--text-dim);font-family:'Share Tech Mono',monospace;margin-bottom:8px;">Map Type Suffixes</div>
+              <div class="conv-row"><span class="conv-name">Base Color</span><span class="conv-suffix">BaseColor</span></div>
+              <div class="conv-row"><span class="conv-name">Roughness</span><span class="conv-suffix">Roughness</span></div>
+              <div class="conv-row"><span class="conv-name">Metalness</span><span class="conv-suffix">Metalness</span></div>
+              <div class="conv-row"><span class="conv-name">Normal</span><span class="conv-suffix">Normal</span></div>
+              <div class="conv-row"><span class="conv-name">Opacity</span><span class="conv-suffix">Opacity</span></div>
+              <div class="conv-row"><span class="conv-name">Emission</span><span class="conv-suffix">Emission</span></div>
+            </div>
+            <div>
+              <div style="font-size:10px;letter-spacing:2px;color:var(--text-dim);font-family:'Share Tech Mono',monospace;margin-bottom:8px;">UDIM Token</div>
+              <div class="conv-row"><span class="conv-name">Maya UDIM</span><span class="conv-suffix">&lt;UDIM&gt;</span></div>
+              <div class="conv-row"><span class="conv-name">Arnold UDIM</span><span class="conv-suffix">&lt;UDIM&gt;</span></div>
+              <div class="conv-row"><span class="conv-name">Specific tile</span><span class="conv-suffix">1001</span></div>
+            </div>
+            <div>
+              <div style="font-size:10px;letter-spacing:2px;color:var(--text-dim);font-family:'Share Tech Mono',monospace;margin-bottom:8px;">Project Base Path</div>
+              <div style="font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--text-dim);line-height:1.8;">
+                <div>Maya_Rigs/</div>
+                <div>&nbsp;&nbsp;CharacterName/</div>
+                <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--accent);">tex/</span></div>
+                <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*.png</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
     </div><!-- end naming conventions card -->
 
@@ -1290,6 +1352,89 @@ fixed = []
       </div>
 
     </div><!-- end script card -->
+
+    <!-- Script: Fix Broken Shape Editor -->
+    <div class="script-card" id="script-fix-shape-editor">
+      <div class="card-header">
+        <div class="card-category">// Shape Editor</div>
+        <div class="card-title">Fix Broken<br>Shape Editor</div>
+        <div class="card-desc">
+          Fixes a blank or incomplete Shape Editor caused by a duplicate <code style="color:var(--accent);font-family:'Share Tech Mono',monospace">shapeEditorManager</code> node.
+          Maya's Shape Editor UI only reads from the default node — if a second one exists (from a scene merge, import, or reference),
+          blendshapes registered there will be invisible in the UI. This script reconnects all blendshapes
+          to the correct node via <code style="color:var(--accent);font-family:'Share Tech Mono',monospace">.message</code> and removes the duplicate.
+        </div>
+        <div class="tags">
+          <span class="tag tag-python">Python</span>
+          <span class="tag" style="background:rgba(0,200,255,0.1);color:#00c8ff;border-color:rgba(0,200,255,0.25);">Shape Editor</span>
+          <span class="tag" style="background:rgba(0,200,255,0.1);color:#00c8ff;border-color:rgba(0,200,255,0.25);">BlendShape</span>
+          <span class="tag tag-maya2022">Maya 2022+</span>
+        </div>
+      </div>
+
+      <div class="note-box" style="margin-bottom:24px;">
+        <div class="note-title">// When to use this</div>
+        <div class="note-item"><span class="note-bullet">▸</span><span>Shape Editor opens but shows 0 or only some blendshapes, even though the nodes exist in the scene.</span></div>
+        <div class="note-item"><span class="note-bullet">▸</span><span>Node Editor shows two <code style="color:var(--accent);font-family:'Share Tech Mono',monospace">shapeEditorManager</code> nodes — one connected to all blendshapes, one empty.</span></div>
+        <div class="note-item"><span class="note-bullet">▸</span><span>Caused by scene merges, imports, or references creating a second manager node.</span></div>
+      </div>
+
+      <div class="section-label">// Step 1 — Diagnose: check which manager has which connections</div>
+      <div class="code-wrap">
+        <div class="code-toolbar">
+          <span class="code-lang">Python</span>
+          <button class="copy-btn" onclick="copyCode('code-sem-diagnose', this)">Copy</button>
+        </div>
+        <pre id="code-sem-diagnose"><span class="kw">import</span> maya.cmds <span class="kw">as</span> mc
+
+<span class="kw">for</span> node <span class="kw">in</span> [<span class="str">"shapeEditorManager"</span>, <span class="str">"shapeEditorManager1"</span>]:
+    <span class="kw">if not</span> mc.<span class="fn">objExists</span>(node):
+        <span class="fn">print</span>(<span class="fn">f</span><span class="str">"{node} — does not exist"</span>)
+        <span class="kw">continue</span>
+    indices = mc.<span class="fn">getAttr</span>(node + <span class="str">".blendShapeParent"</span>, multiIndices=<span class="kw">True</span>) <span class="kw">or</span> []
+    <span class="fn">print</span>(<span class="fn">f</span><span class="str">"\n{node} — {len(indices)} blendshapes connected:"</span>)
+    <span class="kw">for</span> i <span class="kw">in</span> indices:
+        conn = mc.<span class="fn">listConnections</span>(<span class="fn">f</span><span class="str">"{node}.blendShapeParent[{i}]"</span>, source=<span class="kw">True</span>, plugs=<span class="kw">True</span>) <span class="kw">or</span> []
+        <span class="fn">print</span>(<span class="fn">f</span><span class="str">"  [{i}]: {conn}"</span>)</pre>
+      </div>
+
+      <div class="section-label">// Step 2 — Fix: reconnect all blendshapes via .message to primary manager</div>
+      <div class="code-wrap">
+        <div class="code-toolbar">
+          <span class="code-lang">Python</span>
+          <button class="copy-btn" onclick="copyCode('code-sem-fix', this)">Copy</button>
+        </div>
+        <pre id="code-sem-fix"><span class="kw">import</span> maya.cmds <span class="kw">as</span> mc
+
+node = <span class="str">"shapeEditorManager"</span>
+
+<span class="cm"># Collect blendshapes and disconnect wrong plugs</span>
+indices = mc.<span class="fn">getAttr</span>(node + <span class="str">".blendShapeParent"</span>, multiIndices=<span class="kw">True</span>) <span class="kw">or</span> []
+bs_nodes = []
+
+<span class="kw">for</span> i <span class="kw">in</span> indices:
+    plug = <span class="fn">f</span><span class="str">"{node}.blendShapeParent[{i}]"</span>
+    conns = mc.<span class="fn">listConnections</span>(plug, source=<span class="kw">True</span>, plugs=<span class="kw">True</span>) <span class="kw">or</span> []
+    <span class="kw">for</span> c <span class="kw">in</span> conns:
+        bs_name = c.<span class="fn">split</span>(<span class="str">"."</span>)[<span class="num">0</span>]
+        bs_nodes.<span class="fn">append</span>(bs_name)
+        mc.<span class="fn">disconnectAttr</span>(c, plug)
+
+<span class="cm"># Reconnect via .message — the only plug the Shape Editor reads</span>
+<span class="kw">for</span> i, bs <span class="kw">in</span> <span class="fn">enumerate</span>(bs_nodes):
+    mc.<span class="fn">connectAttr</span>(<span class="fn">f</span><span class="str">"{bs}.message"</span>, <span class="fn">f</span><span class="str">"{node}.blendShapeParent[{i}]"</span>, force=<span class="kw">True</span>)
+    <span class="fn">print</span>(<span class="fn">f</span><span class="str">"Fixed: {bs}.message → {node}.blendShapeParent[{i}]"</span>)
+
+<span class="fn">print</span>(<span class="str">"Done — reopen Shape Editor."</span>)</pre>
+      </div>
+
+      <div class="note-box">
+        <div class="note-title">// Notes</div>
+        <div class="note-item"><span class="note-bullet">▸</span><span><code style="color:var(--accent);font-family:'Share Tech Mono',monospace">shapeEditorManager</code> is a protected Maya default node — it cannot be deleted, only the duplicate can be removed.</span></div>
+        <div class="note-item"><span class="note-bullet">▸</span><span>The correct connection is <code style="color:var(--accent);font-family:'Share Tech Mono',monospace">blendShape.message → shapeEditorManager.blendShapeParent[i]</code>. Any other plug (e.g. <code style="color:var(--accent);font-family:'Share Tech Mono',monospace">.midLayerParent</code>) won't register in the UI.</span></div>
+        <div class="note-item"><span class="note-bullet">▸</span><span>Save a backup before running if your scene uses referenced rigs — the duplicate manager may belong to a reference.</span></div>
+      </div>
+    </div><!-- end fix shape editor card -->
       </div>
     </div>
   </div>
@@ -1720,6 +1865,10 @@ const scripts = {
     'fix-arnold-visibility': {
       category: 'Arnold / Viewport',
       name: 'Fix Arnold Mesh Visibility'
+    },
+    'fix-shape-editor': {
+      category: 'Shape Editor',
+      name: 'Fix Broken Shape Editor'
     },
     'mirror-nonlinear': {
       category: 'Deformers',
