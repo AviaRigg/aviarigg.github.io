@@ -1893,63 +1893,56 @@ function toggleLibCat(header, id) {
 // Then scores each item using token matching + substring matching + fuzzy run
 // so "non linear", "nonlinear", "nlin", "ik fk", "ikfk" all resolve correctly
 
+// ── Smart Search ──────────────────────────────────────────────────
+// Matches against the script NAME and TAGS only — not the description.
+// Two layers:
+//   1. Token match  — splits query by spaces, each word must appear in name/tags.
+//      "non linear" → finds "non" AND "linear" → hits NonLinear.
+//   2. Collapse match — strips spaces from both sides, does substring.
+//      "nonlinear" → matches "non linear" in tags. "ikfk" → matches "ik fk".
+// No fuzzy/subsequence — too loose, produces false positives.
+
 function normalise(s) {
   return s.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
 }
 
-// Returns true if all tokens in the query appear somewhere in the haystack
+// All query tokens must appear somewhere in haystack
 function tokenMatch(query, haystack) {
   const tokens = normalise(query).split(' ').filter(Boolean);
   const norm = normalise(haystack);
   return tokens.every(t => norm.includes(t));
 }
 
-// Returns true if the query (collapsed, no spaces) appears as a subsequence
-// in the haystack (collapsed). Handles "nonlinear" matching "non linear".
+// Query collapsed (no spaces) must appear as substring in collapsed haystack
 function collapseMatch(query, haystack) {
-  const q = query.replace(/\s+/g, '');
+  const q = normalise(query).replace(/\s+/g, '');
   const h = normalise(haystack).replace(/\s+/g, '');
-  return h.includes(q);
+  return q.length > 0 && h.includes(q);
 }
 
-// Fuzzy: every char of query appears in order in haystack
-function fuzzyMatch(query, haystack) {
-  const q = query.replace(/\s+/g, '').toLowerCase();
-  const h = normalise(haystack).replace(/\s+/g, '');
-  let qi = 0;
-  for (let hi = 0; hi < h.length && qi < q.length; hi++) {
-    if (h[hi] === q[qi]) qi++;
-  }
-  return qi === q.length;
-}
-
-function smartMatch(query, textContent, tags) {
+function smartMatch(query, name, tags) {
   if (!query) return true;
-  const combined = textContent + ' ' + tags;
-  return tokenMatch(query, combined)
-      || collapseMatch(query, combined)
-      || fuzzyMatch(query, combined);
+  const haystack = name + ' ' + tags;
+  return tokenMatch(query, haystack) || collapseMatch(query, haystack);
 }
 
 function runFilter(q) {
-  // Sidebar items
+  // Sidebar: match against the item's text (just the label) + data-tags
   document.querySelectorAll('.lni[data-script]').forEach(item => {
     const tags = item.getAttribute('data-tags') || '';
-    const text = item.textContent;
-    item.style.display = smartMatch(q, text, tags) ? '' : 'none';
+    const name = item.querySelector('.dot') ? item.textContent.replace('•', '').trim() : item.textContent.trim();
+    item.style.display = smartMatch(q, name, tags) ? '' : 'none';
   });
-  // Homepage index rows
+  // Homepage index: match against data-name + data-tags (set on each row)
   document.querySelectorAll('.recent-item[data-script]').forEach(item => {
     const tags = item.getAttribute('data-tags') || '';
-    const text = item.textContent;
-    item.style.display = smartMatch(q, text, tags) ? '' : 'none';
+    const name = item.querySelector('.recent-item-name') ? item.querySelector('.recent-item-name').textContent.trim() : '';
+    item.style.display = smartMatch(q, name, tags) ? '' : 'none';
   });
 }
 
 function libFilter(q) {
   runFilter(q);
-  const sidebar = document.getElementById('libSearch');
-  if (sidebar && sidebar !== document.activeElement) sidebar.value = q;
 }
 
 function filterScripts(q) {
@@ -1959,7 +1952,7 @@ function filterScripts(q) {
 }
 
 function syncHomeIndex(q) {
-  // kept for compatibility — logic is now inside runFilter
+  // kept for compatibility
 }
 
 function syncSidebarSearch(val) {
