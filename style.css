@@ -1775,13 +1775,19 @@ body::before {
   }
 
   @media (min-width: 3840px) {
-    :root { --sidebar-width: 480px; }
+    :root { --sidebar-width: 560px; }
     body { font-size: 26px; }
     .logo-name { font-size: 42px; }
     .content { padding: 80px; max-width: 2000px; }
     .card-title { font-size: 72px; }
     pre { font-size: 20px; }
-    .conv-grid { grid-template-columns: 1fr 1fr 1fr 1fr; }
+    .lni { font-size: 20px; padding: 14px 24px 14px 42px; }
+    .lib-cat-header { font-size: 15px; padding: 14px 24px; }
+    .conv-grid { grid-template-columns: 1fr 1fr 1fr 1fr; gap: 36px; }
+    .conv-section { padding: 36px; }
+    .conv-section-title { font-size: 16px; }
+    .conv-row { font-size: 22px; padding: 10px 0; }
+    .conv-suffix { font-size: 19px; }
   }
 
   @media (max-width: 1200px) {
@@ -2820,7 +2826,14 @@ body::before {
 }
 
 @media (min-width: 2560px) {
-  .lib-sidebar { width: 400px; font-size: 18px; }
+  .lib-sidebar { width: 460px; font-size: 20px; }
+  .lni { font-size: 16px; padding: 10px 20px 10px 34px; }
+  .lib-cat-header { font-size: 12px; padding: 10px 20px; letter-spacing: 4px; }
+  .conv-grid { grid-template-columns: 1fr 1fr 1fr; gap: 32px; }
+  .conv-section { padding: 32px; }
+  .conv-section-title { font-size: 14px; letter-spacing: 4px; margin-bottom: 18px; }
+  .conv-row { font-size: 18px; padding: 8px 0; }
+  .conv-suffix { font-size: 16px; padding: 3px 14px; }
   .hero-bar-item { font-size: 13px; }
 }
 

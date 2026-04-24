@@ -418,13 +418,13 @@
           <span style="color:var(--accent); font-size:12px;">⌂</span> Home
         </div>
 
+        <!-- Sidebar: alphabetical by category -->
         <div>
-          <div class="lib-cat-header open" onclick="toggleLibCat(this, 'lcat-deformers')">
-            <span>Deformers</span><span class="arr">▶</span>
+          <div class="lib-cat-header open" onclick="toggleLibCat(this, 'lcat-arnold')">
+            <span>Arnold / Viewport</span><span class="arr">▶</span>
           </div>
-          <div class="lib-cat-items open" id="lcat-deformers">
-            <div class="lni" data-script="mirror-nonlinear" data-tags="deformer mirror weights" onclick="libShow('mirror-nonlinear')"><span class="dot"></span>Mirror NonLinear Weights</div>
-            <div class="lni" data-script="add-geo-deformer" data-tags="deformer geometry controllers" onclick="libShow('add-geo-deformer')"><span class="dot"></span>Add Geometry to Deformer</div>
+          <div class="lib-cat-items open" id="lcat-arnold">
+            <div class="lni" data-script="fix-arnold-visibility" data-tags="arnold visibility primaryVisibility render invisible transparent" onclick="libShow('fix-arnold-visibility')"><span class="dot"></span>Fix Arnold Mesh Visibility</div>
           </div>
         </div>
 
@@ -438,20 +438,12 @@
         </div>
 
         <div>
-          <div class="lib-cat-header open" onclick="toggleLibCat(this, 'lcat-arnold')">
-            <span>Arnold / Viewport</span><span class="arr">▶</span>
+          <div class="lib-cat-header open" onclick="toggleLibCat(this, 'lcat-deformers')">
+            <span>Deformers</span><span class="arr">▶</span>
           </div>
-          <div class="lib-cat-items open" id="lcat-arnold">
-            <div class="lni" data-script="fix-arnold-visibility" data-tags="arnold visibility primaryVisibility render invisible transparent" onclick="libShow('fix-arnold-visibility')"><span class="dot"></span>Fix Arnold Mesh Visibility</div>
-          </div>
-        </div>
-
-        <div>
-          <div class="lib-cat-header open" onclick="toggleLibCat(this, 'lcat-uvs')">
-            <span>UVs</span><span class="arr">▶</span>
-          </div>
-          <div class="lib-cat-items open" id="lcat-uvs">
-            <div class="lni" data-script="transfer-uvs" data-tags="uv uvs transfer polyTransfer uvset" onclick="libShow('transfer-uvs')"><span class="dot"></span>Transfer UVs</div>
+          <div class="lib-cat-items open" id="lcat-deformers">
+            <div class="lni" data-script="add-geo-deformer" data-tags="deformer geometry controllers" onclick="libShow('add-geo-deformer')"><span class="dot"></span>Add Geometry to Deformer</div>
+            <div class="lni" data-script="mirror-nonlinear" data-tags="deformer mirror weights" onclick="libShow('mirror-nonlinear')"><span class="dot"></span>Mirror NonLinear Weights</div>
           </div>
         </div>
 
@@ -470,6 +462,15 @@
           </div>
           <div class="lib-cat-items open" id="lcat-shape-editor">
             <div class="lni" data-script="fix-shape-editor" data-tags="shape editor blendshape manager shapeEditorManager broken empty missing fix" onclick="libShow('fix-shape-editor')"><span class="dot"></span>Fix Broken Shape Editor</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="lib-cat-header open" onclick="toggleLibCat(this, 'lcat-uvs')">
+            <span>UVs</span><span class="arr">▶</span>
+          </div>
+          <div class="lib-cat-items open" id="lcat-uvs">
+            <div class="lni" data-script="transfer-uvs" data-tags="uv uvs transfer polyTransfer uvset" onclick="libShow('transfer-uvs')"><span class="dot"></span>Transfer UVs</div>
           </div>
         </div>
 
@@ -514,7 +515,7 @@
       <div class="stats-grid">
         <div class="stat-card">
           <div class="stat-glyph">⌗</div>
-          <div class="stat-number" id="total-count">8</div>
+          <div class="stat-number" id="total-count">7</div>
           <div class="stat-label">Total Scripts</div>
         </div>
         <div class="stat-card">
@@ -539,14 +540,6 @@
           <span class="last-updated">Last updated: April 2026</span>
         </div>
         <div class="recent-list" id="recent-list">
-          <div class="recent-item" data-script="fix-arnold-visibility" data-tags="arnold visibility primaryVisibility render invisible transparent" onclick="libShow('fix-arnold-visibility')">
-            <span class="recent-item-tag">ARNOLD</span>
-            <div class="recent-item-info">
-              <span class="recent-item-name">Fix Arnold Mesh Visibility</span>
-              <span class="recent-item-desc">Restore Arnold render visibility flags on a mesh that is invisible in the Arnold viewport despite being unhidden.</span>
-            </div>
-            <span class="recent-item-arrow">▶</span>
-          </div>
           <div class="recent-item" data-script="mirror-nonlinear" data-tags="deformer mirror weights nonlinear" onclick="libShow('mirror-nonlinear')">
             <span class="recent-item-tag">DEFORMERS</span>
             <div class="recent-item-info">
@@ -587,6 +580,14 @@
             </div>
             <span class="recent-item-arrow">▶</span>
           </div>
+          <div class="recent-item" data-script="fix-arnold-visibility" data-tags="arnold visibility primaryVisibility render invisible transparent" onclick="libShow('fix-arnold-visibility')">
+            <span class="recent-item-tag">ARNOLD</span>
+            <div class="recent-item-info">
+              <span class="recent-item-name">Fix Arnold Mesh Visibility</span>
+              <span class="recent-item-desc">Restore Arnold render visibility flags on a mesh that is invisible in the Arnold viewport despite being unhidden.</span>
+            </div>
+            <span class="recent-item-arrow">▶</span>
+          </div>
           <div class="recent-item" data-script="fix-shape-editor" data-tags="shape editor blendshape manager shapeEditorManager broken empty missing fix" onclick="libShow('fix-shape-editor')">
             <span class="recent-item-tag">SHAPE ED.</span>
             <div class="recent-item-info">
@@ -595,7 +596,7 @@
             </div>
             <span class="recent-item-arrow">▶</span>
           </div>
-          <div class="recent-item" data-script="naming-conventions" data-tags="naming prefix suffix convention node mat shader texture" onclick="libShow('naming-conventions')">
+          <div class="recent-item" data-script="naming-conventions" data-tags="naming prefix suffix convention node mat shader texture" onclick="libShow('naming-conventions')" style="border-top: 1px solid var(--border); margin-top:4px; padding-top:4px; opacity:0.7;">
             <span class="recent-item-tag">REFERENCE</span>
             <div class="recent-item-info">
               <span class="recent-item-name">Naming Conventions</span>
@@ -1171,6 +1172,14 @@ ikfk = mc.<span class="fn">getAttr</span>(<span class="str">'l_arm_settings_ctl.
           <div class="conv-section-title">Display & Organization</div>
           <div class="conv-row"><span class="conv-name">Display Layer</span><span class="conv-suffix">layer</span></div>
           <div class="conv-row"><span class="conv-name">Set</span><span class="conv-suffix">set</span></div>
+        </div>
+
+        <div class="conv-section">
+          <div class="conv-section-title">Shaders & Materials</div>
+          <div class="conv-row"><span class="conv-name">Shader / Material</span><span class="conv-suffix">_mat</span></div>
+          <div class="conv-row"><span class="conv-name">Shading Group</span><span class="conv-suffix">_mat_sg</span></div>
+          <div class="conv-row"><span class="conv-name">File Node</span><span class="conv-suffix">_file</span></div>
+          <div class="conv-row"><span class="conv-name">Place2D Texture</span><span class="conv-suffix">_p2d</span></div>
         </div>
 
       </div><!-- end conv-grid -->
@@ -1805,6 +1814,18 @@ document.addEventListener('DOMContentLoaded', loadFromHash);
 
 // ── Library ──
 const scripts = {
+    'mirror-nonlinear': {
+      category: 'Deformers',
+      name: 'Mirror NonLinear Deformer Weights'
+    },
+    'add-geo-deformer': {
+      category: 'Deformers',
+      name: 'Add Geometry to Deformer'
+    },
+    'change-default-value': {
+      category: 'Attributes',
+      name: 'Change Default Attribute Value'
+    },
     'transfer-uvs': {
       category: 'UVs',
       name: 'Transfer UVs'
@@ -1820,18 +1841,6 @@ const scripts = {
     'fix-shape-editor': {
       category: 'Shape Editor',
       name: 'Fix Broken Shape Editor'
-    },
-    'mirror-nonlinear': {
-      category: 'Deformers',
-      name: 'Mirror NonLinear Deformer Weights'
-    },
-    'add-geo-deformer': {
-      category: 'Deformers',
-      name: 'Add Geometry to Deformer'
-    },
-    'change-default-value': {
-      category: 'Attributes',
-      name: 'Change Default Attribute Value'
     },
     'naming-conventions': {
       category: 'Reference',
