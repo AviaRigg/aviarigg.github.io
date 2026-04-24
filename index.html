@@ -447,6 +447,15 @@
         </div>
 
         <div>
+          <div class="lib-cat-header open" onclick="toggleLibCat(this, 'lcat-uvs')">
+            <span>UVs</span><span class="arr">▶</span>
+          </div>
+          <div class="lib-cat-items open" id="lcat-uvs">
+            <div class="lni" data-script="transfer-uvs" data-tags="uv uvs transfer blender polyTransfer uvset map1 UVMap" onclick="libShow('transfer-uvs')"><span class="dot"></span>Transfer UVs (Blender → Maya)</div>
+          </div>
+        </div>
+
+        <div>
           <div class="lib-cat-header open" onclick="toggleLibCat(this, 'lcat-reference')">
             <span>Reference</span><span class="arr">▶</span>
           </div>
@@ -474,7 +483,7 @@
           <span style="color:var(--accent);" id="lib-bc-sep" style="display:none;">/</span>
           <span id="lib-bc" style="color:var(--text-bright);">HOME</span>
         </div>
-        <div style="margin-left:auto; font-family:'Share Tech Mono',monospace; font-size:10px; color:var(--text-dim); background:var(--surface2); padding:4px 12px; border:1px solid var(--border);">4 SCRIPTS // 1 REF</div>
+        <div style="margin-left:auto; font-family:'Share Tech Mono',monospace; font-size:10px; color:var(--text-dim); background:var(--surface2); padding:4px 12px; border:1px solid var(--border);">5 SCRIPTS // 1 REF</div>
       </div>
       <div class="lib-content">
         <!-- Welcome -->
@@ -487,7 +496,7 @@
       <div class="stats-grid">
         <div class="stat-card">
           <div class="stat-glyph">⌗</div>
-          <div class="stat-number" id="total-count">4</div>
+          <div class="stat-number" id="total-count">5</div>
           <div class="stat-label">Total Scripts</div>
         </div>
         <div class="stat-card">
@@ -541,6 +550,14 @@
             <div class="recent-item-info">
               <span class="recent-item-name">Change Default Attribute Value</span>
               <span class="recent-item-desc">Edit the default value of any existing attribute, including enums.</span>
+            </div>
+            <span class="recent-item-arrow">▶</span>
+          </div>
+          <div class="recent-item" onclick="libShow('transfer-uvs')">
+            <span class="recent-item-tag">UVS</span>
+            <div class="recent-item-info">
+              <span class="recent-item-name">Transfer UVs (Blender → Maya)</span>
+              <span class="recent-item-desc">Transfer UVs from a Blender-exported mesh to the original Maya mesh. Includes UV set mismatch fix (UVMap vs map1).</span>
             </div>
             <span class="recent-item-arrow">▶</span>
           </div>
@@ -892,6 +909,124 @@ exclude_roots = [
       </div>
 
     </div><!-- end script card -->
+
+    <!-- Script: Transfer UVs Blender to Maya -->
+    <div class="script-card" id="script-transfer-uvs">
+      <div class="card-header">
+        <div class="card-category">// UVs</div>
+        <div class="card-title">Transfer UVs<br>(Blender → Maya)</div>
+        <div class="card-desc">
+          Transfer UVs from a Blender-exported mesh back to the original Maya mesh using
+          <code style="color:var(--accent);font-family:'Share Tech Mono',monospace">polyTransfer</code> (same topology) or
+          <code style="color:var(--accent);font-family:'Share Tech Mono',monospace">transferAttributes</code> (closest point).
+          Also covers the common UV set name mismatch between Blender (<code style="color:var(--accent);font-family:'Share Tech Mono',monospace">UVMap</code>) and Maya (<code style="color:var(--accent);font-family:'Share Tech Mono',monospace">map1</code>)
+          that causes UVs to appear missing after transfer.
+        </div>
+        <div class="tags">
+          <span class="tag tag-python">Python</span>
+          <span class="tag" style="background:rgba(0,180,255,0.1);color:#00b4ff;border-color:rgba(0,180,255,0.3);">UVs</span>
+          <span class="tag tag-maya2022">Maya 2022+</span>
+        </div>
+      </div>
+
+      <div class="section-label">// Script — Batch Transfer (same topology, multiple meshes)</div>
+      <div style="color:var(--text); font-size:14px; line-height:1.7; margin-bottom:12px;">
+        Select all meshes: first select the source (Blender UV mesh), then shift-select all Maya target meshes. Run the script.
+      </div>
+      <div class="code-wrap">
+        <div class="code-toolbar">
+          <span class="code-lang">Python</span>
+          <button class="copy-btn" onclick="copyCode('code-transfer-uvs-batch', this)">Copy</button>
+        </div>
+        <pre id="code-transfer-uvs-batch"><span class="kw">import</span> maya.cmds <span class="kw">as</span> mc
+
+selection = mc.<span class="fn">ls</span>(<span class="kv">sl</span>=<span class="nb">True</span>)
+<span class="cm"># selection[0] = source mesh (Blender UV mesh)
+# selection[1:] = target meshes (Maya originals)</span>
+
+<span class="kw">for</span> i, x <span class="kw">in</span> <span class="fn">enumerate</span>(selection):
+    <span class="kw">if</span> i != <span class="nb">0</span>:
+        mc.<span class="fn">polyTransfer</span>(selection[i], <span class="kv">uvSets</span>=<span class="nb">True</span>, <span class="kv">ao</span>=selection[<span class="nb">0</span>], <span class="kv">constructionHistory</span>=<span class="nb">False</span>)
+        mc.<span class="fn">warning</span>(<span class="str">"uvs transferred correctly"</span>)</pre>
+      </div>
+
+      <div class="section-label" style="margin-top:24px;">// Script — Single Mesh Transfer (closest point, different topology)</div>
+      <div style="color:var(--text); font-size:14px; line-height:1.7; margin-bottom:12px;">
+        Use when <code style="color:var(--accent);font-family:'Share Tech Mono',monospace">polyTransfer</code> fails or topology differs. Matches by world-space proximity.
+      </div>
+      <div class="code-wrap">
+        <div class="code-toolbar">
+          <span class="code-lang">Python</span>
+          <button class="copy-btn" onclick="copyCode('code-transfer-uvs-single', this)">Copy</button>
+        </div>
+        <pre id="code-transfer-uvs-single"><span class="kw">import</span> maya.cmds <span class="kw">as</span> mc
+
+source = <span class="str">"Bdt_MouthInterior_UV"</span>  <span class="cm"># Blender mesh with correct UVs</span>
+target = <span class="str">"Bdt_MouthInterior"</span>     <span class="cm"># Maya mesh needing UVs</span>
+
+mc.<span class="fn">polyUVSet</span>(target, <span class="kv">create</span>=<span class="nb">True</span>, <span class="kv">uvSet</span>=<span class="str">"map1"</span>)
+
+mc.<span class="fn">transferAttributes</span>(
+    source, target,
+    <span class="kv">transferUVs</span>=<span class="nb">2</span>,
+    <span class="kv">transferNormals</span>=<span class="nb">0</span>,
+    <span class="kv">transferColors</span>=<span class="nb">0</span>,
+    <span class="kv">sampleSpace</span>=<span class="nb">4</span>,   <span class="cm"># component space — best for identical topology</span>
+    <span class="kv">searchMethod</span>=<span class="nb">3</span>,
+    <span class="kv">flipUVs</span>=<span class="nb">0</span>,
+    <span class="kv">colorBorders</span>=<span class="nb">1</span>
+)
+
+mc.<span class="fn">delete</span>(target, <span class="kv">constructionHistory</span>=<span class="nb">True</span>)</pre>
+      </div>
+
+      <div class="section-label" style="margin-top:24px;">// Fix — UV Set Name Mismatch (UVMap vs map1)</div>
+      <div style="color:var(--text); font-size:14px; line-height:1.7; margin-bottom:12px;">
+        If UVs appear missing after transfer, Blender exported them into a UV set named <code style="color:var(--accent);font-family:'Share Tech Mono',monospace">UVMap</code>
+        instead of Maya's default <code style="color:var(--accent);font-family:'Share Tech Mono',monospace">map1</code>. Diagnose and fix:
+      </div>
+      <div class="code-wrap">
+        <div class="code-toolbar">
+          <span class="code-lang">Python</span>
+          <button class="copy-btn" onclick="copyCode('code-transfer-uvs-fix', this)">Copy</button>
+        </div>
+        <pre id="code-transfer-uvs-fix"><span class="kw">import</span> maya.cmds <span class="kw">as</span> mc
+
+mesh = <span class="str">"Bdt_MouthInterior"</span>  <span class="cm"># replace with your mesh name</span>
+
+<span class="cm"># Step 1 — list all UV sets on the mesh</span>
+<span class="fn">print</span>(mc.<span class="fn">polyUVSet</span>(mesh, <span class="kv">query</span>=<span class="nb">True</span>, <span class="kv">allUVSets</span>=<span class="nb">True</span>))
+<span class="fn">print</span>(mc.<span class="fn">polyUVSet</span>(mesh, <span class="kv">query</span>=<span class="nb">True</span>, <span class="kv">currentUVSet</span>=<span class="nb">True</span>))
+
+<span class="cm"># Step 2 — switch active UV set to UVMap (Blender default name)</span>
+mc.<span class="fn">polyUVSet</span>(mesh, <span class="kv">currentUVSet</span>=<span class="nb">True</span>, <span class="kv">uvSet</span>=<span class="str">"UVMap"</span>)</pre>
+      </div>
+
+      <div class="section-label">// Notes</div>
+      <div class="notes-box">
+        <div class="note-item">
+          <span class="note-bullet">▸</span>
+          <span>For batch transfer: selection order matters. First selected = source (Blender mesh). All others = targets.</span>
+        </div>
+        <div class="note-item">
+          <span class="note-bullet">▸</span>
+          <span>Blender names its UV sets <code style="color:var(--accent);font-family:'Share Tech Mono',monospace">UVMap</code> by default. Maya uses <code style="color:var(--accent);font-family:'Share Tech Mono',monospace">map1</code>. This mismatch causes UVs to silently transfer into a non-active set.</span>
+        </div>
+        <div class="note-item">
+          <span class="note-bullet">▸</span>
+          <span>If the UV editor looks empty after transfer, always check <code style="color:var(--accent);font-family:'Share Tech Mono',monospace">polyUVSet -query -allUVSets</code> first — the UVs are likely there, just in the wrong active set.</span>
+        </div>
+        <div class="note-item">
+          <span class="note-bullet">▸</span>
+          <span>Use <code style="color:var(--accent);font-family:'Share Tech Mono',monospace">sampleSpace=4</code> (component space) for identical topology. Use <code style="color:var(--accent);font-family:'Share Tech Mono',monospace">sampleSpace=0</code> (world space) only if meshes are in the same world position.</span>
+        </div>
+        <div class="note-item">
+          <span class="note-bullet">▸</span>
+          <span>Always delete construction history after <code style="color:var(--accent);font-family:'Share Tech Mono',monospace">transferAttributes</code> — it leaves a dependency node on the mesh.</span>
+        </div>
+      </div>
+
+    </div><!-- end transfer uvs card -->
 
     <!-- Naming Conventions -->
     <div class="script-card" id="script-naming-conventions">
@@ -1578,6 +1713,10 @@ document.addEventListener('DOMContentLoaded', loadFromHash);
 
 // ── Library ──
 const scripts = {
+    'transfer-uvs': {
+      category: 'UVs',
+      name: 'Transfer UVs (Blender → Maya)'
+    },
     'fix-arnold-visibility': {
       category: 'Arnold / Viewport',
       name: 'Fix Arnold Mesh Visibility'
