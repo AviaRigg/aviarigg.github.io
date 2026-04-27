@@ -2301,6 +2301,9 @@ body::before {
 .product-includes-grid--2col {
   grid-template-columns: repeat(2, 1fr);
 }
+#page-product-curvelib .product-includes-section {
+  margin-bottom: 80px;
+}
 /* Curvelib includes 2-col grid */
 
 /* Space between Included Files and Gallery title */
@@ -2535,7 +2538,6 @@ body::before {
   grid-template-columns: repeat(4, 1fr);
   gap: 1px;
   background: var(--border);
-  margin-bottom: 80px;
 }
 .product-include {
   background: var(--surface);
