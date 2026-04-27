@@ -2298,6 +2298,9 @@ body::before {
 }
 
 /* Curvelib includes section spacing */
+.product-includes-grid--2col {
+  grid-template-columns: repeat(2, 1fr);
+}
 #page-product-curvelib .product-includes-section {
   margin-bottom: 64px;
 }
