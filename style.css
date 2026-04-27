@@ -2297,21 +2297,7 @@ body::before {
   border: none;
 }
 
-/* Curvelib: 2-item includes — centered cards */
-#page-product-curvelib .product-includes-grid {
-  display: flex;
-  justify-content: center;
-  grid-template-columns: unset;
-  max-width: unset;
-  margin: 0;
-  background: transparent;
-  gap: 1px;
-}
-#page-product-curvelib .product-includes-grid .product-include {
-  width: clamp(220px, 25vw, 380px);
-  flex-shrink: 0;
-  border: 1px solid var(--border);
-}
+/* Curvelib includes section spacing */
 #page-product-curvelib .product-includes-section {
   margin-bottom: 64px;
 }
@@ -3096,3 +3082,4 @@ body::before {
   .product-buy-row { flex-wrap: wrap; gap: 12px; }
   .shop-notice { flex-direction: column; gap: 6px; }
 }
+
