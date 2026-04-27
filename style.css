@@ -2380,8 +2380,9 @@ body::before {
 
 .product-gallery-wrap {
   display: flex;
-  align-items: stretch;
+  align-items: flex-start;
   gap: 0;
+  overflow: hidden;
   max-width: 1720px;
   width: 100%;
   margin: 0 auto;
@@ -2422,8 +2423,8 @@ body::before {
   border-right: 1px solid var(--border);
   background: rgba(13, 11, 26, 0.5);
   overflow-y: auto;
-  max-height: 100%;
   align-self: stretch;
+  max-height: 100%;
 }
 
 .product-gallery {
@@ -3076,3 +3077,4 @@ body::before {
   .product-buy-row { flex-wrap: wrap; gap: 12px; }
   .shop-notice { flex-direction: column; gap: 6px; }
 }
+
