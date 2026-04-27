@@ -2344,7 +2344,7 @@ body::before {
 
 
 .curvelib-gallery .product-gallery-main-img {
-  background: var(--surface2);
+  background: transparent;
   aspect-ratio: unset;
   height: auto;
   width: 100%;
