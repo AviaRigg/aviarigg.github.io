@@ -1559,7 +1559,7 @@ bs_nodes = []
         </div>
         <div class="product-gallery">
           <div id="curvelib-gallery-main" class="product-gallery-main-img">
-            <img src="./projects/AviaRigg_CurvLib/images/Main Window.png" style="width:auto;height:auto;max-width:100%;max-height:70vh;display:block;margin:0 auto;">
+            <img src="./projects/AviaRigg_CurvLib/images/Main Window.png">
           </div>
           <div class="product-gallery-label" id="curvelib-gallery-label">Controller Shape Menu · Main Window</div>
         </div>
@@ -2147,47 +2147,47 @@ function carouselPrev() { carouselIndex = (carouselIndex - 1 + carouselTotal) % 
 function carouselGoTo(i) { carouselIndex = i; carouselUpdate(); }
 window.addEventListener('resize', carouselResize);
 
-function setGallerySketchfab(thumb, modelId) {
-  const main = document.getElementById('gallery-main-img');
-  main.innerHTML = `<iframe src="https://sketchfab.com/models/${modelId}/embed?autostart=1&ui_theme=dark&ui_infos=0&ui_watermark=0" frameborder="0" allow="autoplay; fullscreen; xr-spatial-tracking" allowfullscreen style="width:100%;height:100%;display:block;"></iframe>`;
-  document.getElementById('gallery-label').textContent = 'F1 SF-25 · Maya Rig · 3D Viewer';
-  document.querySelectorAll('.product-thumb').forEach(t => t.classList.remove('active'));
+// ── Reusable gallery function — works for any product page ──
+function setProductGallery(thumb, mainId, labelId, content, labelText, pageSelector) {
+  const main = document.getElementById(mainId);
+  main.innerHTML = content;
+  document.getElementById(labelId).textContent = labelText;
+  const scope = pageSelector ? document.querySelector(pageSelector) : document;
+  scope.querySelectorAll('.product-thumb').forEach(t => t.classList.remove('active'));
   thumb.classList.add('active');
 }
 
+// F1 gallery helpers
+function setGallerySketchfab(thumb, modelId) {
+  setProductGallery(thumb, 'gallery-main-img', 'gallery-label',
+    `<iframe src="https://sketchfab.com/models/${modelId}/embed?autostart=1&ui_theme=dark&ui_infos=0&ui_watermark=0" frameborder="0" allow="autoplay; fullscreen; xr-spatial-tracking" allowfullscreen></iframe>`,
+    'F1 SF-25 · Maya Rig · 3D Viewer', '#page-product-f1');
+}
 function setGalleryVideo(thumb, id) {
   const ytId = id.replace('yt:', '');
-  const main = document.getElementById('gallery-main-img');
-  main.innerHTML = `<iframe src="https://www.youtube.com/embed/${ytId}?rel=0&autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;height:100%;display:block;"></iframe>`;
-  document.getElementById('gallery-label').textContent = 'F1 SF-25 · Maya Rig · Video';
-  document.querySelectorAll('.product-thumb').forEach(t => t.classList.remove('active'));
-  thumb.classList.add('active');
+  setProductGallery(thumb, 'gallery-main-img', 'gallery-label',
+    `<iframe src="https://www.youtube.com/embed/${ytId}?rel=0&autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`,
+    'F1 SF-25 · Maya Rig · Video', '#page-product-f1');
 }
-
 function setGalleryImg(thumb, src) {
-  const main = document.getElementById('gallery-main-img');
-  main.innerHTML = `<img src="${src}" style="width:100%;height:100%;object-fit:contain;display:block;">`;
-  document.getElementById('gallery-label').textContent = 'F1 SF-25 · Maya Rig · Image';
-  document.querySelectorAll('.product-thumb').forEach(t => t.classList.remove('active'));
-  thumb.classList.add('active');
+  setProductGallery(thumb, 'gallery-main-img', 'gallery-label',
+    `<img src="${src}">`,
+    'F1 SF-25 · Maya Rig · Image', '#page-product-f1');
 }
 
+// Controller Shape Menu gallery helpers
 function setCurvlibGalleryImg(thumb, src, label) {
-  const main = document.getElementById('curvelib-gallery-main');
-  main.innerHTML = `<img src="${src}" style="width:auto;height:auto;max-width:100%;max-height:70vh;display:block;margin:0 auto;">`;
-  document.getElementById('curvelib-gallery-label').textContent = 'Controller Shape Menu · ' + label;
-  document.querySelectorAll('#page-product-curvelib .product-thumb').forEach(t => t.classList.remove('active'));
-  thumb.classList.add('active');
+  setProductGallery(thumb, 'curvelib-gallery-main', 'curvelib-gallery-label',
+    `<img src="${src}">`,
+    'Controller Shape Menu · ' + label, '#page-product-curvelib');
 }
-
 function setCurvlibGalleryVideo(thumb, id) {
   const ytId = id.replace('yt:', '');
-  const main = document.getElementById('curvelib-gallery-main');
-  main.innerHTML = `<iframe src="https://www.youtube.com/embed/${ytId}?rel=0&autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;height:100%;display:block;"></iframe>`;
-  document.getElementById('curvelib-gallery-label').textContent = 'Controller Shape Menu · Video';
-  document.querySelectorAll('#page-product-curvelib .product-thumb').forEach(t => t.classList.remove('active'));
-  thumb.classList.add('active');
+  setProductGallery(thumb, 'curvelib-gallery-main', 'curvelib-gallery-label',
+    `<iframe src="https://www.youtube.com/embed/${ytId}?rel=0&autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`,
+    'Controller Shape Menu · Video', '#page-product-curvelib');
 }
+
 
 function toggleCategory(id) {
 
