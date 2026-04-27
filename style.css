@@ -2299,10 +2299,10 @@ body::before {
 
 /* Curvelib includes section spacing */
 .product-includes-grid--2col {
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr) !important;
 }
 #page-product-curvelib .product-includes-section {
-  margin-bottom: 80px;
+  margin-bottom: 0;
 }
 /* Curvelib includes 2-col grid */
 
