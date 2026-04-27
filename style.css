@@ -2392,8 +2392,8 @@ body::before {
 
 .product-gallery-wrap {
   display: flex;
+  align-items: stretch;
   gap: 0;
-  max-width: 1720px;
   width: 100%;
   margin: 0 auto;
   border: 1px solid var(--border);
@@ -2435,11 +2435,13 @@ body::before {
 .product-gallery {
   flex: 1;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .product-gallery-main-img {
   width: 100%;
-  height: auto;
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
