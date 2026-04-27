@@ -2297,13 +2297,24 @@ body::before {
   border: none;
 }
 
-/* Curvelib: 2-item includes grid — centered, no empty columns */
+/* Curvelib: 2-item includes — centered cards */
 #page-product-curvelib .product-includes-grid {
-  grid-template-columns: repeat(2, 1fr);
-  max-width: 800px;
+  display: flex;
+  justify-content: center;
+  grid-template-columns: unset;
+  max-width: unset;
+  margin: 0;
+  background: transparent;
+  gap: 1px;
+}
+#page-product-curvelib .product-includes-grid .product-include {
+  width: clamp(220px, 25vw, 380px);
+  flex-shrink: 0;
+  border: 1px solid var(--border);
 }
 #page-product-curvelib .product-includes-section {
   margin-bottom: 64px;
+  text-align: center;
 }
 
 /* Space between Included Files and Gallery title */
