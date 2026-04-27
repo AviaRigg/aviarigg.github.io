@@ -2432,6 +2432,8 @@ body::before {
   flex-shrink: 0;
   border-right: 1px solid var(--border);
   background: rgba(13, 11, 26, 0.5);
+  overflow-y: auto;
+  max-height: 70vh;
 }
 
 .product-gallery {
@@ -3087,4 +3089,3 @@ body::before {
   .product-buy-row { flex-wrap: wrap; gap: 12px; }
   .shop-notice { flex-direction: column; gap: 6px; }
 }
-
