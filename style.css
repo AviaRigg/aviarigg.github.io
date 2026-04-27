@@ -2297,10 +2297,25 @@ body::before {
   border: none;
 }
 
-/* Curvelib hero — tall UI screenshot displayed at natural size, centered */
-#page-product-curvelib .product-hero {
-  align-items: start;
+/* Curvelib: 2-item includes grid — centered, no empty columns */
+#page-product-curvelib .product-includes-grid {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 800px;
 }
+#page-product-curvelib .product-includes-section {
+  margin-bottom: 64px;
+}
+
+/* Space between Included Files and Gallery title */
+#page-product-curvelib .product-gallery-section {
+  margin-top: 16px;
+}
+
+/* Vertically center hero text column with image */
+#page-product-curvelib .product-hero {
+  align-items: center;
+}
+
 .curvelib-img-wrap {
   overflow: visible !important;
   background: transparent;
@@ -3071,4 +3086,3 @@ body::before {
   .product-buy-row { flex-wrap: wrap; gap: 12px; }
   .shop-notice { flex-direction: column; gap: 6px; }
 }
-
