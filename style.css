@@ -2297,34 +2297,55 @@ body::before {
   border: none;
 }
 
-/* Curvelib hero — tall UI screenshot, let it flow at natural ratio capped sensibly */
-#page-product-curvelib .product-img-wrap {
-  overflow: visible;
+/* Curvelib hero — tall UI screenshot displayed at natural size, centered */
+#page-product-curvelib .product-hero {
+  align-items: start;
+}
+.curvelib-img-wrap {
+  overflow: visible !important;
   background: transparent;
+  border: none !important;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
-#page-product-curvelib .product-hero-img {
-  max-height: 600px;
-  object-fit: contain;
-  width: 100%;
+.curvelib-img-wrap::before,
+.curvelib-img-wrap::after {
+  display: none !important;
 }
+.curvelib-img-wrap .shop-card-scan {
+  display: none;
+}
+.curvelib-hero-img {
+  width: auto !important;
+  height: auto !important;
+  max-width: 100%;
+  max-height: 75vh;
+  display: block;
+  border: 1px solid var(--border);
+  object-fit: unset;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+}
+
 
 .curvelib-gallery .product-gallery-main-img {
   background: var(--surface2);
   aspect-ratio: unset;
   height: auto;
-  min-height: 200px;
-  max-height: 70vh;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 .curvelib-gallery .product-gallery-main-img img,
 .curvelib-gallery .product-gallery-main-img iframe {
-  width: 100%;
+  width: auto;
   height: auto;
+  max-width: 100%;
   max-height: 70vh;
-  object-fit: contain;
   display: block;
+  margin: 0 auto;
 }
 .curvelib-gallery .product-thumb {
   aspect-ratio: unset;
@@ -2335,6 +2356,7 @@ body::before {
   object-fit: contain;
   background: var(--surface2);
 }
+
 
 
 

@@ -1492,10 +1492,10 @@ bs_nodes = []
         </div>
         <div class="product-license">// Personal, educational & portfolio use only</div>
       </div>
-      <div class="product-hero-right">
-        <div class="product-img-wrap">
+      <div class="product-hero-right curvelib-hero-right">
+        <div class="product-img-wrap curvelib-img-wrap">
           <div class="shop-card-scan"></div>
-          <img src="./projects/AviaRigg_CurvLib/images/Main Window.png" alt="Controller Shape Menu - Main Window" class="product-hero-img">
+          <img src="./projects/AviaRigg_CurvLib/images/Main Window.png" alt="Controller Shape Menu - Main Window" class="product-hero-img curvelib-hero-img">
         </div>
       </div>
     </div>
@@ -1577,7 +1577,7 @@ bs_nodes = []
         </div>
         <div class="product-gallery">
           <div id="curvelib-gallery-main" class="product-gallery-main-img">
-            <img src="./projects/AviaRigg_CurvLib/images/Main Window.png" style="width:100%;height:auto;object-fit:contain;display:block;">
+            <img src="./projects/AviaRigg_CurvLib/images/Main Window.png" style="width:auto;height:auto;max-width:100%;max-height:70vh;display:block;margin:0 auto;">
           </div>
           <div class="product-gallery-label" id="curvelib-gallery-label">Controller Shape Menu · Main Window</div>
         </div>
@@ -2174,7 +2174,7 @@ function setGalleryImg(thumb, src) {
 
 function setCurvlibGalleryImg(thumb, src, label) {
   const main = document.getElementById('curvelib-gallery-main');
-  main.innerHTML = `<img src="${src}" style="width:100%;height:auto;object-fit:contain;display:block;">`;
+  main.innerHTML = `<img src="${src}" style="width:auto;height:auto;max-width:100%;max-height:70vh;display:block;margin:0 auto;">`;
   document.getElementById('curvelib-gallery-label').textContent = 'Controller Shape Menu · ' + label;
   document.querySelectorAll('#page-product-curvelib .product-thumb').forEach(t => t.classList.remove('active'));
   thumb.classList.add('active');
