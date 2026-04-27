@@ -1403,8 +1403,24 @@ bs_nodes = []
       <div class="eyebrow">Store</div>
       <div class="section-h">Shop</div>
     </div>
-    <div class="shop-notice">Products coming soon &mdash; powered by Lemon Squeezy</div>
     <div class="shop-grid">
+
+      <div class="shop-card shop-card--active" onclick="showPage('product-curvelib')">
+        <div class="shop-card-thumb shop-card-thumb--img">
+          <div class="shop-card-scan"></div>
+          <img src="./projects/AviaRigg_CurvLib/images/Main Window.png" alt="Controller Shape Menu" class="shop-card-img">
+          <div class="shop-card-thumb-tag">// Maya Tool</div>
+        </div>
+        <div class="shop-card-body">
+          <div class="shop-card-cat">Python Tool · v2.0.0</div>
+          <div class="shop-card-title">Controller Shape Menu</div>
+          <div class="shop-card-desc">Full controller creation and management toolkit for Maya riggers — shape library, custom shapes, color management, and more.</div>
+          <div class="shop-card-footer">
+            <span class="shop-card-price">€5+</span>
+            <a href="https://aviarigg.lemonsqueezy.com/checkout/buy/11a60b08-61c4-4fed-bb9b-5f787f25b940?embed=1" class="lemonsqueezy-button shop-buy-btn" onclick="event.stopPropagation()">Buy →</a>
+          </div>
+        </div>
+      </div>
 
       <div class="shop-card shop-card--active" onclick="showPage('product-f1')">
         <div class="shop-card-thumb shop-card-thumb--img">
@@ -1450,6 +1466,144 @@ bs_nodes = []
       </div>
 
     </div>
+  </div>
+</div>
+
+<!-- ══ PRODUCT: CONTROLLER SHAPE MENU ══ -->
+<div class="page" id="page-product-curvelib">
+  <div class="product-wrap">
+
+    <div class="product-back" onclick="showPage('shop')">← Back to Shop</div>
+
+    <div class="product-hero">
+      <div class="product-hero-left">
+        <div class="eyebrow">Maya Tool · Python · v2.0.0</div>
+        <div class="section-h">Controller<br><span class="accent">Shape Menu</span></div>
+        <p class="product-tagline">A complete controller creation and management toolkit for Maya riggers. Eliminate repetitive setup, enforce consistent rig structure, and speed up daily workflows — from instant controller creation to full color and shape management.</p>
+        <div class="product-tags">
+          <span class="ptag">Maya 2026</span>
+          <span class="ptag">Python 3</span>
+          <span class="ptag">No Dependencies</span>
+          <span class="ptag">v2.0.0</span>
+          <span class="ptag">Shelf Installer</span>
+        </div>
+        <div class="product-buy-row">
+          <span class="product-price">€5+</span>
+          <a href="https://aviarigg.lemonsqueezy.com/checkout/buy/11a60b08-61c4-4fed-bb9b-5f787f25b940?embed=1" class="lemonsqueezy-button product-buy-btn">Buy Now →</a>
+        </div>
+        <div class="product-license">// Personal, educational & portfolio use only</div>
+      </div>
+      <div class="product-hero-right">
+        <div class="product-img-wrap">
+          <div class="shop-card-scan"></div>
+          <img src="./projects/AviaRigg_CurvLib/images/Main Window.png" alt="Controller Shape Menu - Main Window" class="product-hero-img">
+        </div>
+      </div>
+    </div>
+
+    <div class="product-features-grid">
+      <div class="product-feature">
+        <div class="pf-icon">◈</div>
+        <div class="pf-title">Instant Controller Creation</div>
+        <div class="pf-desc">8 built-in shapes — Circle, Square, RoundSquare, Gear, Arrow, Foot and more. Controllers generated with a clean transform and properly parented curve shapes.</div>
+      </div>
+      <div class="product-feature">
+        <div class="pf-icon">✦</div>
+        <div class="pf-title">Custom User Shapes</div>
+        <div class="pf-desc">Convert any curve into a reusable shape saved to your personal library. Shapes persist between sessions and can be deleted directly from the tool.</div>
+      </div>
+      <div class="product-feature">
+        <div class="pf-icon">◎</div>
+        <div class="pf-title">Full Color Management</div>
+        <div class="pf-desc">Direct RGB input, built-in presets, and a custom color library. Colors persist between Maya sessions with automatic viewport application.</div>
+      </div>
+      <div class="product-feature">
+        <div class="pf-icon">▣</div>
+        <div class="pf-title">Replace Controller Shape</div>
+        <div class="pf-desc">Swap the shape on existing controllers without touching the transform, pivot, or hierarchy. Axis orientation supported during replacement.</div>
+      </div>
+      <div class="product-feature">
+        <div class="pf-icon">⬡</div>
+        <div class="pf-title">Favorites & Ordering</div>
+        <div class="pf-desc">Mark shapes as favorites for instant double-click creation. Reorder the shape list freely — all preferences saved between sessions.</div>
+      </div>
+      <div class="product-feature">
+        <div class="pf-icon">▲</div>
+        <div class="pf-title">Channel Box Presets</div>
+        <div class="pf-desc">Quickly hide or lock controller attributes with one click. Apply attribute presets directly from the tool without touching the Channel Box manually.</div>
+      </div>
+    </div>
+
+    <!-- WHAT'S INCLUDED -->
+    <div class="product-includes-section">
+      <div class="eyebrow">What You Get</div>
+      <div class="section-h" style="margin-bottom:32px;">Included Files</div>
+      <div class="product-includes-grid">
+        <div class="product-include">
+          <div class="pi-label">// 01</div>
+          <div class="pi-title">Python Script</div>
+          <div class="pi-desc">Full tool implementation — lightweight, no external dependencies. Drop-in ready for any Maya pipeline.</div>
+        </div>
+        <div class="product-include">
+          <div class="pi-label">// 02</div>
+          <div class="pi-title">Shelf Installer</div>
+          <div class="pi-desc">One-click shelf button installer. Sets up the tool in your Maya shelf automatically.</div>
+        </div>
+        <div class="product-include">
+          <div class="pi-label">// 03</div>
+          <div class="pi-title">Built-in Shape Library</div>
+          <div class="pi-desc">8 production-ready controller shapes included out of the box — ready to use immediately.</div>
+        </div>
+        <div class="product-include">
+          <div class="pi-label">// 04</div>
+          <div class="pi-title">User Shape System</div>
+          <div class="pi-desc">Full infrastructure to build and store your own studio-specific controller library inside the tool.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GALLERY -->
+    <div class="product-gallery-section">
+      <div class="eyebrow">Preview</div>
+      <div class="section-h" style="margin-bottom:32px;">Gallery</div>
+      <div class="product-gallery-wrap">
+        <div class="product-gallery-thumbs">
+          <div class="product-thumb active" onclick="setCurvlibGalleryImg(this, './projects/AviaRigg_CurvLib/images/Main Window.png', 'Main Window')">
+            <img src="./projects/AviaRigg_CurvLib/images/Main Window.png" alt="Main Window">
+          </div>
+          <div class="product-thumb" onclick="setCurvlibGalleryImg(this, './projects/AviaRigg_CurvLib/images/Controller Library Window.png', 'Controller Library')">
+            <img src="./projects/AviaRigg_CurvLib/images/Controller Library Window.png" alt="Controller Library">
+          </div>
+          <div class="product-thumb" onclick="setCurvlibGalleryImg(this, './projects/AviaRigg_CurvLib/images/Create Custom Controller Window.png', 'Custom Controller Window')">
+            <img src="./projects/AviaRigg_CurvLib/images/Create Custom Controller Window.png" alt="Custom Controller">
+          </div>
+          <div class="product-thumb" onclick="setCurvlibGalleryImg(this, './projects/AviaRigg_CurvLib/images/Channel Box Preset Window.png', 'Channel Box Presets')">
+            <img src="./projects/AviaRigg_CurvLib/images/Channel Box Preset Window.png" alt="Channel Box Presets">
+          </div>
+          <!-- VIDEO SLOTS — add YouTube IDs when ready -->
+          <!-- <div class="product-thumb" onclick="setCurvlibGalleryVideo(this, 'yt:YOUR_VIDEO_ID')">
+            <img src="https://img.youtube.com/vi/YOUR_VIDEO_ID/mqdefault.jpg" alt="Video">
+            <div class="thumb-play">▶</div>
+          </div> -->
+        </div>
+        <div class="product-gallery">
+          <div id="curvelib-gallery-main" class="product-gallery-main-img">
+            <img src="./projects/AviaRigg_CurvLib/images/Main Window.png" style="width:100%;height:100%;object-fit:contain;display:block;">
+          </div>
+          <div class="product-gallery-label" id="curvelib-gallery-label">Controller Shape Menu · Main Window</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-cta">
+      <div class="product-cta-text">Ready to speed up your rigging workflow?</div>
+      <div class="product-buy-row" style="justify-content:center;">
+        <span class="product-price">€5+</span>
+        <a href="https://aviarigg.lemonsqueezy.com/checkout/buy/11a60b08-61c4-4fed-bb9b-5f787f25b940?embed=1" class="lemonsqueezy-button product-buy-btn">Buy Now →</a>
+      </div>
+      <div class="product-license">// Personal, educational & portfolio use only. No redistribution or resale.</div>
+    </div>
+
   </div>
 </div>
 
@@ -1795,13 +1949,14 @@ function showPage(id) {
   if (id === 'library') libHome();
   if (id === 'port-f1') setTimeout(carouselResize, 100);
   if (id === 'shop') setTimeout(updateScanHeights, 50);
+  if (id === 'product-curvelib') setTimeout(updateScanHeights, 50);
   history.pushState(null, '', '#' + id);
 }
 
 // Handle URL hash on load
 function loadFromHash() {
   const hash = window.location.hash.replace('#', '');
-  const valid = ['home','portfolio','library','shop','about','contact','product-f1','port-f1'];
+  const valid = ['home','portfolio','library','shop','about','contact','product-f1','product-curvelib','port-f1'];
   if (hash && valid.includes(hash)) {
     showPage(hash);
   } else {
@@ -2028,7 +2183,24 @@ function setGalleryImg(thumb, src) {
   thumb.classList.add('active');
 }
 
-function toggleCategory(id) {
+function setCurvlibGalleryImg(thumb, src, label) {
+  const main = document.getElementById('curvelib-gallery-main');
+  main.innerHTML = `<img src="${src}" style="width:100%;height:100%;object-fit:contain;display:block;">`;
+  document.getElementById('curvelib-gallery-label').textContent = 'Controller Shape Menu · ' + label;
+  document.querySelectorAll('#page-product-curvelib .product-thumb').forEach(t => t.classList.remove('active'));
+  thumb.classList.add('active');
+}
+
+function setCurvlibGalleryVideo(thumb, id) {
+  const ytId = id.replace('yt:', '');
+  const main = document.getElementById('curvelib-gallery-main');
+  main.innerHTML = `<iframe src="https://www.youtube.com/embed/${ytId}?rel=0&autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;height:100%;display:block;"></iframe>`;
+  document.getElementById('curvelib-gallery-label').textContent = 'Controller Shape Menu · Video';
+  document.querySelectorAll('#page-product-curvelib .product-thumb').forEach(t => t.classList.remove('active'));
+  thumb.classList.add('active');
+}
+
+
   const catId = 'lcat-' + id.replace('cat-', '');
   const el = document.getElementById(catId);
   if (el) {
