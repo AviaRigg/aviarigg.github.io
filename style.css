@@ -1961,6 +1961,8 @@ body::before {
   overflow: hidden;
   opacity: 0.5;
   cursor: default;
+  display: flex;
+  flex-direction: column;
 }
 
 .shop-card-thumb {
@@ -1977,7 +1979,7 @@ body::before {
   border-bottom: 1px solid var(--border);
 }
 
-.shop-card-body { padding: clamp(10px, 0.9vw, 14px); }
+.shop-card-body { padding: clamp(10px, 0.9vw, 14px); display: flex; flex-direction: column; flex: 1; }
 
 .shop-card-cat {
   font-family: 'Share Tech Mono', monospace;
@@ -2001,6 +2003,7 @@ body::before {
   color: var(--text);
   line-height: 1.6;
   margin-bottom: 16px;
+  flex: 1;
 }
 
 .shop-card-footer {
