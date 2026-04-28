@@ -6,9 +6,61 @@
 <title>Paul Chedozeau — AviaRigg</title>
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./style.css">
-<script type="text/javascript" src="https://payhip.com/payhip.js"></script>
 </head>
 <body>
+
+<!-- ══ CHECKOUT MODAL ══ -->
+<div id="checkout-modal" style="
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  background:rgba(0,0,0,0.75);
+  backdrop-filter:blur(4px);
+  align-items:center;
+  justify-content:center;
+">
+  <div style="
+    position:relative;
+    width:min(520px, 95vw);
+    height:min(680px, 90vh);
+    background:#0d0d12;
+    border:1px solid rgba(255,255,255,0.1);
+    box-shadow:0 0 60px rgba(139,79,200,0.2);
+    display:flex;
+    flex-direction:column;
+  ">
+    <div style="
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:14px 18px;
+      border-bottom:1px solid rgba(255,255,255,0.07);
+      font-family:'Share Tech Mono',monospace;
+      font-size:10px;
+      letter-spacing:3px;
+      color:#666680;
+      text-transform:uppercase;
+    ">
+      <span>// Checkout — AviaRigg</span>
+      <button onclick="closeCheckout()" style="
+        background:none;
+        border:none;
+        color:#666680;
+        font-size:20px;
+        cursor:pointer;
+        line-height:1;
+        padding:0 4px;
+        transition:color 0.2s;
+      " onmouseover="this.style.color='#eeeef8'" onmouseout="this.style.color='#666680'">✕</button>
+    </div>
+    <iframe id="checkout-iframe" src="" style="
+      flex:1;
+      border:none;
+      width:100%;
+    "></iframe>
+  </div>
+</div>
 
 <!-- NAV -->
 <nav class="topnav">
@@ -1435,7 +1487,7 @@ bs_nodes = []
           <div class="shop-card-desc">A fully rigged F1 car for Maya. Hamilton or Leclerc livery included — choose your side very carefully.</div>
           <div class="shop-card-footer">
             <span class="shop-card-price">€20+</span>
-            <a href="https://payhip.com/b/4akCM" class="payhip-buy-button shop-buy-btn" data-theme="none" data-product="4akCM" onclick="event.stopPropagation()">Buy →</a>
+            <a href="https://payhip.com/b/4akCM" class="shop-buy-btn" onclick="event.preventDefault(); event.stopPropagation(); openCheckout('https://payhip.com/b/4akCM')">Buy →</a>
           </div>
         </div>
       </div>
@@ -1648,7 +1700,7 @@ bs_nodes = []
         </div>
         <div class="product-buy-row">
           <span class="product-price">€20+</span>
-          <a href="https://payhip.com/b/4akCM" class="payhip-buy-button product-buy-btn" data-theme="none" data-product="4akCM">Buy Now →</a>
+          <a href="https://payhip.com/b/4akCM" class="product-buy-btn" onclick="event.preventDefault(); openCheckout('https://payhip.com/b/4akCM')">Buy Now →</a>
         </div>
         <div class="product-license">// Personal, educational & portfolio use only</div>
       </div>
@@ -1766,7 +1818,7 @@ bs_nodes = []
       <div class="product-cta-text">Ready to add this to your toolkit?</div>
       <div class="product-buy-row" style="justify-content:center;">
         <span class="product-price">€20+</span>
-        <a href="https://payhip.com/b/4akCM" class="payhip-buy-button product-buy-btn" data-theme="none" data-product="4akCM">Buy Now →</a>
+        <a href="https://payhip.com/b/4akCM" class="product-buy-btn" onclick="event.preventDefault(); openCheckout('https://payhip.com/b/4akCM')">Buy Now →</a>
       </div>
       <div class="product-license">// Personal, educational & portfolio use only. No redistribution or resale.</div>
     </div>
@@ -1972,7 +2024,6 @@ function showPage(id) {
   if (id === 'shop') setTimeout(updateScanHeights, 50);
   if (id === 'product-curvelib') { setTimeout(updateScanHeights, 50); setTimeout(syncGallerySidebars, 100); }
   if (id === 'product-f1') setTimeout(syncGallerySidebars, 100);
-  if (id === 'shop' || id === 'product-f1') setTimeout(function(){ if (window.Payhip) window.Payhip.reload(); }, 150);
   history.pushState(null, '', '#' + id);
 }
 
@@ -2247,6 +2298,31 @@ function toggleCategory(id) {
     if (hdr) hdr.classList.toggle('open');
   }
 }
+
+// ── Checkout Modal ──
+function openCheckout(url) {
+  const modal = document.getElementById('checkout-modal');
+  document.getElementById('checkout-iframe').src = url;
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCheckout() {
+  const modal = document.getElementById('checkout-modal');
+  modal.style.display = 'none';
+  document.getElementById('checkout-iframe').src = '';
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('checkout-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeCheckout();
+  });
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeCheckout();
+});
 
 </script>
 </body>
