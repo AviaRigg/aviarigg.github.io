@@ -6,6 +6,7 @@
 <title>Paul Chedozeau — AviaRigg</title>
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./style.css">
+<script type="text/javascript" src="https://payhip.com/payhip.js"></script>
 </head>
 <body>
 
@@ -1971,6 +1972,7 @@ function showPage(id) {
   if (id === 'shop') setTimeout(updateScanHeights, 50);
   if (id === 'product-curvelib') { setTimeout(updateScanHeights, 50); setTimeout(syncGallerySidebars, 100); }
   if (id === 'product-f1') setTimeout(syncGallerySidebars, 100);
+  if (id === 'shop' || id === 'product-f1') setTimeout(function(){ if (window.Payhip) window.Payhip.reload(); }, 150);
   history.pushState(null, '', '#' + id);
 }
 
@@ -2247,6 +2249,5 @@ function toggleCategory(id) {
 }
 
 </script>
-<script type="text/javascript" src="https://payhip.com/payhip.js"></script>
 </body>
 </html>
