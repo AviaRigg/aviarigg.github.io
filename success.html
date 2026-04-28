@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Purchase Complete — AviaRigg</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d12;
+    --surface: #13131a;
+    --surface2: #1a1a24;
+    --border: rgba(255,255,255,0.07);
+    --accent: #8b4fc8;
+    --accent2: #b06ef0;
+    --green: #00e87a;
+    --text: #c8c8d8;
+    --text-bright: #eeeef8;
+    --text-dim: #666680;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+
+  /* Subtle grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(139,79,200,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(139,79,200,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .success-wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 560px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .success-logo {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(18px, 2vw, 22px);
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 48px;
+  }
+
+  .success-logo span {
+    color: var(--accent2);
+  }
+
+  .success-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: clamp(32px, 5vw, 56px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .success-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--green), transparent);
+  }
+
+  .success-glyph {
+    font-size: 40px;
+    margin-bottom: 24px;
+    display: block;
+    color: var(--green);
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  .success-eyebrow {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 16px;
+  }
+
+  .success-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700;
+    color: var(--text-bright);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .success-title .accent {
+    color: var(--accent2);
+  }
+
+  .success-desc {
+    font-size: clamp(13px, 1.2vw, 15px);
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 36px;
+  }
+
+  .success-steps {
+    border-top: 1px solid var(--border);
+    padding-top: 28px;
+    margin-bottom: 36px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .success-step {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .step-num {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    min-width: 28px;
+    padding-top: 2px;
+  }
+
+  .step-text {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .step-text strong {
+    color: var(--text-bright);
+    font-weight: 600;
+  }
+
+  .success-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover {
+    background: var(--accent2);
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    padding: 12px 28px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .btn-ghost:hover {
+    color: var(--text-bright);
+    border-color: rgba(255,255,255,0.2);
+  }
+
+  .success-footer {
+    margin-top: 32px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+
+  .success-footer a {
+    color: var(--accent2);
+    text-decoration: none;
+  }
+
+  .success-footer a:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+
+<div class="success-wrap">
+
+  <div class="success-logo">Avia<span>Rigg</span></div>
+
+  <div class="success-card">
+
+    <span class="success-glyph">✓</span>
+    <div class="success-eyebrow">// Purchase Complete</div>
+    <div class="success-title">You're all<br><span class="accent">set.</span></div>
+    <p class="success-desc">
+      Thanks for your purchase — your download link and receipt have been sent to your email. Check your spam folder if you don't see it within a few minutes.
+    </p>
+
+    <div class="success-steps">
+      <div class="success-step">
+        <span class="step-num">01</span>
+        <span class="step-text"><strong>Check your email</strong> — your download link was sent immediately after payment.</span>
+      </div>
+      <div class="success-step">
+        <span class="step-num">02</span>
+        <span class="step-text"><strong>Download your files</strong> — unzip and follow the included README for setup instructions.</span>
+      </div>
+      <div class="success-step">
+        <span class="step-num">03</span>
+        <span class="step-text"><strong>Questions?</strong> Reach out at <strong>paulchedozeau@gmail.com</strong> — happy to help.</span>
+      </div>
+    </div>
+
+    <div class="success-actions">
+      <a href="./index.html" class="btn-primary">← Back to Shop</a>
+      <a href="https://www.instagram.com/aviarigg" target="_blank" class="btn-ghost">@aviarigg</a>
+    </div>
+
+  </div>
+
+  <div class="success-footer">
+    aviarigg.github.io — &copy; 2025 Paul Chedozeau &nbsp;·&nbsp;
+    <a href="mailto:paulchedozeau@gmail.com">Contact</a>
+  </div>
+
+</div>
+
+</body>
+</html>
