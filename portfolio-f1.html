@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>F1 SF-25 Breakdown — AviaRigg</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+<style>
+  .page { display: block !important; }
+  .nav-logo, .nav-link, .nav-badge, .nav-drawer a { text-decoration: none; }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <a class="nav-logo" href="./index.html">Avia<span>Rigg</span></a>
+  <div class="nav-links">
+    <a class="nav-link" href="./index.html">Home</a>
+    <a class="nav-link active" href="./portfolio.html">Portfolio</a>
+    <a class="nav-link" href="./library.html">Script Library</a>
+    <a class="nav-link" href="./shop.html">Shop</a>
+    <a class="nav-link" href="./about.html">About</a>
+    <a class="nav-link" href="./contact.html">Contact</a>
+    <a class="nav-badge" href="./contact.html">&#9679; Open to Work</a>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" onclick="toggleMobileNav()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-drawer" id="nav-drawer">
+  <a class="nav-link" href="./index.html">Home</a>
+  <a class="nav-link" href="./portfolio.html">Portfolio</a>
+  <a class="nav-link" href="./library.html">Script Library</a>
+  <a class="nav-link" href="./shop.html">Shop</a>
+  <a class="nav-link" href="./about.html">About</a>
+  <a class="nav-link" href="./contact.html">Contact</a>
+  <a class="nav-badge" href="./contact.html">&#9679; Open to Work</a>
+</div>
+
+<div class="page active" id="page-port-f1">
+  <div class="port-breakdown-wrap">
+    <a class="product-back" href="./portfolio.html" style="text-decoration:none;">&#8592; Back to Portfolio</a>
+
+    <div class="pb-hero">
+      <div class="pb-hero-left">
+        <div class="eyebrow">Hard Surface · 2025</div>
+        <div class="section-h">Formula 1<br><span class="accent">SF-25 Livery</span></div>
+        <p class="pb-desc">A production-ready hard surface rig for the Ferrari SF-25 F1 car. Built entirely in Maya 2022+ with a clean, animator-friendly hierarchy. Features auto-spinning wheels driven by motion, a DRS rear wing system, dual livery switching between Hamilton and Leclerc via custom attribute, and full AnimSchool Picker support.</p>
+        <div class="port-featured-tags" style="margin-bottom:0;">
+          <span class="ptag">Maya 2022+</span>
+          <span class="ptag">Hard Surface</span>
+          <span class="ptag">DRS System</span>
+          <span class="ptag">Dual Livery</span>
+          <span class="ptag">AnimSchool Picker</span>
+        </div>
+      </div>
+      <div class="pb-hero-right">
+        <div class="pb-img-frame">
+          <img src="./projects/f1_SF25/images/F1_Rendered.png" alt="F1 SF-25 Rendered">
+          <div class="pb-img-caption">// Final Render — Hamilton Livery</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pb-specs">
+      <div class="pb-spec"><span class="pb-spec-label">Software</span><span class="pb-spec-val">Maya 2022+</span></div>
+      <div class="pb-spec"><span class="pb-spec-label">Type</span><span class="pb-spec-val">Hard Surface</span></div>
+      <div class="pb-spec"><span class="pb-spec-label">Textures</span><span class="pb-spec-val">4K / 2K / 1K</span></div>
+      <div class="pb-spec"><span class="pb-spec-label">Liveries</span><span class="pb-spec-val">Hamilton + Leclerc</span></div>
+      <div class="pb-spec"><span class="pb-spec-label">Picker</span><span class="pb-spec-val">AnimSchool</span></div>
+      <div class="pb-spec"><span class="pb-spec-label">Year</span><span class="pb-spec-val">2025</span></div>
+    </div>
+
+    <div class="pb-section-label">// Breakdown</div>
+    <div class="pb-carousel">
+      <button class="pb-carousel-btn pb-carousel-prev" onclick="carouselPrev()">&#8592;</button>
+      <div class="pb-carousel-track-wrap">
+        <div class="pb-carousel-track" id="pb-carousel-track">
+          <div class="pb-img-frame pb-carousel-slide">
+            <img src="./projects/f1_SF25/images/F1_Rig.png" alt="Rig">
+            <div class="pb-img-caption">// Rig View</div>
+          </div>
+          <div class="pb-img-frame pb-carousel-slide">
+            <img src="./projects/f1_SF25/images/F1_Picker.png" alt="Picker">
+            <div class="pb-img-caption">// AnimSchool Picker</div>
+          </div>
+          <div class="pb-img-frame pb-carousel-slide">
+            <img src="./projects/f1_SF25/images/F1_FBX.png" alt="FBX">
+            <div class="pb-img-caption">// FBX Model</div>
+          </div>
+          <div class="pb-img-frame pb-carousel-slide">
+            <img src="./projects/f1_SF25/images/F1_Blender.png" alt="Blender">
+            <div class="pb-img-caption">// Blender Version</div>
+          </div>
+        </div>
+      </div>
+      <button class="pb-carousel-btn pb-carousel-next" onclick="carouselNext()">&#8594;</button>
+      <div class="pb-carousel-dots" id="pb-carousel-dots">
+        <span class="pb-dot active" onclick="carouselGoTo(0)"></span>
+        <span class="pb-dot" onclick="carouselGoTo(1)"></span>
+        <span class="pb-dot" onclick="carouselGoTo(2)"></span>
+        <span class="pb-dot" onclick="carouselGoTo(3)"></span>
+      </div>
+    </div>
+
+    <div class="pb-section-label">// Interactive 3D</div>
+    <div class="pb-img-frame pb-sketchfab">
+      <iframe src="https://sketchfab.com/models/f9ae37650a9a40d88b38071ae9523c71/embed?autostart=0&ui_theme=dark&ui_infos=0&ui_watermark=0" frameborder="0" allow="autoplay; fullscreen; xr-spatial-tracking" allowfullscreen></iframe>
+      <div class="pb-img-caption">// Interactive 3D Viewer — SF-25 Rig on Sketchfab</div>
+    </div>
+
+    <div class="pb-section-label">// Technical Notes</div>
+    <div class="pb-notes-grid">
+      <div class="pb-note"><div class="pb-note-num">01</div><div class="pb-note-title">Auto Wheel Spin</div><div class="pb-note-desc">Wheels spin automatically based on world movement via expression — no manual keyframing needed. Override available for custom rotation.</div></div>
+      <div class="pb-note"><div class="pb-note-num">02</div><div class="pb-note-title">DRS System</div><div class="pb-note-desc">Rear wing elements are driven by a single DRS attribute. Open/close is fully animatable with clean deformation and no geometry intersection.</div></div>
+      <div class="pb-note"><div class="pb-note-num">03</div><div class="pb-note-title">Dual Livery</div><div class="pb-note-desc">Hamilton and Leclerc liveries switchable via a custom attribute on the main controller. No shader reassignment or manual toggling required.</div></div>
+      <div class="pb-note"><div class="pb-note-num">04</div><div class="pb-note-title">Hierarchy</div><div class="pb-note-desc">Fully organized outliner with logical grouping. Root_Scale at the top for global positioning. All controls follow AviaRigg naming conventions.</div></div>
+    </div>
+
+    <div class="pb-section-label">// Showcase Videos</div>
+    <div class="pb-videos">
+      <div class="pb-img-frame pb-video-frame">
+        <iframe src="https://www.youtube.com/embed/AbGyZreyAak?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="pb-img-caption">// Rig Showcase</div>
+      </div>
+      <div class="pb-img-frame pb-video-frame">
+        <iframe src="https://www.youtube.com/embed/9_WERFJg4w8?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="pb-img-caption">// Breakdown</div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+function toggleMobileNav() {
+  const drawer = document.getElementById('nav-drawer');
+  const btn = document.getElementById('nav-hamburger');
+  const isOpen = drawer.classList.contains('open');
+  drawer.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open', !isOpen);
+}
+
+let carouselIndex = 0;
+const carouselTotal = 4;
+function carouselResize() {
+  const track = document.getElementById('pb-carousel-track');
+  const wrap = document.querySelector('.pb-carousel-track-wrap');
+  if (!track || !wrap) return;
+  const activeSlide = track.querySelectorAll('.pb-carousel-slide')[carouselIndex];
+  if (!activeSlide) return;
+  const img = activeSlide.querySelector('img');
+  if (!img) return;
+  if (img.complete && img.naturalHeight > 0) {
+    const ratio = img.naturalHeight / img.naturalWidth;
+    wrap.style.height = (wrap.offsetWidth * ratio) + 'px';
+  } else {
+    img.onload = () => {
+      const ratio = img.naturalHeight / img.naturalWidth;
+      wrap.style.height = (wrap.offsetWidth * ratio) + 'px';
+    };
+  }
+}
+function carouselUpdate() {
+  const track = document.getElementById('pb-carousel-track');
+  if (!track) return;
+  track.style.transform = `translateX(-${carouselIndex * 100}%)`;
+  document.querySelectorAll('.pb-dot').forEach((d, i) => d.classList.toggle('active', i === carouselIndex));
+  setTimeout(carouselResize, 50);
+}
+function carouselNext() { carouselIndex = (carouselIndex + 1) % carouselTotal; carouselUpdate(); }
+function carouselPrev() { carouselIndex = (carouselIndex - 1 + carouselTotal) % carouselTotal; carouselUpdate(); }
+function carouselGoTo(i) { carouselIndex = i; carouselUpdate(); }
+window.addEventListener('resize', carouselResize);
+window.addEventListener('load', () => setTimeout(carouselResize, 100));
+</script>
+</body>
+</html>

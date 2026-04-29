@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop — AviaRigg</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+<style>
+  .page { display: block !important; }
+  .nav-logo, .nav-link, .nav-badge, .nav-drawer a { text-decoration: none; }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <a class="nav-logo" href="./index.html">Avia<span>Rigg</span></a>
+  <div class="nav-links">
+    <a class="nav-link" href="./index.html">Home</a>
+    <a class="nav-link" href="./portfolio.html">Portfolio</a>
+    <a class="nav-link" href="./library.html">Script Library</a>
+    <a class="nav-link active" href="./shop.html">Shop</a>
+    <a class="nav-link" href="./about.html">About</a>
+    <a class="nav-link" href="./contact.html">Contact</a>
+    <a class="nav-badge" href="./contact.html">&#9679; Open to Work</a>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" onclick="toggleMobileNav()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-drawer" id="nav-drawer">
+  <a class="nav-link" href="./index.html">Home</a>
+  <a class="nav-link" href="./portfolio.html">Portfolio</a>
+  <a class="nav-link" href="./library.html">Script Library</a>
+  <a class="nav-link" href="./shop.html">Shop</a>
+  <a class="nav-link" href="./about.html">About</a>
+  <a class="nav-link" href="./contact.html">Contact</a>
+  <a class="nav-badge" href="./contact.html">&#9679; Open to Work</a>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div id="checkout-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
+  <div style="position:relative;width:min(680px,95vw);height:min(820px,92vh);background:#0d0d12;border:1px solid rgba(255,255,255,0.1);box-shadow:0 0 60px rgba(139,79,200,0.2);display:flex;flex-direction:column;">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid rgba(255,255,255,0.07);font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:#666680;text-transform:uppercase;">
+      <span>// Checkout — AviaRigg</span>
+      <button onclick="closeCheckout()" style="background:none;border:none;color:#666680;font-size:20px;cursor:pointer;line-height:1;padding:0 4px;transition:color 0.2s;" onmouseover="this.style.color='#eeeef8'" onmouseout="this.style.color='#666680'">&#10005;</button>
+    </div>
+    <iframe id="checkout-iframe" src="" style="flex:1;border:none;width:100%;"></iframe>
+  </div>
+</div>
+
+<div class="page active" id="page-shop">
+  <div class="shop-wrap">
+    <div class="port-header">
+      <div class="eyebrow">Store</div>
+      <div class="section-h">Shop</div>
+    </div>
+    <div class="shop-grid">
+      <a class="shop-card shop-card--active" href="./product-curvelib.html" style="text-decoration:none;">
+        <div class="shop-card-thumb shop-card-thumb--img">
+          <div class="shop-card-scan"></div>
+          <img src="./projects/AviaRigg_CurvLib/images/Main Window.png" alt="Controller Shape Menu" class="shop-card-img">
+          <div class="shop-card-thumb-tag">// Maya Tool</div>
+        </div>
+        <div class="shop-card-body">
+          <div class="shop-card-cat">Python Tool · v2.1.0</div>
+          <div class="shop-card-title">Controller Shape Menu</div>
+          <div class="shop-card-desc">A Maya tool built by a rigger, for riggers — everything you need to create, manage, and customize controllers without the headache.</div>
+          <div class="shop-card-footer">
+            <span class="shop-card-price">&#8364;4.99+</span>
+            <a href="https://aviarigg.lemonsqueezy.com/checkout/buy/11a60b08-61c4-4fed-bb9b-5f787f25b940?embed=1" class="lemonsqueezy-button shop-buy-btn" onclick="event.stopPropagation()">Buy &#8594;</a>
+          </div>
+        </div>
+      </a>
+
+      <a class="shop-card shop-card--active" href="./product-f1.html" style="text-decoration:none;">
+        <div class="shop-card-thumb shop-card-thumb--img">
+          <div class="shop-card-scan"></div>
+          <img src="./projects/f1_SF25/images/F1_Rendered.png" alt="F1 SF-25 Rig" class="shop-card-img">
+          <div class="shop-card-thumb-tag">// Hard Surface</div>
+        </div>
+        <div class="shop-card-body">
+          <div class="shop-card-cat">Maya Rig</div>
+          <div class="shop-card-title">Formula 1 SF-25 Livery</div>
+          <div class="shop-card-desc">A fully rigged F1 car for Maya. Hamilton or Leclerc livery included — choose your side very carefully.</div>
+          <div class="shop-card-footer">
+            <span class="shop-card-price">&#8364;19.99+</span>
+            <a href="https://payhip.com/b/4akCM" class="shop-buy-btn" onclick="event.preventDefault();event.stopPropagation();openCheckout('https://payhip.com/b/4akCM')">Buy &#8594;</a>
+          </div>
+        </div>
+      </a>
+
+      <div class="shop-card">
+        <div class="shop-card-thumb">// Coming Soon</div>
+        <div class="shop-card-body">
+          <div class="shop-card-cat">Rig Pack</div>
+          <div class="shop-card-title">Character Rig Template</div>
+          <div class="shop-card-desc">Production-ready character rig base — biped, fully scalable and documented.</div>
+          <div class="shop-card-footer"><span class="shop-card-price">— —</span><span class="shop-card-badge">Coming Soon</span></div>
+        </div>
+      </div>
+
+      <div class="shop-card">
+        <div class="shop-card-thumb">// Coming Soon</div>
+        <div class="shop-card-body">
+          <div class="shop-card-cat">Script Pack</div>
+          <div class="shop-card-title">MEL & Python Scripts</div>
+          <div class="shop-card-desc">Curated pack of utility scripts for riggers — deformers, attributes, naming.</div>
+          <div class="shop-card-footer"><span class="shop-card-price">— —</span><span class="shop-card-badge">Coming Soon</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+function toggleMobileNav() {
+  const drawer = document.getElementById('nav-drawer');
+  const btn = document.getElementById('nav-hamburger');
+  const isOpen = drawer.classList.contains('open');
+  drawer.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open', !isOpen);
+}
+function updateScanHeights() {
+  document.querySelectorAll('.shop-card-thumb--img').forEach(el => {
+    el.style.setProperty('--thumb-h', el.offsetHeight + 'px');
+  });
+}
+window.addEventListener('resize', updateScanHeights);
+document.addEventListener('DOMContentLoaded', () => {
+  updateScanHeights();
+  if (window.ResizeObserver) {
+    const ro = new ResizeObserver(updateScanHeights);
+    document.querySelectorAll('.shop-card-thumb--img').forEach(el => ro.observe(el));
+  }
+});
+function openCheckout(url) {
+  const modal = document.getElementById('checkout-modal');
+  document.getElementById('checkout-iframe').src = url;
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closeCheckout() {
+  const modal = document.getElementById('checkout-modal');
+  modal.style.display = 'none';
+  document.getElementById('checkout-iframe').src = '';
+  document.body.style.overflow = '';
+}
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('checkout-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeCheckout();
+  });
+});
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeCheckout(); });
+</script>
+</body>
+</html>

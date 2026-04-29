@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — AviaRigg</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+<style>
+  .page { display: block !important; }
+  .nav-logo, .nav-link, .nav-badge, .nav-drawer a { text-decoration: none; }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <a class="nav-logo" href="./index.html">Avia<span>Rigg</span></a>
+  <div class="nav-links">
+    <a class="nav-link" href="./index.html">Home</a>
+    <a class="nav-link active" href="./portfolio.html">Portfolio</a>
+    <a class="nav-link" href="./library.html">Script Library</a>
+    <a class="nav-link" href="./shop.html">Shop</a>
+    <a class="nav-link" href="./about.html">About</a>
+    <a class="nav-link" href="./contact.html">Contact</a>
+    <a class="nav-badge" href="./contact.html">&#9679; Open to Work</a>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" onclick="toggleMobileNav()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-drawer" id="nav-drawer">
+  <a class="nav-link" href="./index.html">Home</a>
+  <a class="nav-link" href="./portfolio.html">Portfolio</a>
+  <a class="nav-link" href="./library.html">Script Library</a>
+  <a class="nav-link" href="./shop.html">Shop</a>
+  <a class="nav-link" href="./about.html">About</a>
+  <a class="nav-link" href="./contact.html">Contact</a>
+  <a class="nav-badge" href="./contact.html">&#9679; Open to Work</a>
+</div>
+
+<div class="page active" id="page-portfolio">
+  <div class="port-wrap">
+    <div class="port-header">
+      <div class="eyebrow">Work</div>
+      <div class="section-h">Portfolio</div>
+    </div>
+    <div class="reel-section">
+      <div class="showreel">
+        <div class="showreel-play">&#9655;</div>
+        <div class="showreel-label">Showreel — Coming Soon</div>
+        <div class="showreel-sub">Reel in progress — check back soon</div>
+      </div>
+      <div class="port-section-label">// Projects</div>
+      <div class="port-grid">
+        <a class="port-card" style="opacity:1;cursor:pointer;text-decoration:none;" href="./portfolio-f1.html">
+          <div class="pc-thumb" style="padding:0;overflow:hidden;position:relative;">
+            <img src="./projects/f1_SF25/images/F1_Rendered.png" alt="F1 SF-25" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.3s ease;">
+            <div style="position:absolute;top:8px;left:8px;font-family:'Share Tech Mono',monospace;font-size:clamp(8px,0.65vw,10px);letter-spacing:2px;color:var(--text-bright);background:rgba(139,79,200,0.7);padding:3px 8px;text-transform:uppercase;">Hard Surface</div>
+          </div>
+          <div class="pc-body">
+            <div class="pc-cat">Maya Rig · 2025</div>
+            <div class="pc-title">Formula 1 SF-25 Livery</div>
+            <div class="pc-desc">Production-ready F1 car rig — DRS system, dual livery, auto wheel spin, AnimSchool picker.</div>
+          </div>
+        </a>
+        <div class="port-card placeholder">
+          <div class="pc-thumb">// Coming Soon</div>
+          <div class="pc-body"><div class="pc-cat">Character Rig</div><div class="pc-title">Nordic Bandit</div><div class="pc-desc">Full character rig breakdown — uploading soon.</div></div>
+        </div>
+        <div class="port-card placeholder">
+          <div class="pc-thumb">// Coming Soon</div>
+          <div class="pc-body"><div class="pc-cat">Tool</div><div class="pc-title">AviaRigg Toolkit</div><div class="pc-desc">Full toolkit documentation — coming soon.</div></div>
+        </div>
+        <div class="port-card placeholder">
+          <div class="pc-thumb">// Coming Soon</div>
+          <div class="pc-body"><div class="pc-cat">Facial Rig</div><div class="pc-title">Project Incoming</div><div class="pc-desc">Facial rig breakdown — coming soon.</div></div>
+        </div>
+        <div class="port-card placeholder">
+          <div class="pc-thumb">// Coming Soon</div>
+          <div class="pc-body"><div class="pc-cat">Workshop Project</div><div class="pc-title">HatRigs Project</div><div class="pc-desc">Project from HatRigs workshop — coming soon.</div></div>
+        </div>
+        <div class="port-card placeholder">
+          <div class="pc-thumb">// Coming Soon</div>
+          <div class="pc-body"><div class="pc-cat">Workshop Project</div><div class="pc-title">Rigging Dojo Project</div><div class="pc-desc">Project from Rigging Dojo workshop — coming soon.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+function toggleMobileNav() {
+  const drawer = document.getElementById('nav-drawer');
+  const btn = document.getElementById('nav-hamburger');
+  const isOpen = drawer.classList.contains('open');
+  drawer.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open', !isOpen);
+}
+</script>
+</body>
+</html>

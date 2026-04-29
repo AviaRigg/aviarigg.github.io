@@ -88,6 +88,7 @@ body::before {
   cursor: pointer;
   transition: color 0.2s;
   user-select: none;
+  text-decoration: none;
 }
 .nav-logo span { color: var(--accent2); }
 .nav-logo:hover span { color: var(--accent3); }
@@ -420,6 +421,8 @@ body::before {
   transition: all 0.2s ease, transform 0.2s ease;
   position: relative;
   overflow: hidden;
+  text-decoration: none;
+  color: inherit;
 }
 .explore-item::before {
   content: '';
