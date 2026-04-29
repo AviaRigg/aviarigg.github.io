@@ -9,6 +9,30 @@
 <style>
   .page { display: block !important; }
   .nav-logo, .nav-link, .nav-badge, .nav-drawer a { text-decoration: none; }
+  #lib-mobile-toast {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    border-left: 3px solid var(--accent);
+    padding: 14px 24px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-bright);
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    white-space: nowrap;
+  }
+  #lib-mobile-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
 </style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-RYTKYEPJG2"></script>
@@ -22,6 +46,8 @@
 <body>
 
 <!-- NAV -->
+<div id="lib-mobile-toast">// Desktop only — open on PC</div>
+
 <nav class="topnav">
   <a class="nav-logo" href="./index.html">Avia<span>Rigg</span></a>
   <div class="nav-links">
@@ -108,7 +134,7 @@
           <div class="explore-item-left"><span class="explore-cat">Work</span><span class="explore-name">Portfolio</span></div>
           <span class="explore-arrow">&#9654;</span>
         </a>
-        <a class="explore-item" href="./library.html" style="text-decoration:none;">
+        <a class="explore-item" href="./library.html" onclick="if(window.innerWidth<=768){event.preventDefault();document.getElementById('lib-mobile-toast').classList.add('show');setTimeout(()=>document.getElementById('lib-mobile-toast').classList.remove('show'),3000);}" style="text-decoration:none;">
           <div class="explore-item-left"><span class="explore-cat">Tools</span><span class="explore-name">Script Library</span></div>
           <span class="explore-arrow">&#9654;</span>
         </a>
