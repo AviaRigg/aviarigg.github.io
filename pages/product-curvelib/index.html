@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Controller Shape Menu — AviaRigg Shop</title>
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="/style.css">
 <style>
   .page { display: block !important; }
   .nav-logo, .nav-link, .nav-badge, .nav-drawer a { text-decoration: none; }
@@ -33,32 +33,32 @@
 </div>
 
 <nav class="topnav">
-  <a class="nav-logo" href="./index.html">Avia<span>Rigg</span></a>
+  <a class="nav-logo" href="/">Avia<span>Rigg</span></a>
   <div class="nav-links">
-    <a class="nav-link" href="./index.html">Home</a>
-    <a class="nav-link" href="./portfolio.html">Portfolio</a>
-    <a class="nav-link" href="./library.html">Script Library</a>
-    <a class="nav-link active" href="./shop.html">Shop</a>
-    <a class="nav-link" href="./about.html">About</a>
-    <a class="nav-link" href="./contact.html">Contact</a>
-    <a class="nav-badge" href="./contact.html">&#9679; Open to Work</a>
+    <a class="nav-link" href="/">Home</a>
+    <a class="nav-link" href="/pages/portfolio">Portfolio</a>
+    <a class="nav-link" href="/pages/library">Script Library</a>
+    <a class="nav-link active" href="/pages/shop">Shop</a>
+    <a class="nav-link" href="/pages/about">About</a>
+    <a class="nav-link" href="/pages/contact">Contact</a>
+    <a class="nav-badge" href="/pages/contact">&#9679; Open to Work</a>
   </div>
   <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" onclick="toggleMobileNav()">
     <span></span><span></span><span></span>
   </button>
 </nav>
 <div class="nav-drawer" id="nav-drawer">
-  <a class="nav-link" href="./index.html">Home</a>
-  <a class="nav-link" href="./portfolio.html">Portfolio</a>
-  <a class="nav-link" href="./shop.html">Shop</a>
-  <a class="nav-link" href="./about.html">About</a>
-  <a class="nav-link" href="./contact.html">Contact</a>
-  <a class="nav-badge" href="./contact.html">&#9679; Open to Work</a>
+  <a class="nav-link" href="/">Home</a>
+  <a class="nav-link" href="/pages/portfolio">Portfolio</a>
+  <a class="nav-link" href="/pages/shop">Shop</a>
+  <a class="nav-link" href="/pages/about">About</a>
+  <a class="nav-link" href="/pages/contact">Contact</a>
+  <a class="nav-badge" href="/pages/contact">&#9679; Open to Work</a>
 </div>
 
 <div class="page active" id="page-product-curvelib">
   <div class="product-wrap">
-    <a class="product-back" href="./shop.html" style="text-decoration:none;">&#8592; Back to Shop</a>
+    <a class="product-back" href="/pages/shop" style="text-decoration:none;">&#8592; Back to Shop</a>
     <div class="product-hero">
       <div class="product-hero-left">
         <div class="eyebrow">Maya Tool · Python</div>
@@ -76,7 +76,7 @@
       <div class="product-hero-right curvelib-hero-right">
         <div class="product-img-wrap curvelib-img-wrap">
           <div class="shop-card-scan"></div>
-          <img src="./projects/AviaRigg_CurvLib/images/Main Window.png" alt="Controller Shape Menu" class="product-hero-img curvelib-hero-img">
+          <img src="/projects/AviaRigg_CurvLib/images/Main Window.png" alt="Controller Shape Menu" class="product-hero-img curvelib-hero-img">
         </div>
       </div>
     </div>
@@ -104,10 +104,10 @@
           <div class="product-thumb" onclick="setCurvlibGalleryVideo(this,'yt:5QWno9tJAGs')"><img src="https://img.youtube.com/vi/5QWno9tJAGs/mqdefault.jpg" alt="Channel Box Presets"><div class="thumb-play">&#9654;</div></div>
           <div class="product-thumb" onclick="setCurvlibGalleryVideo(this,'yt:ZVCshRuwY_0')"><img src="https://img.youtube.com/vi/ZVCshRuwY_0/mqdefault.jpg" alt="Get Name"><div class="thumb-play">&#9654;</div></div>
           <div class="product-thumb" onclick="setCurvlibGalleryVideo(this,'yt:emvZmKgxOO0')"><img src="https://img.youtube.com/vi/emvZmKgxOO0/mqdefault.jpg" alt="Installer"><div class="thumb-play">&#9654;</div></div>
-          <div class="product-thumb" onclick="setCurvlibGalleryImg(this,'./projects/AviaRigg_CurvLib/images/Main Window.png','Main Window')"><img src="./projects/AviaRigg_CurvLib/images/Main Window.png" alt="Main Window"></div>
-          <div class="product-thumb" onclick="setCurvlibGalleryImg(this,'./projects/AviaRigg_CurvLib/images/Controller Library Window.png','Controller Library')"><img src="./projects/AviaRigg_CurvLib/images/Controller Library Window.png" alt="Controller Library"></div>
-          <div class="product-thumb" onclick="setCurvlibGalleryImg(this,'./projects/AviaRigg_CurvLib/images/Create Custom Controller Window.png','Custom Controller')"><img src="./projects/AviaRigg_CurvLib/images/Create Custom Controller Window.png" alt="Custom Controller"></div>
-          <div class="product-thumb" onclick="setCurvlibGalleryImg(this,'./projects/AviaRigg_CurvLib/images/Channel Box Preset Window.png','Channel Box Presets')"><img src="./projects/AviaRigg_CurvLib/images/Channel Box Preset Window.png" alt="Channel Box Presets"></div>
+          <div class="product-thumb" onclick="setCurvlibGalleryImg(this,'/projects/AviaRigg_CurvLib/images/Main Window.png','Main Window')"><img src="/projects/AviaRigg_CurvLib/images/Main Window.png" alt="Main Window"></div>
+          <div class="product-thumb" onclick="setCurvlibGalleryImg(this,'/projects/AviaRigg_CurvLib/images/Controller Library Window.png','Controller Library')"><img src="/projects/AviaRigg_CurvLib/images/Controller Library Window.png" alt="Controller Library"></div>
+          <div class="product-thumb" onclick="setCurvlibGalleryImg(this,'/projects/AviaRigg_CurvLib/images/Create Custom Controller Window.png','Custom Controller')"><img src="/projects/AviaRigg_CurvLib/images/Create Custom Controller Window.png" alt="Custom Controller"></div>
+          <div class="product-thumb" onclick="setCurvlibGalleryImg(this,'/projects/AviaRigg_CurvLib/images/Channel Box Preset Window.png','Channel Box Presets')"><img src="/projects/AviaRigg_CurvLib/images/Channel Box Preset Window.png" alt="Channel Box Presets"></div>
         </div>
         <div class="product-gallery">
           <div id="curvelib-gallery-main" class="product-gallery-main-img">
