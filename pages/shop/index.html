@@ -70,110 +70,6 @@
 
   .shop-tab-panel { display: none; }
   .shop-tab-panel.active { display: block; animation: pgIn 0.25s ease; padding-top: 40px; }
-
-  /* ══════════════════════════════════════════
-     4K / HiDPI — font sizes only, no layout impact.
-     Container is capped at 1600px so vw won't help;
-     fixed px values scaled ~1.55x from base.
-  ══════════════════════════════════════════ */
-  @media (min-width: 2560px) {
-    /* no html font-size change — avoids layout bloat */
-
-    /* Tab nav */
-    .shop-tab { font-size: 15px; letter-spacing: 4px; }
-    .shop-tab-icon { font-size: 18px; }
-
-    /* Hero card */
-    .hero-cat, .hero-featured-label { font-size: 14px; letter-spacing: 4px; }
-    .hero-card-tag  { font-size: 13px; letter-spacing: 4px; }
-    .hero-title     { font-size: 52px; }
-    .hero-desc      { font-size: 18px; }
-    .hero-price     { font-size: 48px; }
-    .hero-price-sub { font-size: 14px; }
-
-    /* Filter row */
-    .filter-btn   { font-size: 13px; letter-spacing: 4px; }
-    .filter-count { font-size: 12px; }
-
-    /* Product cards */
-    .pc-cat         { font-size: 13px; letter-spacing: 4px; }
-    .pc-title       { font-size: 24px; }
-    .pc-desc        { font-size: 15px; }
-    .pc-price       { font-size: 30px; }
-    .pc-badge       { font-size: 12px; letter-spacing: 3px; }
-    .pc-tag         { font-size: 13px; letter-spacing: 3px; }
-    .pc-placeholder { font-size: 14px; }
-    .shop-buy-btn   { font-size: 13px; letter-spacing: 4px; }
-    .shop-notice    { font-size: 13px; letter-spacing: 3px; }
-
-    /* Commission tab */
-    .comm-avail-badge   { font-size: 14px; letter-spacing: 4px; }
-    .comm-talk-text     { font-size: 18px; }
-    .comm-step          { font-size: 14px; letter-spacing: 6px; }
-    .comm-section-title { font-size: 44px; }
-    .comm-section-sub   { font-size: 17px; }
-
-    /* Tier cards */
-    .comm-tier-name          { font-size: 14px; letter-spacing: 5px; }
-    .comm-tier-headline      { font-size: 28px; }
-    .comm-tier-desc          { font-size: 16px; }
-    .comm-tier-price         { font-size: 52px; }
-    .comm-tier-delivery      { font-size: 14px; letter-spacing: 4px; }
-    .comm-tier-delivery-note { font-size: 15px; }
-    .comm-tier-features li   { font-size: 15px; }
-    .comm-tier-revisions     { font-size: 13px; letter-spacing: 4px; }
-
-    /* Facial / policy */
-    .comm-facial-label { font-size: 14px; letter-spacing: 5px; }
-    .comm-policy-title { font-size: 22px; }
-    .comm-policy-text  { font-size: 15px; }
-
-    /* Add-ons */
-    .comm-addon-name    { font-size: 19px; }
-    .comm-addon-desc    { font-size: 14px; }
-    .comm-addon-price   { font-size: 28px; }
-    .comm-addon-days    { font-size: 13px; letter-spacing: 3px; }
-    .comm-fd-tier-name  { font-size: 13px; letter-spacing: 4px; }
-    .comm-fd-tier-info  { font-size: 17px; }
-    .comm-fd-tier-price { font-size: 26px; }
-
-    /* Contact grid */
-    .comm-contact-icon  { font-size: 28px; }
-    .comm-contact-title { font-size: 21px; }
-    .comm-contact-desc  { font-size: 15px; }
-
-    /* Buttons */
-    .comm-btn-outline,
-    .comm-btn-primary { font-size: 13px; letter-spacing: 4px; }
-  }
-
-  /* True 4K — another ~20% bump on top */
-  @media (min-width: 3840px) {
-    .shop-tab           { font-size: 18px; }
-    .hero-title         { font-size: 64px; }
-    .hero-desc          { font-size: 22px; }
-    .hero-price         { font-size: 60px; }
-    .pc-title           { font-size: 30px; }
-    .pc-desc            { font-size: 18px; }
-    .pc-price           { font-size: 38px; }
-    .comm-section-title { font-size: 56px; }
-    .comm-section-sub   { font-size: 21px; }
-    .comm-tier-headline { font-size: 34px; }
-    .comm-tier-desc     { font-size: 20px; }
-    .comm-tier-price    { font-size: 64px; }
-    .comm-tier-features li { font-size: 19px; }
-    .comm-talk-text     { font-size: 22px; }
-    .comm-addon-name    { font-size: 24px; }
-    .comm-addon-desc    { font-size: 18px; }
-    .comm-addon-price   { font-size: 34px; }
-    .comm-contact-title { font-size: 26px; }
-    .comm-contact-desc  { font-size: 19px; }
-    .comm-btn-outline,
-    .comm-btn-primary   { font-size: 16px; letter-spacing: 4px; }
-    .shop-buy-btn       { font-size: 16px; }
-    .filter-btn         { font-size: 16px; }
-  }
-
   /* ══════════════════════════════════════════
      OPTION A — PRODUCTS TAB
   ══════════════════════════════════════════ */
@@ -718,6 +614,109 @@
     .shop-tab { padding: 12px 16px; }
     .comm-addon { grid-template-columns: 1fr auto; }
     .comm-addon .comm-btn-outline { grid-column: 1 / -1; text-align: center; }
+  }
+
+  /* ══════════════════════════════════════════
+     4K / HiDPI — font sizes only, no layout impact.
+     Placed LAST so cascade order wins over base rules.
+     Container is capped at 1600px wide so vw-based
+     clamp() values stop growing well before 2560px —
+     these fixed px overrides push past that ceiling.
+  ══════════════════════════════════════════ */
+  @media (min-width: 2560px) {
+    /* Tab nav */
+    .shop-tab { font-size: 15px; letter-spacing: 4px; }
+    .shop-tab-icon { font-size: 18px; }
+
+    /* Hero card */
+    .hero-cat, .hero-featured-label { font-size: 14px; letter-spacing: 4px; }
+    .hero-card-tag  { font-size: 13px; letter-spacing: 4px; }
+    .hero-title     { font-size: 52px; }
+    .hero-desc      { font-size: 18px; }
+    .hero-price     { font-size: 48px; }
+    .hero-price-sub { font-size: 14px; }
+
+    /* Filter row */
+    .filter-btn   { font-size: 13px; letter-spacing: 4px; }
+    .filter-count { font-size: 12px; }
+
+    /* Product cards */
+    .pc-cat         { font-size: 13px; letter-spacing: 4px; }
+    .pc-title       { font-size: 24px; }
+    .pc-desc        { font-size: 15px; }
+    .pc-price       { font-size: 30px; }
+    .pc-badge       { font-size: 12px; letter-spacing: 3px; }
+    .pc-tag         { font-size: 13px; letter-spacing: 3px; }
+    .pc-placeholder { font-size: 14px; }
+    .shop-buy-btn   { font-size: 13px; letter-spacing: 4px; }
+    .shop-notice    { font-size: 13px; letter-spacing: 3px; }
+
+    /* Commission tab */
+    .comm-avail-badge   { font-size: 14px; letter-spacing: 4px; }
+    .comm-talk-text     { font-size: 18px; }
+    .comm-step          { font-size: 14px; letter-spacing: 6px; }
+    .comm-section-title { font-size: 44px; }
+    .comm-section-sub   { font-size: 17px; }
+
+    /* Tier cards */
+    .comm-tier-name          { font-size: 14px; letter-spacing: 5px; }
+    .comm-tier-headline      { font-size: 28px; }
+    .comm-tier-desc          { font-size: 16px; }
+    .comm-tier-price         { font-size: 52px; }
+    .comm-tier-delivery      { font-size: 14px; letter-spacing: 4px; }
+    .comm-tier-delivery-note { font-size: 15px; }
+    .comm-tier-features li   { font-size: 15px; }
+    .comm-tier-revisions     { font-size: 13px; letter-spacing: 4px; }
+
+    /* Facial / policy */
+    .comm-facial-label { font-size: 14px; letter-spacing: 5px; }
+    .comm-policy-title { font-size: 22px; }
+    .comm-policy-text  { font-size: 15px; }
+
+    /* Add-ons */
+    .comm-addon-name    { font-size: 19px; }
+    .comm-addon-desc    { font-size: 14px; }
+    .comm-addon-price   { font-size: 28px; }
+    .comm-addon-days    { font-size: 13px; letter-spacing: 3px; }
+    .comm-fd-tier-name  { font-size: 13px; letter-spacing: 4px; }
+    .comm-fd-tier-info  { font-size: 17px; }
+    .comm-fd-tier-price { font-size: 26px; }
+
+    /* Contact grid */
+    .comm-contact-icon  { font-size: 28px; }
+    .comm-contact-title { font-size: 21px; }
+    .comm-contact-desc  { font-size: 15px; }
+
+    /* Buttons */
+    .comm-btn-outline,
+    .comm-btn-primary { font-size: 13px; letter-spacing: 4px; }
+  }
+
+  /* True 4K (3840px) — another ~25% bump on top of 2560px values */
+  @media (min-width: 3840px) {
+    .shop-tab           { font-size: 18px; }
+    .hero-title         { font-size: 64px; }
+    .hero-desc          { font-size: 22px; }
+    .hero-price         { font-size: 60px; }
+    .pc-title           { font-size: 30px; }
+    .pc-desc            { font-size: 18px; }
+    .pc-price           { font-size: 38px; }
+    .comm-section-title { font-size: 56px; }
+    .comm-section-sub   { font-size: 21px; }
+    .comm-tier-headline { font-size: 34px; }
+    .comm-tier-desc     { font-size: 20px; }
+    .comm-tier-price    { font-size: 64px; }
+    .comm-tier-features li { font-size: 19px; }
+    .comm-talk-text     { font-size: 22px; }
+    .comm-addon-name    { font-size: 24px; }
+    .comm-addon-desc    { font-size: 18px; }
+    .comm-addon-price   { font-size: 34px; }
+    .comm-contact-title { font-size: 26px; }
+    .comm-contact-desc  { font-size: 19px; }
+    .comm-btn-outline,
+    .comm-btn-primary   { font-size: 16px; letter-spacing: 4px; }
+    .shop-buy-btn       { font-size: 16px; }
+    .filter-btn         { font-size: 16px; }
   }
 </style>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-RYTKYEPJG2"></script>
