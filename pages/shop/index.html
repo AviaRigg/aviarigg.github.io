@@ -10,6 +10,9 @@
   .page { display: block !important; }
   .nav-logo, .nav-link, .nav-badge, .nav-drawer a { text-decoration: none; }
 
+  /* Override shop-wrap to remove side padding — centering handled by inner containers */
+  .shop-wrap { padding-left: 0 !important; padding-right: 0 !important; }
+
   /* ══════════════════════════════════════════
      TAB SWITCHER — redesigned
   ══════════════════════════════════════════ */
@@ -582,28 +585,23 @@
   .comm-btn-primary:hover { background: var(--accent2); border-color: var(--accent2); }
 
   /* ── CENTERED 2/3 CONTAINER ── */
-  .shop-inner {
-    max-width: 1100px;
-    width: 66.666%;
-    margin: 0 auto;
-  }
-  .shop-tabs-wrap {
-    max-width: 1100px;
-    width: 66.666%;
-    margin: 0 auto;
-  }
+  /* Uses 66.666vw so it's always 2/3 of the viewport at any resolution,
+     with a floor so it doesn't get too narrow on small screens */
+  .shop-inner,
+  .shop-tabs-wrap,
   .comm-wrap {
-    max-width: 1100px;
-    width: 66.666%;
-    margin: 0 auto;
+    width: min(66.666vw, 1600px);
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   /* Responsive */
   @media (max-width: 1400px) {
-    .shop-inner, .shop-tabs-wrap, .comm-wrap { width: 75%; }
+    .shop-inner, .shop-tabs-wrap, .comm-wrap { width: min(75vw, 1600px); }
   }
   @media (max-width: 1100px) {
-    .shop-inner, .shop-tabs-wrap, .comm-wrap { width: 90%; }
+    .shop-inner, .shop-tabs-wrap, .comm-wrap { width: 90vw; }
     .hero-card { grid-template-columns: 1fr; }
     .hero-card-img { border-right: none; border-bottom: 1px solid var(--border); }
     .product-grid { grid-template-columns: repeat(2,1fr); }
@@ -669,9 +667,11 @@
 
 <div class="page active" id="page-shop">
   <div class="shop-wrap">
+    <div class="shop-tabs-wrap">
     <div class="port-header">
       <div class="eyebrow">Store</div>
       <div class="section-h">Shop</div>
+    </div>
     </div>
 
     <!-- ── TAB SWITCHER ── -->
