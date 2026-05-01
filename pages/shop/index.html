@@ -9,6 +9,498 @@
 <style>
   .page { display: block !important; }
   .nav-logo, .nav-link, .nav-badge, .nav-drawer a { text-decoration: none; }
+
+  /* ── AVAILABILITY TOGGLE ──────────────────────────────────
+     To mark yourself as unavailable, change this one line:
+     .nav-badge, .comm-avail-badge  →  display: none
+     and uncomment the .comm-unavail-badge block below.
+  ─────────────────────────────────────────────────────────── */
+
+  /* ── SHOP TABS ── */
+  .shop-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+  }
+  .shop-tab {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: clamp(10px, 0.9vw, 13px);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding: 14px 32px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    user-select: none;
+  }
+  .shop-tab:hover { color: var(--text); }
+  .shop-tab.active { color: var(--accent2); border-bottom-color: var(--accent2); }
+
+  .shop-tab-panel { display: none; }
+  .shop-tab-panel.active { display: block; animation: pgIn 0.25s ease; }
+
+  /* ── COMMISSION CONTENT ── */
+  .comm-wrap {
+    max-width: 1200px;
+  }
+
+  /* Availability badge inside commissions */
+  .comm-avail-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0,232,122,0.07);
+    border: 1px solid rgba(0,232,122,0.3);
+    padding: 7px 18px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: clamp(9px, 0.8vw, 12px);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 40px;
+    animation: blink 2.5s ease-in-out infinite;
+  }
+  .comm-avail-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--green);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Uncomment this block to show "unavailable" state instead:
+  .comm-avail-badge { display: none; }
+  .comm-unavail-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,80,80,0.07);
+    border: 1px solid rgba(255,80,80,0.3);
+    padding: 7px 18px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: clamp(9px, 0.8vw, 12px);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #ff5050;
+    margin-bottom: 40px;
+  }
+  */
+  .comm-unavail-badge { display: none; }
+
+  /* Talk banner */
+  .comm-talk-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    background: rgba(139,79,200,0.06);
+    border: 1px solid rgba(139,79,200,0.2);
+    border-left: 3px solid var(--accent);
+    padding: clamp(16px, 1.5vw, 24px) clamp(20px, 2vw, 32px);
+    margin-bottom: 56px;
+    flex-wrap: wrap;
+  }
+  .comm-talk-text {
+    font-size: clamp(13px, 1vw, 15px);
+    color: var(--text);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+  .comm-talk-text strong { color: var(--text-bright); font-weight: 600; }
+
+  /* Step label */
+  .comm-step {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: clamp(9px, 0.8vw, 11px);
+    letter-spacing: 5px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .comm-step::before { content: ''; width: 28px; height: 1px; background: var(--accent); flex-shrink: 0; }
+
+  .comm-section-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(22px, 2.5vw, 40px);
+    font-weight: 700;
+    color: var(--text-bright);
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .comm-section-sub {
+    font-size: clamp(13px, 1vw, 15px);
+    color: var(--text-dim);
+    font-weight: 300;
+    margin-bottom: clamp(24px, 3vw, 40px);
+  }
+
+  /* Tier grid */
+  .comm-tiers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    margin-bottom: 32px;
+  }
+
+  .comm-tier {
+    background: var(--surface);
+    padding: clamp(20px, 2vw, 36px) clamp(16px, 1.8vw, 28px);
+    display: flex;
+    flex-direction: column;
+    transition: background 0.2s;
+  }
+  .comm-tier:hover { background: var(--surface2); }
+  .comm-tier.featured { background: var(--surface2); border-top: 2px solid var(--accent); }
+
+  .comm-tier-name {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: clamp(9px, 0.75vw, 11px);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .comm-tier-headline {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(18px, 1.8vw, 26px);
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 10px;
+    line-height: 1.1;
+  }
+  .comm-tier-desc {
+    font-size: clamp(12px, 0.95vw, 14px);
+    color: var(--text);
+    line-height: 1.65;
+    font-weight: 300;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+  }
+  .comm-tier-price {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(32px, 3vw, 48px);
+    font-weight: 700;
+    color: var(--text-bright);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .comm-tier-price span {
+    font-size: clamp(14px, 1.1vw, 18px);
+    color: var(--text-dim);
+    font-weight: 400;
+  }
+  .comm-tier-delivery {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: clamp(9px, 0.75vw, 11px);
+    letter-spacing: 3px;
+    color: var(--accent2);
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .comm-tier-delivery-note {
+    font-size: clamp(11px, 0.85vw, 13px);
+    color: var(--text-dim);
+    font-style: italic;
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+  .comm-tier-features {
+    list-style: none;
+    flex: 1;
+    margin-bottom: 20px;
+  }
+  .comm-tier-features li {
+    font-size: clamp(12px, 0.95vw, 14px);
+    color: var(--text);
+    padding: 7px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 300;
+  }
+  .comm-tier-features li:last-child { border-bottom: none; }
+  .comm-tier-features li::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: var(--border);
+  }
+  .comm-tier-features li.incl::before { background: var(--green); }
+  .comm-tier-features li.excl { color: var(--text-dim); opacity: 0.45; }
+  .comm-tier-features li.excl::before { background: var(--text-dim); opacity: 0.3; }
+
+  .comm-tier-revisions {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: clamp(9px, 0.75vw, 11px);
+    letter-spacing: 3px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  /* Facial Only card */
+  .comm-facial-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--accent);
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: clamp(20px, 3vw, 48px);
+    align-items: center;
+    padding: clamp(20px, 2vw, 32px) clamp(20px, 2.5vw, 36px);
+    margin-bottom: 12px;
+    transition: background 0.2s;
+  }
+  .comm-facial-card:hover { background: var(--surface2); }
+  .comm-facial-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: clamp(9px, 0.75vw, 11px);
+    letter-spacing: 4px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    margin-top: 32px;
+  }
+
+  /* Policy box */
+  .comm-policy {
+    display: flex;
+    gap: 16px;
+    background: rgba(139,79,200,0.04);
+    border: 1px solid rgba(139,79,200,0.15);
+    border-left: 3px solid var(--accent);
+    padding: clamp(16px, 1.5vw, 24px) clamp(20px, 2vw, 28px);
+    margin: 32px 0 48px;
+    align-items: flex-start;
+  }
+  .comm-policy-icon {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--accent2);
+    background: rgba(139,79,200,0.12);
+    border: 1px solid rgba(139,79,200,0.25);
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+    letter-spacing: 0;
+  }
+  .comm-policy-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(15px, 1.2vw, 20px);
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 8px;
+  }
+  .comm-policy-text {
+    font-size: clamp(12px, 0.95vw, 14px);
+    color: var(--text);
+    line-height: 1.65;
+    font-weight: 300;
+    margin-bottom: 6px;
+  }
+  .comm-policy-text:last-child { margin-bottom: 0; }
+  .comm-policy-text strong { color: var(--text-bright); font-weight: 600; }
+
+  /* Divider */
+  .comm-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  /* Add-ons grid */
+  .comm-addons-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--border);
+    margin-bottom: 48px;
+  }
+  .comm-addon {
+    background: var(--surface);
+    padding: clamp(14px, 1.5vw, 22px) clamp(16px, 1.8vw, 26px);
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: clamp(12px, 1.5vw, 24px);
+    transition: background 0.2s;
+  }
+  .comm-addon:hover { background: var(--surface2); }
+  .comm-addon-name {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(14px, 1.2vw, 18px);
+    font-weight: 600;
+    color: var(--text-bright);
+    margin-bottom: 3px;
+  }
+  .comm-addon-desc {
+    font-size: clamp(11px, 0.9vw, 13px);
+    color: var(--text-dim);
+    font-weight: 300;
+    line-height: 1.4;
+  }
+  .comm-addon-meta { text-align: right; flex-shrink: 0; }
+  .comm-addon-price {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(18px, 1.6vw, 26px);
+    font-weight: 700;
+    color: var(--accent2);
+  }
+  .comm-addon-days {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: clamp(8px, 0.7vw, 10px);
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+
+  /* Fast delivery addon (full width) */
+  .comm-addon-full {
+    grid-column: 1 / -1;
+    background: var(--surface);
+    padding: clamp(16px, 1.5vw, 24px) clamp(16px, 1.8vw, 26px);
+    transition: background 0.2s;
+  }
+  .comm-addon-full:hover { background: var(--surface2); }
+  .comm-fd-tiers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 14px;
+  }
+  .comm-fd-tier {
+    background: rgba(139,79,200,0.04);
+    border: 1px solid var(--border);
+    padding: 12px 16px;
+  }
+  .comm-fd-tier-name {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: clamp(8px, 0.7vw, 10px);
+    letter-spacing: 3px;
+    color: var(--text-dim);
+    margin-bottom: 5px;
+    text-transform: uppercase;
+  }
+  .comm-fd-tier-info {
+    font-size: clamp(12px, 0.95vw, 14px);
+    font-weight: 500;
+    color: var(--text-bright);
+    margin-bottom: 2px;
+  }
+  .comm-fd-tier-price {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(18px, 1.5vw, 24px);
+    font-weight: 700;
+    color: var(--accent2);
+    margin-bottom: 10px;
+  }
+
+  /* Hard surface tiers */
+  .comm-hs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    margin-bottom: 48px;
+  }
+
+  /* Bottom contact */
+  .comm-contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    margin-bottom: 24px;
+  }
+  .comm-contact-option {
+    background: var(--surface);
+    padding: clamp(20px, 2vw, 32px) clamp(16px, 1.8vw, 24px);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.2s;
+  }
+  .comm-contact-option:hover { background: var(--surface2); }
+  .comm-contact-icon { font-size: 22px; }
+  .comm-contact-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(15px, 1.3vw, 19px);
+    font-weight: 700;
+    color: var(--text-bright);
+  }
+  .comm-contact-desc {
+    font-size: clamp(12px, 0.9vw, 13px);
+    color: var(--text-dim);
+    font-weight: 300;
+    line-height: 1.55;
+    flex: 1;
+  }
+
+  /* Buttons inside commission section */
+  .comm-btn-outline {
+    display: inline-block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: clamp(9px, 0.8vw, 11px);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text);
+    border: 1px solid var(--border);
+    background: transparent;
+    padding: 9px 20px;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .comm-btn-outline:hover { border-color: var(--accent2); color: var(--accent2); }
+
+  .comm-btn-primary {
+    display: inline-block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: clamp(9px, 0.8vw, 11px);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #fff;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    padding: 9px 20px;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .comm-btn-primary:hover { background: var(--accent2); border-color: var(--accent2); }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .comm-tiers-grid, .comm-hs-grid { grid-template-columns: 1fr; }
+    .comm-contact-grid { grid-template-columns: 1fr; }
+    .comm-addons-grid { grid-template-columns: 1fr; }
+    .comm-facial-card { grid-template-columns: 1fr; }
+    .comm-fd-tiers { grid-template-columns: 1fr; }
+    .comm-addon { grid-template-columns: 1fr auto; }
+    .comm-addon .comm-btn-outline { grid-column: 1 / -1; text-align: center; }
+  }
+  @media (max-width: 600px) {
+    .shop-tab { padding: 12px 16px; font-size: 9px; }
+    .comm-talk-banner { flex-direction: column; }
+  }
 </style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-RYTKYEPJG2"></script>
@@ -62,63 +554,424 @@
       <div class="eyebrow">Store</div>
       <div class="section-h">Shop</div>
     </div>
-    <div class="shop-grid">
-      <div class="shop-card shop-card--active" onclick="window.location.href='/pages/product-curvelib'">
-        <div class="shop-card-thumb shop-card-thumb--img">
-          <div class="shop-card-scan"></div>
-          <img src="/projects/AviaRigg_CurvLib/images/Main Window.png" alt="Controller Shape Menu" class="shop-card-img">
-          <div class="shop-card-thumb-tag">// Maya Tool</div>
-        </div>
-        <div class="shop-card-body">
-          <div class="shop-card-cat">Python Tool · v2.1.0</div>
-          <div class="shop-card-title">Controller Shape Menu</div>
-          <div class="shop-card-desc">A Maya tool built by a rigger, for riggers — everything you need to create, manage, and customize controllers without the headache.</div>
-          <div class="shop-card-footer">
-            <span class="shop-card-price">&#8364;4.99+</span>
-            <a href="https://payhip.com/b/bZ1mE" class="shop-buy-btn" onclick="event.preventDefault();event.stopPropagation();openCheckout('https://payhip.com/b/bZ1mE')">Buy &#8594;</a>
+
+    <!-- TAB SWITCHER -->
+    <div class="shop-tabs">
+      <div class="shop-tab active" onclick="switchTab('products')">// Products</div>
+      <div class="shop-tab" onclick="switchTab('commissions')">// Commissions</div>
+    </div>
+
+    <!-- ══ TAB: PRODUCTS ══════════════════════════════════════ -->
+    <div class="shop-tab-panel active" id="tab-products">
+      <div class="shop-grid">
+        <div class="shop-card shop-card--active" onclick="window.location.href='/pages/product-curvelib'">
+          <div class="shop-card-thumb shop-card-thumb--img">
+            <div class="shop-card-scan"></div>
+            <img src="/projects/AviaRigg_CurvLib/images/Main Window.png" alt="Controller Shape Menu" class="shop-card-img">
+            <div class="shop-card-thumb-tag">// Maya Tool</div>
+          </div>
+          <div class="shop-card-body">
+            <div class="shop-card-cat">Python Tool · v2.1.0</div>
+            <div class="shop-card-title">Controller Shape Menu</div>
+            <div class="shop-card-desc">A Maya tool built by a rigger, for riggers — everything you need to create, manage, and customize controllers without the headache.</div>
+            <div class="shop-card-footer">
+              <span class="shop-card-price">&#8364;4.99+</span>
+              <a href="https://payhip.com/b/bZ1mE" class="shop-buy-btn" onclick="event.preventDefault();event.stopPropagation();openCheckout('https://payhip.com/b/bZ1mE')">Buy &#8594;</a>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="shop-card shop-card--active" onclick="window.location.href='/pages/product-f1'">
-        <div class="shop-card-thumb shop-card-thumb--img">
-          <div class="shop-card-scan"></div>
-          <img src="/projects/f1_SF25/images/F1_Rendered.png" alt="F1 SF-25 Rig" class="shop-card-img">
-          <div class="shop-card-thumb-tag">// Hard Surface</div>
-        </div>
-        <div class="shop-card-body">
-          <div class="shop-card-cat">Maya Rig</div>
-          <div class="shop-card-title">Formula 1 SF-25 Livery</div>
-          <div class="shop-card-desc">A fully rigged F1 car for Maya. Hamilton or Leclerc livery included — choose your side very carefully.</div>
-          <div class="shop-card-footer">
-            <span class="shop-card-price">&#8364;19.99+</span>
-            <a href="https://payhip.com/b/4akCM" class="shop-buy-btn" onclick="event.preventDefault();event.stopPropagation();openCheckout('https://payhip.com/b/4akCM')">Buy &#8594;</a>
+        <div class="shop-card shop-card--active" onclick="window.location.href='/pages/product-f1'">
+          <div class="shop-card-thumb shop-card-thumb--img">
+            <div class="shop-card-scan"></div>
+            <img src="/projects/f1_SF25/images/F1_Rendered.png" alt="F1 SF-25 Rig" class="shop-card-img">
+            <div class="shop-card-thumb-tag">// Hard Surface</div>
+          </div>
+          <div class="shop-card-body">
+            <div class="shop-card-cat">Maya Rig</div>
+            <div class="shop-card-title">Formula 1 SF-25 Livery</div>
+            <div class="shop-card-desc">A fully rigged F1 car for Maya. Hamilton or Leclerc livery included — choose your side very carefully.</div>
+            <div class="shop-card-footer">
+              <span class="shop-card-price">&#8364;19.99+</span>
+              <a href="https://payhip.com/b/4akCM" class="shop-buy-btn" onclick="event.preventDefault();event.stopPropagation();openCheckout('https://payhip.com/b/4akCM')">Buy &#8594;</a>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="shop-card">
-        <div class="shop-card-thumb">// Coming Soon</div>
-        <div class="shop-card-body">
-          <div class="shop-card-cat">Rig Pack</div>
-          <div class="shop-card-title">Character Rig Template</div>
-          <div class="shop-card-desc">Production-ready character rig base — biped, fully scalable and documented.</div>
-          <div class="shop-card-footer"><span class="shop-card-price">— —</span><span class="shop-card-badge">Coming Soon</span></div>
+        <div class="shop-card">
+          <div class="shop-card-thumb">// Coming Soon</div>
+          <div class="shop-card-body">
+            <div class="shop-card-cat">Rig Pack</div>
+            <div class="shop-card-title">Character Rig Template</div>
+            <div class="shop-card-desc">Production-ready character rig base — biped, fully scalable and documented.</div>
+            <div class="shop-card-footer"><span class="shop-card-price">— —</span><span class="shop-card-badge">Coming Soon</span></div>
+          </div>
         </div>
-      </div>
 
-      <div class="shop-card">
-        <div class="shop-card-thumb">// Coming Soon</div>
-        <div class="shop-card-body">
-          <div class="shop-card-cat">Script Pack</div>
-          <div class="shop-card-title">MEL & Python Scripts</div>
-          <div class="shop-card-desc">Curated pack of utility scripts for riggers — deformers, attributes, naming.</div>
-          <div class="shop-card-footer"><span class="shop-card-price">— —</span><span class="shop-card-badge">Coming Soon</span></div>
+        <div class="shop-card">
+          <div class="shop-card-thumb">// Coming Soon</div>
+          <div class="shop-card-body">
+            <div class="shop-card-cat">Script Pack</div>
+            <div class="shop-card-title">MEL &amp; Python Scripts</div>
+            <div class="shop-card-desc">Curated pack of utility scripts for riggers — deformers, attributes, naming.</div>
+            <div class="shop-card-footer"><span class="shop-card-price">— —</span><span class="shop-card-badge">Coming Soon</span></div>
+          </div>
         </div>
       </div>
     </div>
+
+    <!-- ══ TAB: COMMISSIONS ══════════════════════════════════ -->
+    <div class="shop-tab-panel" id="tab-commissions">
+      <div class="comm-wrap">
+
+        <!-- Availability -->
+        <div class="comm-avail-badge">Currently Available for Commissions</div>
+        <div class="comm-unavail-badge">&#9679; &nbsp;Currently Unavailable — Check Back Soon</div>
+
+        <!-- Talk banner -->
+        <div class="comm-talk-banner">
+          <div class="comm-talk-text">
+            <strong>Not sure what you need?</strong> Reach out before purchasing — I'll look at your project and point you toward the right tier, or scope something custom. No upselling.
+          </div>
+          <a href="/pages/contact" class="comm-btn-outline">&#9993; &nbsp;Talk to me first</a>
+        </div>
+
+        <!-- ── STEP 01: Character Rigs ── -->
+        <div class="comm-step">Step 01</div>
+        <div class="comm-section-title">Character Rigs</div>
+        <div class="comm-section-sub">All rigs delivered as Maya source files (.mb) with full documentation.</div>
+
+        <div class="comm-tiers-grid">
+          <!-- Starter -->
+          <div class="comm-tier">
+            <div class="comm-tier-name">Starter</div>
+            <div class="comm-tier-headline">Prop / Simple Character</div>
+            <div class="comm-tier-desc">Non-humanoid, stylized, or simple characters. Weapons, vehicles, game assets. No fingers, no face.</div>
+            <div class="comm-tier-price">&#8364;29 <span>EUR</span></div>
+            <div class="comm-tier-delivery">Max 10 Day Delivery</div>
+            <div class="comm-tier-delivery-note">Often delivered sooner</div>
+            <ul class="comm-tier-features">
+              <li class="incl">Full body rig</li>
+              <li class="incl">Clean hierarchy</li>
+              <li class="incl">Body deformation blendshapes</li>
+              <li class="incl">Project file delivery</li>
+              <li class="excl">Finger rig</li>
+              <li class="excl">IK/FK switch</li>
+              <li class="excl">Props &amp; assets rigging</li>
+              <li class="excl">Facial rig</li>
+              <li class="excl">Facial blendshapes</li>
+              <li class="excl">MGPicker UI</li>
+              <li class="excl">Cartoon deformation &amp; stretchy limbs</li>
+            </ul>
+            <div class="comm-tier-revisions">3 Revisions Included</div>
+            <a href="https://payhip.com/b/zLKWk" target="_blank" class="comm-btn-outline" style="text-align:center;">Order Starter &#8594;</a>
+          </div>
+
+          <!-- Humanoid -->
+          <div class="comm-tier featured">
+            <div class="comm-tier-name">Humanoid</div>
+            <div class="comm-tier-headline">Full Biped Rig</div>
+            <div class="comm-tier-desc">Full biped with IK/FK, fingers, body blendshapes, 1 prop. Animator-ready out of the box.</div>
+            <div class="comm-tier-price">&#8364;99 <span>EUR</span></div>
+            <div class="comm-tier-delivery">Max 20 Day Delivery</div>
+            <div class="comm-tier-delivery-note">Often delivered sooner</div>
+            <ul class="comm-tier-features">
+              <li class="incl">Full body rig</li>
+              <li class="incl">Clean hierarchy</li>
+              <li class="incl">Body deformation blendshapes</li>
+              <li class="incl">Project file delivery</li>
+              <li class="incl">Finger rig</li>
+              <li class="incl">IK/FK switch</li>
+              <li class="incl">1 Prop &amp; assets rigging</li>
+              <li class="excl">Facial rig</li>
+              <li class="excl">Facial blendshapes</li>
+              <li class="excl">MGPicker UI</li>
+              <li class="excl">Cartoon deformation &amp; stretchy limbs</li>
+            </ul>
+            <div class="comm-tier-revisions">7 Revisions Included</div>
+            <a href="https://payhip.com/b/j3d6i" target="_blank" class="comm-btn-primary" style="text-align:center;">Order Humanoid &#8594;</a>
+          </div>
+
+          <!-- Production -->
+          <div class="comm-tier">
+            <div class="comm-tier-name">Production</div>
+            <div class="comm-tier-headline">Full Production Rig</div>
+            <div class="comm-tier-desc">Full biped, facial rig, FACS blendshapes, cartoon deformation, MGPicker UI, 2 props. Short film or cinematic grade.</div>
+            <div class="comm-tier-price">&#8364;199 <span>EUR</span></div>
+            <div class="comm-tier-delivery">Max 90 Day Delivery</div>
+            <div class="comm-tier-delivery-note">Often delivered sooner</div>
+            <ul class="comm-tier-features">
+              <li class="incl">Full body rig</li>
+              <li class="incl">Clean hierarchy</li>
+              <li class="incl">Body deformation blendshapes</li>
+              <li class="incl">Project file delivery</li>
+              <li class="incl">Finger rig</li>
+              <li class="incl">IK/FK switch</li>
+              <li class="incl">2 Props &amp; assets rigging</li>
+              <li class="incl">Facial rig</li>
+              <li class="incl">Facial blendshapes</li>
+              <li class="incl">MGPicker UI</li>
+              <li class="incl">Cartoon deformation &amp; stretchy limbs</li>
+            </ul>
+            <div class="comm-tier-revisions">Unlimited Revisions</div>
+            <a href="https://payhip.com/b/2XKOe" target="_blank" class="comm-btn-outline" style="text-align:center;">Order Production &#8594;</a>
+          </div>
+        </div>
+
+        <!-- Facial Only -->
+        <div class="comm-facial-label">// Already have a body rig? Just need the face.</div>
+        <div class="comm-facial-card">
+          <div>
+            <div class="comm-tier-name" style="margin-bottom:8px;">Facial Only</div>
+            <div class="comm-tier-headline">Standalone Facial Rig</div>
+            <div style="font-size:clamp(12px,0.95vw,14px);color:var(--text);line-height:1.65;font-weight:300;max-width:380px;">Standalone facial rig for characters that already have a body rig. FACS-based blendshapes, full facial controls, project file delivery.</div>
+          </div>
+          <div>
+            <div class="comm-addon-days" style="margin-bottom:10px;">Includes</div>
+            <ul class="comm-tier-features" style="margin-bottom:0;">
+              <li class="incl">Facial rig</li>
+              <li class="incl">Facial blendshapes</li>
+              <li class="incl">Project file delivery</li>
+              <li class="incl">5 Revisions included</li>
+            </ul>
+          </div>
+          <div style="text-align:right;">
+            <div class="comm-tier-price" style="margin-bottom:4px;">&#8364;79</div>
+            <div class="comm-tier-delivery" style="margin-bottom:3px;">Max 30 Day Delivery</div>
+            <div class="comm-tier-delivery-note" style="margin-bottom:20px;">Often delivered sooner</div>
+            <a href="https://payhip.com/b/HXM95" target="_blank" class="comm-btn-outline">Order Facial Rig &#8594;</a>
+          </div>
+        </div>
+
+        <!-- Revision policy -->
+        <div class="comm-policy">
+          <div class="comm-policy-icon">!</div>
+          <div>
+            <div class="comm-policy-title">What counts as a revision?</div>
+            <p class="comm-policy-text">Revisions cover <strong>additional changes</strong> to an already delivered rig — not bug fixes. If there are skin weight issues, deformation problems, or anything not working correctly as delivered, I will fix it at no revision cost. That's just part of the job.</p>
+            <p class="comm-policy-text">A revision is used when you request something <strong>new or different</strong> from the original scope: a different mesh, model changes, new facial expressions, different rigging features, added controls, or anything that wasn't in the original brief.</p>
+          </div>
+        </div>
+
+        <hr class="comm-divider">
+
+        <!-- ── STEP 02: Add-ons ── -->
+        <div class="comm-step">Step 02</div>
+        <div class="comm-section-title">Add-ons</div>
+        <div class="comm-section-sub">Stack extras on top of any character package. Order separately via Payhip.</div>
+
+        <div class="comm-addons-grid">
+          <!-- Fast delivery - full width -->
+          <div class="comm-addon-full">
+            <div class="comm-addon-name">Extra Fast Delivery</div>
+            <div class="comm-addon-desc">Need it sooner? Rush delivery available for all tiers.</div>
+            <div class="comm-fd-tiers">
+              <div class="comm-fd-tier">
+                <div class="comm-fd-tier-name">Starter</div>
+                <div class="comm-fd-tier-info">4 day delivery</div>
+                <div class="comm-fd-tier-price">+&#8364;49</div>
+                <a href="https://payhip.com/b/dMQGU" target="_blank" class="comm-btn-outline" style="display:block;text-align:center;">Add to Order</a>
+              </div>
+              <div class="comm-fd-tier">
+                <div class="comm-fd-tier-name">Humanoid</div>
+                <div class="comm-fd-tier-info">10 day delivery</div>
+                <div class="comm-fd-tier-price">+&#8364;119</div>
+                <a href="https://payhip.com/b/tL9om" target="_blank" class="comm-btn-outline" style="display:block;text-align:center;">Add to Order</a>
+              </div>
+              <div class="comm-fd-tier">
+                <div class="comm-fd-tier-name">Production</div>
+                <div class="comm-fd-tier-info">60 day delivery</div>
+                <div class="comm-fd-tier-price">+&#8364;299</div>
+                <a href="https://payhip.com/b/upGVR" target="_blank" class="comm-btn-outline" style="display:block;text-align:center;">Add to Order</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Individual add-ons -->
+          <div class="comm-addon">
+            <div>
+              <div class="comm-addon-name">Props &amp; Assets Rigging</div>
+              <div class="comm-addon-desc">Per prop. Weapons, tools, accessories — rigged and ready to attach.</div>
+            </div>
+            <div class="comm-addon-meta">
+              <div class="comm-addon-price">+&#8364;9</div>
+              <div class="comm-addon-days">+2 Days / Prop</div>
+            </div>
+            <a href="https://payhip.com/b/6DAU8" target="_blank" class="comm-btn-outline">Add to Order</a>
+          </div>
+
+          <div class="comm-addon">
+            <div>
+              <div class="comm-addon-name">IK/FK Switch</div>
+              <div class="comm-addon-desc">Add IK/FK switching to a Starter rig. Essential for animation flexibility.</div>
+            </div>
+            <div class="comm-addon-meta">
+              <div class="comm-addon-price">+&#8364;19</div>
+              <div class="comm-addon-days">+1 Day</div>
+            </div>
+            <a href="https://payhip.com/b/TdvmS" target="_blank" class="comm-btn-outline">Add to Order</a>
+          </div>
+
+          <div class="comm-addon">
+            <div>
+              <div class="comm-addon-name">MGPicker UI</div>
+              <div class="comm-addon-desc">Custom animator picker panel built for your rig. Namespace-portable, production-ready.</div>
+            </div>
+            <div class="comm-addon-meta">
+              <div class="comm-addon-price">+&#8364;29</div>
+              <div class="comm-addon-days">+3 Days</div>
+            </div>
+            <a href="https://payhip.com/b/joOQX" target="_blank" class="comm-btn-outline">Add to Order</a>
+          </div>
+
+          <div class="comm-addon">
+            <div>
+              <div class="comm-addon-name">Cartoon Deformation</div>
+              <div class="comm-addon-desc">Stretchy limbs, squash &amp; stretch, tweak controls. Full cartoon rig setup.</div>
+            </div>
+            <div class="comm-addon-meta">
+              <div class="comm-addon-price">+&#8364;39</div>
+              <div class="comm-addon-days">+5 Days</div>
+            </div>
+            <a href="https://payhip.com/b/S3Zn1" target="_blank" class="comm-btn-outline">Add to Order</a>
+          </div>
+
+          <div class="comm-addon">
+            <div>
+              <div class="comm-addon-name">Additional Revision Pack</div>
+              <div class="comm-addon-desc">Extra revision bundle if you've used your included revisions.</div>
+            </div>
+            <div class="comm-addon-meta">
+              <div class="comm-addon-price">+&#8364;19</div>
+              <div class="comm-addon-days">+3 Days</div>
+            </div>
+            <a href="https://payhip.com/b/GF1hr" target="_blank" class="comm-btn-outline">Add to Order</a>
+          </div>
+
+          <div class="comm-addon">
+            <div>
+              <div class="comm-addon-name">Rig Documentation</div>
+              <div class="comm-addon-desc">Full written breakdown — control naming, features, limitations, delivery specs, and usage notes. Essential for studio pipelines.</div>
+            </div>
+            <div class="comm-addon-meta">
+              <div class="comm-addon-price">+&#8364;19</div>
+              <div class="comm-addon-days">+2 Days</div>
+            </div>
+            <a href="https://payhip.com/b/1plwz" target="_blank" class="comm-btn-outline">Add to Order</a>
+          </div>
+        </div>
+
+        <hr class="comm-divider">
+
+        <!-- ── STEP 03: Hard Surface ── -->
+        <div class="comm-step">Step 03</div>
+        <div class="comm-section-title">Hard Surface &amp; Mechanical Rigs</div>
+        <div class="comm-section-sub">Vehicles, objects, mechanical assemblies. No character required.</div>
+
+        <div class="comm-hs-grid">
+          <!-- Simple Object -->
+          <div class="comm-tier">
+            <div class="comm-tier-name">Simple Object</div>
+            <div class="comm-tier-headline">Prop Rig</div>
+            <div class="comm-tier-desc">Static or simply animated props. Crates, barrels, treasure chests, doors with basic open/close.</div>
+            <div class="comm-tier-price">&#8364;19</div>
+            <div class="comm-tier-delivery">Max 5 Day Delivery</div>
+            <div class="comm-tier-delivery-note">Often delivered sooner</div>
+            <ul class="comm-tier-features">
+              <li class="incl">Clean transform rig</li>
+              <li class="incl">Basic open / close controls</li>
+              <li class="incl">Clean hierarchy and naming</li>
+              <li class="incl">Project file delivery (.mb)</li>
+              <li class="excl">Mechanical systems</li>
+              <li class="excl">Wheel / steering systems</li>
+              <li class="excl">Suspension / deformation</li>
+            </ul>
+            <div class="comm-tier-revisions">3 Revisions Included</div>
+            <a href="/pages/contact" class="comm-btn-outline" style="text-align:center;">Order Simple Object &#8594;</a>
+          </div>
+
+          <!-- Mechanical -->
+          <div class="comm-tier featured">
+            <div class="comm-tier-name">Mechanical</div>
+            <div class="comm-tier-headline">Mechanical Rig</div>
+            <div class="comm-tier-desc">Moving parts, constraints, mechanical systems. Robot arms, conveyor belts, folding mechanisms.</div>
+            <div class="comm-tier-price">&#8364;49</div>
+            <div class="comm-tier-delivery">Max 15 Day Delivery</div>
+            <div class="comm-tier-delivery-note">Often delivered sooner</div>
+            <ul class="comm-tier-features">
+              <li class="incl">Clean transform rig</li>
+              <li class="incl">Mechanical constraint system</li>
+              <li class="incl">Custom attribute controls</li>
+              <li class="incl">Clean hierarchy and naming</li>
+              <li class="incl">Project file delivery (.mb)</li>
+              <li class="excl">Wheel / steering systems</li>
+              <li class="excl">Suspension / deformation</li>
+            </ul>
+            <div class="comm-tier-revisions">5 Revisions Included</div>
+            <a href="/pages/contact" class="comm-btn-primary" style="text-align:center;">Order Mechanical &#8594;</a>
+          </div>
+
+          <!-- Vehicle -->
+          <div class="comm-tier">
+            <div class="comm-tier-name">Vehicle</div>
+            <div class="comm-tier-headline">Vehicle Rig</div>
+            <div class="comm-tier-desc">Full vehicle rigs. F1 cars, motorcycles, bicycles. Auto wheel spin, steering, suspension, animatable systems.</div>
+            <div class="comm-tier-price">&#8364;99</div>
+            <div class="comm-tier-delivery">Max 30 Day Delivery</div>
+            <div class="comm-tier-delivery-note">Often delivered sooner</div>
+            <ul class="comm-tier-features">
+              <li class="incl">Full vehicle rig</li>
+              <li class="incl">Auto wheel spin (motion-driven)</li>
+              <li class="incl">Steering system</li>
+              <li class="incl">Suspension setup</li>
+              <li class="incl">Animatable mechanical systems</li>
+              <li class="incl">Clean hierarchy and naming</li>
+              <li class="incl">Project file delivery (.mb)</li>
+            </ul>
+            <div class="comm-tier-revisions">7 Revisions Included</div>
+            <a href="/pages/contact" class="comm-btn-outline" style="text-align:center;">Order Vehicle &#8594;</a>
+          </div>
+        </div>
+
+        <hr class="comm-divider">
+
+        <!-- ── STEP 04: Not Sure ── -->
+        <div class="comm-step">Step 04</div>
+        <div class="comm-section-title" style="text-align:center;">Not Sure? Let's Talk.</div>
+        <div class="comm-section-sub" style="text-align:center;">Message me before buying anything. I'll look at your project and tell you honestly what you need.</div>
+
+        <div class="comm-contact-grid">
+          <div class="comm-contact-option">
+            <div class="comm-contact-icon">&#127919;</div>
+            <div class="comm-contact-title">Not sure which tier</div>
+            <div class="comm-contact-desc">Describe your character or asset and I'll tell you exactly which package fits — and what to expect.</div>
+            <a href="/pages/contact" class="comm-btn-outline" style="width:100%;text-align:center;">Ask me</a>
+          </div>
+          <div class="comm-contact-option">
+            <div class="comm-contact-icon">&#127959;</div>
+            <div class="comm-contact-title">Custom or unusual project</div>
+            <div class="comm-contact-desc">Creature rig, quadruped, specific pipeline requirement, bulk order, or something else entirely — let's scope it together.</div>
+            <a href="/pages/contact" class="comm-btn-outline" style="width:100%;text-align:center;">Let's scope it</a>
+          </div>
+          <div class="comm-contact-option">
+            <div class="comm-contact-icon">&#127970;</div>
+            <div class="comm-contact-title">Studio or team enquiry</div>
+            <div class="comm-contact-desc">Multiple characters, pipeline integration, tool development, or ongoing work. Reach out and we'll figure out what makes sense.</div>
+            <a href="/pages/contact" class="comm-btn-outline" style="width:100%;text-align:center;">Contact me</a>
+          </div>
+        </div>
+
+        <div style="text-align:center;margin-top:8px;padding-bottom:8px;">
+          <a href="/pages/contact" class="btn-primary">&#9993; &nbsp;contact@aviarigg.com</a>
+        </div>
+
+      </div>
+    </div>
+    <!-- end commissions tab -->
+
   </div>
 </div>
+
 <script>
 function toggleMobileNav() {
   const drawer = document.getElementById('nav-drawer');
@@ -127,6 +980,14 @@ function toggleMobileNav() {
   drawer.classList.toggle('open', !isOpen);
   btn.classList.toggle('open', !isOpen);
 }
+
+function switchTab(tab) {
+  document.querySelectorAll('.shop-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.shop-tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
 function updateScanHeights() {
   document.querySelectorAll('.shop-card-thumb--img').forEach(el => {
     el.style.setProperty('--thumb-h', el.offsetHeight + 'px');
@@ -139,7 +1000,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const ro = new ResizeObserver(updateScanHeights);
     document.querySelectorAll('.shop-card-thumb--img').forEach(el => ro.observe(el));
   }
+  // Open commissions tab if URL has #commissions
+  if (window.location.hash === '#commissions') {
+    document.querySelectorAll('.shop-tab')[1].click();
+  }
 });
+
 function openCheckout(url) {
   const modal = document.getElementById('checkout-modal');
   document.getElementById('checkout-iframe').src = url;
