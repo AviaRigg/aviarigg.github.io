@@ -10,499 +10,600 @@
   .page { display: block !important; }
   .nav-logo, .nav-link, .nav-badge, .nav-drawer a { text-decoration: none; }
 
-  /* ── AVAILABILITY TOGGLE ──────────────────────────────────
-     To mark yourself as unavailable, change this one line:
-     .nav-badge, .comm-avail-badge  →  display: none
-     and uncomment the .comm-unavail-badge block below.
-  ─────────────────────────────────────────────────────────── */
-
-  /* ── SHOP TABS ── */
+  /* ══════════════════════════════════════════
+     TAB SWITCHER — redesigned
+  ══════════════════════════════════════════ */
   .shop-tabs {
     display: flex;
-    gap: 0;
-    border-bottom: 1px solid var(--border);
+    gap: 2px;
     margin-bottom: 48px;
+    position: relative;
   }
+
   .shop-tab {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     font-family: 'Share Tech Mono', monospace;
-    font-size: clamp(10px, 0.9vw, 13px);
+    font-size: clamp(10px, 0.9vw, 12px);
     letter-spacing: 3px;
     text-transform: uppercase;
     color: var(--text-dim);
-    padding: 14px 32px;
+    padding: 14px 28px;
     cursor: pointer;
-    border-bottom: 2px solid transparent;
-    transition: color 0.2s, border-color 0.2s;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-bottom: none;
+    transition: color 0.2s, background 0.2s, border-color 0.2s;
     user-select: none;
+    position: relative;
   }
-  .shop-tab:hover { color: var(--text); }
-  .shop-tab.active { color: var(--accent2); border-bottom-color: var(--accent2); }
+  .shop-tab::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; left: 0; right: 0;
+    height: 1px;
+    background: var(--border);
+    transition: background 0.2s;
+  }
+  .shop-tab:hover { color: var(--text); background: var(--surface2); }
+  .shop-tab.active {
+    color: var(--accent2);
+    background: var(--surface2);
+    border-color: var(--accent);
+  }
+  .shop-tab.active::after { background: var(--surface2); }
+
+  .shop-tab-icon {
+    font-size: 14px;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+  }
+  .shop-tab.active .shop-tab-icon { opacity: 1; }
+
+  .shop-tab-underline {
+    height: 1px;
+    background: var(--border);
+    margin-bottom: 40px;
+    margin-top: -1px;
+  }
 
   .shop-tab-panel { display: none; }
   .shop-tab-panel.active { display: block; animation: pgIn 0.25s ease; }
 
-  /* ── COMMISSION CONTENT ── */
-  .comm-wrap {
-    max-width: 1200px;
+  /* ══════════════════════════════════════════
+     OPTION A — PRODUCTS TAB
+  ══════════════════════════════════════════ */
+
+  /* Hero featured card */
+  .hero-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--accent);
+    margin-bottom: 1px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    overflow: hidden;
+  }
+  .hero-card:hover { background: var(--surface2); }
+  .hero-card:hover .hero-img { transform: scale(1.03); }
+
+  .hero-card-img {
+    position: relative; overflow: hidden;
+    aspect-ratio: 16/9;
+    border-right: 1px solid var(--border);
+  }
+  .hero-img {
+    width: 100%; height: 100%; object-fit: cover;
+    display: block; transition: transform 0.5s ease;
+  }
+  .hero-img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(139,79,200,0.25) 0%, transparent 55%);
+  }
+  .hero-card-tag {
+    position: absolute; top: 14px; left: 14px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px; letter-spacing: 3px;
+    color: var(--text-bright);
+    background: rgba(139,79,200,0.75);
+    padding: 4px 12px; text-transform: uppercase; z-index: 1;
   }
 
-  /* Availability badge inside commissions */
+  .hero-card-body {
+    padding: clamp(24px,3vw,48px);
+    display: flex; flex-direction: column; justify-content: center; gap: 14px;
+  }
+  .hero-featured-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px; letter-spacing: 4px;
+    color: var(--green); text-transform: uppercase;
+    display: flex; align-items: center; gap: 8px;
+    animation: blink 2.5s ease-in-out infinite;
+  }
+  .hero-featured-label::before {
+    content: ''; width: 6px; height: 6px;
+    background: var(--green); border-radius: 50%; flex-shrink: 0;
+  }
+  .hero-cat {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px; letter-spacing: 3px;
+    color: var(--accent2); text-transform: uppercase;
+  }
+  .hero-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(22px,2.8vw,40px); font-weight: 700;
+    color: var(--text-bright); line-height: 1.1; letter-spacing: 1px;
+  }
+  .hero-desc {
+    font-size: clamp(13px,1vw,15px);
+    color: var(--text); line-height: 1.7; font-weight: 300;
+  }
+  .hero-footer {
+    display: flex; align-items: center;
+    justify-content: space-between; gap: 16px;
+    border-top: 1px solid var(--border);
+    padding-top: 18px; margin-top: 4px; flex-wrap: wrap;
+  }
+  .hero-price {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(26px,2.5vw,36px); font-weight: 700;
+    color: var(--text-bright); line-height: 1;
+  }
+  .hero-price-sub {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px; color: var(--text-dim); margin-top: 3px;
+  }
+
+  /* Filter row */
+  .filter-row {
+    display: flex; align-items: center;
+    gap: 0; margin-bottom: 1px;
+    border-bottom: 1px solid var(--border);
+  }
+  .filter-btn {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--text-dim);
+    padding: 12px 22px; cursor: pointer;
+    background: none; border: none;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    user-select: none; white-space: nowrap;
+  }
+  .filter-btn:hover { color: var(--text); }
+  .filter-btn.active { color: var(--accent2); border-bottom-color: var(--accent2); }
+  .filter-count {
+    font-size: 9px; color: var(--text-dim);
+    background: var(--surface2); border: 1px solid var(--border);
+    padding: 1px 5px; margin-left: 5px; letter-spacing: 1px;
+    vertical-align: middle;
+  }
+  .filter-btn.active .filter-count { color: var(--accent2); border-color: rgba(176,110,245,0.3); }
+
+  /* Product grid */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--border);
+  }
+  .product-card {
+    background: var(--surface);
+    cursor: pointer; position: relative; overflow: hidden;
+    transition: background 0.2s;
+    display: flex; flex-direction: column;
+    opacity: 1;
+  }
+  .product-card.dim { opacity: 0.4; cursor: default; }
+  .product-card.hidden { display: none; }
+  .product-card:not(.dim):hover { background: var(--surface2); }
+  .product-card:not(.dim):hover .pc-img { transform: scale(1.04); }
+
+  /* Top accent on hover */
+  .product-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.25s ease; z-index: 1;
+  }
+  .product-card:not(.dim):hover::before { transform: scaleX(1); }
+
+  .pc-thumb {
+    aspect-ratio: 16/9; overflow: hidden;
+    background: var(--surface2); position: relative;
+  }
+  .pc-img {
+    width: 100%; height: 100%; object-fit: cover;
+    display: block; transition: transform 0.4s ease;
+  }
+  .pc-placeholder {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px; letter-spacing: 3px;
+    color: var(--text-dim); text-transform: uppercase;
+  }
+  .pc-tag {
+    position: absolute; top: 10px; left: 10px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px; letter-spacing: 2px;
+    color: var(--text-bright); background: rgba(139,79,200,0.65);
+    padding: 3px 9px; text-transform: uppercase; z-index: 1;
+  }
+  .pc-body {
+    padding: clamp(14px,1.4vw,20px);
+    display: flex; flex-direction: column; flex: 1;
+  }
+  .pc-cat {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px; letter-spacing: 3px;
+    color: var(--accent2); text-transform: uppercase; margin-bottom: 5px;
+  }
+  .pc-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(16px,1.5vw,20px); font-weight: 700;
+    color: var(--text-bright); letter-spacing: 0.5px; margin-bottom: 7px;
+  }
+  .pc-desc {
+    font-size: clamp(11px,0.9vw,13px); color: var(--text);
+    line-height: 1.6; font-weight: 300; flex: 1; margin-bottom: 14px;
+  }
+  .pc-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid var(--border); padding-top: 12px;
+  }
+  .pc-price {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(18px,1.8vw,24px); font-weight: 700;
+    color: var(--text-bright);
+  }
+  .pc-badge {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px; letter-spacing: 2px; color: var(--text-dim);
+    border: 1px solid var(--border); padding: 3px 9px; text-transform: uppercase;
+  }
+
+  /* Buy button */
+  .shop-buy-btn {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: clamp(10px,0.9vw,12px); letter-spacing: 3px;
+    text-transform: uppercase; color: var(--accent2);
+    border: 1px solid var(--accent); background: transparent;
+    padding: 8px 18px; text-decoration: none;
+    transition: all 0.2s; cursor: pointer;
+    clip-path: polygon(5px 0%, 100% 0%, calc(100% - 5px) 100%, 0% 100%);
+    white-space: nowrap;
+  }
+  .shop-buy-btn:hover {
+    background: rgba(0,232,122,0.1);
+    border-color: var(--green); color: var(--green);
+    animation: blink 1.2s ease-in-out infinite;
+  }
+
+  /* Notice strip */
+  .shop-notice {
+    display: flex; align-items: center; gap: 12px;
+    margin-top: 24px; padding: 12px 16px;
+    border: 1px solid var(--border); border-left: 2px solid var(--accent);
+    background: rgba(139,79,200,0.04);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: clamp(9px,0.8vw,11px); letter-spacing: 2px;
+    color: var(--text-dim); text-transform: uppercase;
+  }
+  .shop-notice::before { content: '//'; color: var(--accent); flex-shrink: 0; }
+
+  /* ══════════════════════════════════════════
+     COMMISSIONS TAB — centered + redesigned
+  ══════════════════════════════════════════ */
+  .comm-wrap {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  /* Availability badge */
   .comm-avail-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
+    display: inline-flex; align-items: center; gap: 8px;
     background: rgba(0,232,122,0.07);
     border: 1px solid rgba(0,232,122,0.3);
     padding: 7px 18px;
     font-family: 'Share Tech Mono', monospace;
-    font-size: clamp(9px, 0.8vw, 12px);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--green);
-    margin-bottom: 40px;
+    font-size: clamp(9px,0.8vw,11px); letter-spacing: 3px;
+    text-transform: uppercase; color: var(--green);
+    margin-bottom: 32px;
     animation: blink 2.5s ease-in-out infinite;
   }
   .comm-avail-badge::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    background: var(--green);
-    border-radius: 50%;
-    flex-shrink: 0;
+    content: ''; width: 6px; height: 6px;
+    background: var(--green); border-radius: 50%; flex-shrink: 0;
   }
-
-  /* Uncomment this block to show "unavailable" state instead:
-  .comm-avail-badge { display: none; }
-  .comm-unavail-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(255,80,80,0.07);
-    border: 1px solid rgba(255,80,80,0.3);
-    padding: 7px 18px;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: clamp(9px, 0.8vw, 12px);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #ff5050;
-    margin-bottom: 40px;
-  }
-  */
   .comm-unavail-badge { display: none; }
 
   /* Talk banner */
   .comm-talk-banner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
+    display: flex; align-items: center;
+    justify-content: space-between; gap: 24px;
     background: rgba(139,79,200,0.06);
     border: 1px solid rgba(139,79,200,0.2);
     border-left: 3px solid var(--accent);
-    padding: clamp(16px, 1.5vw, 24px) clamp(20px, 2vw, 32px);
-    margin-bottom: 56px;
-    flex-wrap: wrap;
+    padding: clamp(16px,1.5vw,22px) clamp(20px,2vw,28px);
+    margin-bottom: 48px; flex-wrap: wrap;
   }
   .comm-talk-text {
-    font-size: clamp(13px, 1vw, 15px);
-    color: var(--text);
-    line-height: 1.6;
-    font-weight: 300;
+    font-size: clamp(13px,1vw,14px);
+    color: var(--text); line-height: 1.6; font-weight: 300;
   }
   .comm-talk-text strong { color: var(--text-bright); font-weight: 600; }
 
   /* Step label */
   .comm-step {
     font-family: 'Share Tech Mono', monospace;
-    font-size: clamp(9px, 0.8vw, 11px);
-    letter-spacing: 5px;
-    color: var(--accent);
-    text-transform: uppercase;
+    font-size: clamp(9px,0.8vw,11px); letter-spacing: 5px;
+    color: var(--accent); text-transform: uppercase;
     margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    display: flex; align-items: center; gap: 12px;
   }
   .comm-step::before { content: ''; width: 28px; height: 1px; background: var(--accent); flex-shrink: 0; }
 
   .comm-section-title {
     font-family: 'Rajdhani', sans-serif;
-    font-size: clamp(22px, 2.5vw, 40px);
-    font-weight: 700;
-    color: var(--text-bright);
-    letter-spacing: 1px;
-    margin-bottom: 6px;
+    font-size: clamp(20px,2.2vw,34px); font-weight: 700;
+    color: var(--text-bright); letter-spacing: 1px; margin-bottom: 5px;
   }
   .comm-section-sub {
-    font-size: clamp(13px, 1vw, 15px);
-    color: var(--text-dim);
-    font-weight: 300;
-    margin-bottom: clamp(24px, 3vw, 40px);
+    font-size: clamp(12px,0.95vw,14px);
+    color: var(--text-dim); font-weight: 300;
+    margin-bottom: clamp(20px,2.5vw,36px);
   }
 
   /* Tier grid */
   .comm-tiers-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--border);
-    margin-bottom: 32px;
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 1px; background: var(--border); margin-bottom: 24px;
   }
-
   .comm-tier {
     background: var(--surface);
-    padding: clamp(20px, 2vw, 36px) clamp(16px, 1.8vw, 28px);
-    display: flex;
-    flex-direction: column;
-    transition: background 0.2s;
+    padding: clamp(18px,1.8vw,30px) clamp(14px,1.5vw,24px);
+    display: flex; flex-direction: column; transition: background 0.2s;
   }
   .comm-tier:hover { background: var(--surface2); }
   .comm-tier.featured { background: var(--surface2); border-top: 2px solid var(--accent); }
 
   .comm-tier-name {
     font-family: 'Share Tech Mono', monospace;
-    font-size: clamp(9px, 0.75vw, 11px);
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 8px;
+    font-size: 10px; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 8px;
   }
   .comm-tier-headline {
     font-family: 'Rajdhani', sans-serif;
-    font-size: clamp(18px, 1.8vw, 26px);
-    font-weight: 700;
-    color: var(--text-bright);
-    margin-bottom: 10px;
-    line-height: 1.1;
+    font-size: clamp(16px,1.6vw,22px); font-weight: 700;
+    color: var(--text-bright); margin-bottom: 8px; line-height: 1.1;
   }
   .comm-tier-desc {
-    font-size: clamp(12px, 0.95vw, 14px);
-    color: var(--text);
-    line-height: 1.65;
-    font-weight: 300;
-    margin-bottom: 20px;
-    flex-shrink: 0;
+    font-size: clamp(11px,0.9vw,13px); color: var(--text);
+    line-height: 1.65; font-weight: 300; margin-bottom: 18px; flex-shrink: 0;
   }
   .comm-tier-price {
     font-family: 'Rajdhani', sans-serif;
-    font-size: clamp(32px, 3vw, 48px);
-    font-weight: 700;
-    color: var(--text-bright);
-    line-height: 1;
-    margin-bottom: 4px;
+    font-size: clamp(28px,2.8vw,42px); font-weight: 700;
+    color: var(--text-bright); line-height: 1; margin-bottom: 4px;
   }
   .comm-tier-price span {
-    font-size: clamp(14px, 1.1vw, 18px);
-    color: var(--text-dim);
-    font-weight: 400;
+    font-size: clamp(12px,1vw,16px); color: var(--text-dim); font-weight: 400;
   }
   .comm-tier-delivery {
     font-family: 'Share Tech Mono', monospace;
-    font-size: clamp(9px, 0.75vw, 11px);
-    letter-spacing: 3px;
-    color: var(--accent2);
-    text-transform: uppercase;
-    margin-bottom: 3px;
+    font-size: 10px; letter-spacing: 3px;
+    color: var(--accent2); text-transform: uppercase; margin-bottom: 3px;
   }
   .comm-tier-delivery-note {
-    font-size: clamp(11px, 0.85vw, 13px);
-    color: var(--text-dim);
-    font-style: italic;
-    font-weight: 300;
-    margin-bottom: 20px;
+    font-size: clamp(11px,0.85vw,13px); color: var(--text-dim);
+    font-style: italic; font-weight: 300; margin-bottom: 18px;
   }
   .comm-tier-features {
-    list-style: none;
-    flex: 1;
-    margin-bottom: 20px;
+    list-style: none; flex: 1; margin-bottom: 18px;
   }
   .comm-tier-features li {
-    font-size: clamp(12px, 0.95vw, 14px);
-    color: var(--text);
-    padding: 7px 0;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 300;
+    font-size: clamp(11px,0.9vw,13px); color: var(--text);
+    padding: 6px 0; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 10px; font-weight: 300;
   }
   .comm-tier-features li:last-child { border-bottom: none; }
   .comm-tier-features li::before {
-    content: '';
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    background: var(--border);
+    content: ''; width: 5px; height: 5px; border-radius: 50%;
+    flex-shrink: 0; background: var(--border);
   }
   .comm-tier-features li.incl::before { background: var(--green); }
-  .comm-tier-features li.excl { color: var(--text-dim); opacity: 0.45; }
+  .comm-tier-features li.excl { color: var(--text-dim); opacity: 0.4; }
   .comm-tier-features li.excl::before { background: var(--text-dim); opacity: 0.3; }
 
   .comm-tier-revisions {
     font-family: 'Share Tech Mono', monospace;
-    font-size: clamp(9px, 0.75vw, 11px);
-    letter-spacing: 3px;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    margin-bottom: 16px;
+    font-size: 10px; letter-spacing: 3px;
+    color: var(--text-dim); text-transform: uppercase; margin-bottom: 14px;
   }
 
-  /* Facial Only card */
-  .comm-facial-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-left: 2px solid var(--accent);
-    display: grid;
-    grid-template-columns: 1fr 1fr auto;
-    gap: clamp(20px, 3vw, 48px);
-    align-items: center;
-    padding: clamp(20px, 2vw, 32px) clamp(20px, 2.5vw, 36px);
-    margin-bottom: 12px;
-    transition: background 0.2s;
-  }
-  .comm-facial-card:hover { background: var(--surface2); }
+  /* Facial Only */
   .comm-facial-label {
     font-family: 'Share Tech Mono', monospace;
-    font-size: clamp(9px, 0.75vw, 11px);
-    letter-spacing: 4px;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    margin-bottom: 12px;
-    margin-top: 32px;
+    font-size: 10px; letter-spacing: 4px;
+    color: var(--text-dim); text-transform: uppercase;
+    margin-bottom: 10px; margin-top: 24px;
   }
+  .comm-facial-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-left: 2px solid var(--accent);
+    display: grid; grid-template-columns: 1fr 1fr auto;
+    gap: clamp(16px,2.5vw,40px); align-items: center;
+    padding: clamp(18px,1.8vw,28px) clamp(18px,2vw,30px);
+    margin-bottom: 10px; transition: background 0.2s;
+  }
+  .comm-facial-card:hover { background: var(--surface2); }
 
-  /* Policy box */
+  /* Policy */
   .comm-policy {
-    display: flex;
-    gap: 16px;
+    display: flex; gap: 14px;
     background: rgba(139,79,200,0.04);
     border: 1px solid rgba(139,79,200,0.15);
     border-left: 3px solid var(--accent);
-    padding: clamp(16px, 1.5vw, 24px) clamp(20px, 2vw, 28px);
-    margin: 32px 0 48px;
-    align-items: flex-start;
+    padding: clamp(14px,1.5vw,22px) clamp(18px,2vw,26px);
+    margin: 28px 0 40px; align-items: flex-start;
   }
   .comm-policy-icon {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 11px;
-    color: var(--accent2);
-    background: rgba(139,79,200,0.12);
+    font-family: 'Share Tech Mono', monospace; font-size: 11px;
+    color: var(--accent2); background: rgba(139,79,200,0.12);
     border: 1px solid rgba(139,79,200,0.25);
-    width: 28px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-top: 2px;
-    letter-spacing: 0;
+    width: 26px; height: 26px; display: flex;
+    align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
   }
   .comm-policy-title {
     font-family: 'Rajdhani', sans-serif;
-    font-size: clamp(15px, 1.2vw, 20px);
-    font-weight: 700;
-    color: var(--text-bright);
-    margin-bottom: 8px;
+    font-size: clamp(14px,1.1vw,18px); font-weight: 700;
+    color: var(--text-bright); margin-bottom: 6px;
   }
   .comm-policy-text {
-    font-size: clamp(12px, 0.95vw, 14px);
-    color: var(--text);
-    line-height: 1.65;
-    font-weight: 300;
-    margin-bottom: 6px;
+    font-size: clamp(11px,0.9vw,13px); color: var(--text);
+    line-height: 1.65; font-weight: 300; margin-bottom: 5px;
   }
   .comm-policy-text:last-child { margin-bottom: 0; }
   .comm-policy-text strong { color: var(--text-bright); font-weight: 600; }
 
   /* Divider */
-  .comm-divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 48px 0;
-  }
+  .comm-divider { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
 
-  /* Add-ons grid */
+  /* Add-ons */
   .comm-addons-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1px;
-    background: var(--border);
-    margin-bottom: 48px;
+    display: grid; grid-template-columns: repeat(2,1fr);
+    gap: 1px; background: var(--border); margin-bottom: 40px;
   }
   .comm-addon {
     background: var(--surface);
-    padding: clamp(14px, 1.5vw, 22px) clamp(16px, 1.8vw, 26px);
-    display: grid;
-    grid-template-columns: 1fr auto auto;
-    align-items: center;
-    gap: clamp(12px, 1.5vw, 24px);
+    padding: clamp(12px,1.3vw,20px) clamp(14px,1.5vw,22px);
+    display: grid; grid-template-columns: 1fr auto auto;
+    align-items: center; gap: clamp(10px,1.2vw,20px);
     transition: background 0.2s;
   }
   .comm-addon:hover { background: var(--surface2); }
   .comm-addon-name {
     font-family: 'Rajdhani', sans-serif;
-    font-size: clamp(14px, 1.2vw, 18px);
-    font-weight: 600;
-    color: var(--text-bright);
-    margin-bottom: 3px;
+    font-size: clamp(13px,1.1vw,16px); font-weight: 600;
+    color: var(--text-bright); margin-bottom: 3px;
   }
   .comm-addon-desc {
-    font-size: clamp(11px, 0.9vw, 13px);
-    color: var(--text-dim);
-    font-weight: 300;
-    line-height: 1.4;
+    font-size: clamp(10px,0.85vw,12px); color: var(--text-dim);
+    font-weight: 300; line-height: 1.4;
   }
   .comm-addon-meta { text-align: right; flex-shrink: 0; }
   .comm-addon-price {
     font-family: 'Rajdhani', sans-serif;
-    font-size: clamp(18px, 1.6vw, 26px);
-    font-weight: 700;
-    color: var(--accent2);
+    font-size: clamp(16px,1.5vw,22px); font-weight: 700; color: var(--accent2);
   }
   .comm-addon-days {
     font-family: 'Share Tech Mono', monospace;
-    font-size: clamp(8px, 0.7vw, 10px);
-    letter-spacing: 2px;
-    color: var(--text-dim);
-    text-transform: uppercase;
+    font-size: 9px; letter-spacing: 2px; color: var(--text-dim); text-transform: uppercase;
   }
-
-  /* Fast delivery addon (full width) */
   .comm-addon-full {
-    grid-column: 1 / -1;
-    background: var(--surface);
-    padding: clamp(16px, 1.5vw, 24px) clamp(16px, 1.8vw, 26px);
+    grid-column: 1 / -1; background: var(--surface);
+    padding: clamp(14px,1.5vw,22px) clamp(14px,1.5vw,22px);
     transition: background 0.2s;
   }
   .comm-addon-full:hover { background: var(--surface2); }
   .comm-fd-tiers {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-top: 14px;
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 8px; margin-top: 12px;
   }
   .comm-fd-tier {
     background: rgba(139,79,200,0.04);
-    border: 1px solid var(--border);
-    padding: 12px 16px;
+    border: 1px solid var(--border); padding: 10px 14px;
   }
   .comm-fd-tier-name {
     font-family: 'Share Tech Mono', monospace;
-    font-size: clamp(8px, 0.7vw, 10px);
-    letter-spacing: 3px;
-    color: var(--text-dim);
-    margin-bottom: 5px;
-    text-transform: uppercase;
+    font-size: 9px; letter-spacing: 3px; color: var(--text-dim);
+    margin-bottom: 4px; text-transform: uppercase;
   }
   .comm-fd-tier-info {
-    font-size: clamp(12px, 0.95vw, 14px);
-    font-weight: 500;
-    color: var(--text-bright);
-    margin-bottom: 2px;
+    font-size: clamp(12px,0.95vw,14px); font-weight: 500;
+    color: var(--text-bright); margin-bottom: 2px;
   }
   .comm-fd-tier-price {
     font-family: 'Rajdhani', sans-serif;
-    font-size: clamp(18px, 1.5vw, 24px);
-    font-weight: 700;
-    color: var(--accent2);
-    margin-bottom: 10px;
+    font-size: clamp(16px,1.4vw,22px); font-weight: 700;
+    color: var(--accent2); margin-bottom: 10px;
   }
 
-  /* Hard surface tiers */
+  /* Hard surface grid */
   .comm-hs-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--border);
-    margin-bottom: 48px;
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 1px; background: var(--border); margin-bottom: 40px;
   }
 
-  /* Bottom contact */
+  /* Contact grid */
   .comm-contact-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--border);
-    margin-bottom: 24px;
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 1px; background: var(--border); margin-bottom: 20px;
   }
   .comm-contact-option {
     background: var(--surface);
-    padding: clamp(20px, 2vw, 32px) clamp(16px, 1.8vw, 24px);
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+    padding: clamp(18px,1.8vw,28px) clamp(14px,1.5vw,22px);
+    text-align: center; display: flex;
+    flex-direction: column; align-items: center; gap: 8px;
     transition: background 0.2s;
   }
   .comm-contact-option:hover { background: var(--surface2); }
-  .comm-contact-icon { font-size: 22px; }
+  .comm-contact-icon { font-size: 20px; }
   .comm-contact-title {
     font-family: 'Rajdhani', sans-serif;
-    font-size: clamp(15px, 1.3vw, 19px);
-    font-weight: 700;
-    color: var(--text-bright);
+    font-size: clamp(14px,1.2vw,17px); font-weight: 700; color: var(--text-bright);
   }
   .comm-contact-desc {
-    font-size: clamp(12px, 0.9vw, 13px);
-    color: var(--text-dim);
-    font-weight: 300;
-    line-height: 1.55;
-    flex: 1;
+    font-size: clamp(11px,0.85vw,12px); color: var(--text-dim);
+    font-weight: 300; line-height: 1.55; flex: 1;
   }
 
-  /* Buttons inside commission section */
+  /* Buttons */
   .comm-btn-outline {
     display: inline-block;
     font-family: 'Share Tech Mono', monospace;
-    font-size: clamp(9px, 0.8vw, 11px);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--text);
-    border: 1px solid var(--border);
-    background: transparent;
-    padding: 9px 20px;
-    text-decoration: none;
-    transition: border-color 0.2s, color 0.2s;
-    white-space: nowrap;
-    cursor: pointer;
+    font-size: clamp(9px,0.8vw,11px); letter-spacing: 3px;
+    text-transform: uppercase; color: var(--text);
+    border: 1px solid var(--border); background: transparent;
+    padding: 8px 18px; text-decoration: none;
+    transition: border-color 0.2s, color 0.2s; white-space: nowrap; cursor: pointer;
   }
   .comm-btn-outline:hover { border-color: var(--accent2); color: var(--accent2); }
-
   .comm-btn-primary {
     display: inline-block;
     font-family: 'Share Tech Mono', monospace;
-    font-size: clamp(9px, 0.8vw, 11px);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #fff;
-    border: 1px solid var(--accent);
-    background: var(--accent);
-    padding: 9px 20px;
-    text-decoration: none;
-    transition: background 0.2s, border-color 0.2s;
-    white-space: nowrap;
-    cursor: pointer;
+    font-size: clamp(9px,0.8vw,11px); letter-spacing: 3px;
+    text-transform: uppercase; color: #fff;
+    border: 1px solid var(--accent); background: var(--accent);
+    padding: 8px 18px; text-decoration: none;
+    transition: background 0.2s, border-color 0.2s; white-space: nowrap; cursor: pointer;
   }
   .comm-btn-primary:hover { background: var(--accent2); border-color: var(--accent2); }
 
   /* Responsive */
-  @media (max-width: 900px) {
+  @media (max-width: 1000px) {
+    .hero-card { grid-template-columns: 1fr; }
+    .hero-card-img { border-right: none; border-bottom: 1px solid var(--border); }
+    .product-grid { grid-template-columns: repeat(2,1fr); }
     .comm-tiers-grid, .comm-hs-grid { grid-template-columns: 1fr; }
     .comm-contact-grid { grid-template-columns: 1fr; }
     .comm-addons-grid { grid-template-columns: 1fr; }
     .comm-facial-card { grid-template-columns: 1fr; }
     .comm-fd-tiers { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .product-grid { grid-template-columns: 1fr; }
+    .filter-row { overflow-x: auto; }
+    .shop-tab { padding: 12px 16px; }
     .comm-addon { grid-template-columns: 1fr auto; }
     .comm-addon .comm-btn-outline { grid-column: 1 / -1; text-align: center; }
   }
-  @media (max-width: 600px) {
-    .shop-tab { padding: 12px 16px; font-size: 9px; }
-    .comm-talk-banner { flex-direction: column; }
-  }
 </style>
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-RYTKYEPJG2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -555,80 +656,125 @@
       <div class="section-h">Shop</div>
     </div>
 
-    <!-- TAB SWITCHER -->
+    <!-- ── TAB SWITCHER ── -->
     <div class="shop-tabs">
-      <div class="shop-tab active" onclick="switchTab('products')">// Products</div>
-      <div class="shop-tab" onclick="switchTab('commissions')">// Commissions</div>
+      <div class="shop-tab active" id="tab-btn-products" onclick="switchTab('products',this)">
+        <span class="shop-tab-icon">&#9632;</span> Products
+      </div>
+      <div class="shop-tab" id="tab-btn-commissions" onclick="switchTab('commissions',this)">
+        <span class="shop-tab-icon">&#9670;</span> Commissions
+      </div>
     </div>
+    <div class="shop-tab-underline"></div>
 
     <!-- ══ TAB: PRODUCTS ══════════════════════════════════════ -->
     <div class="shop-tab-panel active" id="tab-products">
-      <div class="shop-grid">
-        <div class="shop-card shop-card--active" onclick="window.location.href='/pages/product-curvelib'">
-          <div class="shop-card-thumb shop-card-thumb--img">
-            <div class="shop-card-scan"></div>
-            <img src="/projects/AviaRigg_CurvLib/images/Main Window.png" alt="Controller Shape Menu" class="shop-card-img">
-            <div class="shop-card-thumb-tag">// Maya Tool</div>
-          </div>
-          <div class="shop-card-body">
-            <div class="shop-card-cat">Python Tool · v2.1.0</div>
-            <div class="shop-card-title">Controller Shape Menu</div>
-            <div class="shop-card-desc">A Maya tool built by a rigger, for riggers — everything you need to create, manage, and customize controllers without the headache.</div>
-            <div class="shop-card-footer">
-              <span class="shop-card-price">&#8364;4.99+</span>
-              <a href="https://payhip.com/b/bZ1mE" class="shop-buy-btn" onclick="event.preventDefault();event.stopPropagation();openCheckout('https://payhip.com/b/bZ1mE')">Buy &#8594;</a>
+
+      <!-- Hero featured card -->
+      <div class="hero-card" onclick="window.location.href='/pages/product-f1'">
+        <div class="hero-card-img">
+          <img class="hero-img" src="/projects/f1_SF25/images/F1_Rendered.png" alt="F1 SF-25 Rig">
+          <div class="hero-img-overlay"></div>
+          <div class="hero-card-tag">// Hard Surface · Featured</div>
+        </div>
+        <div class="hero-card-body">
+          <div class="hero-featured-label">Featured Product</div>
+          <div class="hero-cat">Maya Rig</div>
+          <div class="hero-title">Formula 1 SF-25 Livery</div>
+          <div class="hero-desc">A fully rigged F1 car for Maya. Hamilton or Leclerc livery included — choose your side very carefully.</div>
+          <div class="hero-footer">
+            <div>
+              <div class="hero-price">&#8364;19.99</div>
+              <div class="hero-price-sub">EUR · Pay what you want</div>
             </div>
+            <a href="https://payhip.com/b/4akCM" class="shop-buy-btn" onclick="event.preventDefault();event.stopPropagation();openCheckout('https://payhip.com/b/4akCM')">Buy Now &#8594;</a>
           </div>
         </div>
+      </div>
 
-        <div class="shop-card shop-card--active" onclick="window.location.href='/pages/product-f1'">
-          <div class="shop-card-thumb shop-card-thumb--img">
-            <div class="shop-card-scan"></div>
-            <img src="/projects/f1_SF25/images/F1_Rendered.png" alt="F1 SF-25 Rig" class="shop-card-img">
-            <div class="shop-card-thumb-tag">// Hard Surface</div>
+      <!-- Filter row -->
+      <div class="filter-row">
+        <button class="filter-btn active" onclick="filterProducts('all',this)">All <span class="filter-count">4</span></button>
+        <button class="filter-btn" onclick="filterProducts('tool',this)">Tools <span class="filter-count">1</span></button>
+        <button class="filter-btn" onclick="filterProducts('rig',this)">Rigs <span class="filter-count">1</span></button>
+        <button class="filter-btn" onclick="filterProducts('soon',this)">Coming Soon <span class="filter-count">2</span></button>
+      </div>
+
+      <!-- Product grid -->
+      <div class="product-grid" id="product-grid">
+
+        <div class="product-card" data-cat="rig" onclick="window.location.href='/pages/product-f1'">
+          <div class="pc-thumb">
+            <img class="pc-img" src="/projects/f1_SF25/images/F1_Rendered.png" alt="F1 SF-25 Rig">
+            <div class="pc-tag">// Hard Surface</div>
           </div>
-          <div class="shop-card-body">
-            <div class="shop-card-cat">Maya Rig</div>
-            <div class="shop-card-title">Formula 1 SF-25 Livery</div>
-            <div class="shop-card-desc">A fully rigged F1 car for Maya. Hamilton or Leclerc livery included — choose your side very carefully.</div>
-            <div class="shop-card-footer">
-              <span class="shop-card-price">&#8364;19.99+</span>
+          <div class="pc-body">
+            <div class="pc-cat">Maya Rig</div>
+            <div class="pc-title">Formula 1 SF-25 Livery</div>
+            <div class="pc-desc">A fully rigged F1 car for Maya. Hamilton or Leclerc livery included.</div>
+            <div class="pc-footer">
+              <span class="pc-price">&#8364;19.99+</span>
               <a href="https://payhip.com/b/4akCM" class="shop-buy-btn" onclick="event.preventDefault();event.stopPropagation();openCheckout('https://payhip.com/b/4akCM')">Buy &#8594;</a>
             </div>
           </div>
         </div>
 
-        <div class="shop-card">
-          <div class="shop-card-thumb">// Coming Soon</div>
-          <div class="shop-card-body">
-            <div class="shop-card-cat">Rig Pack</div>
-            <div class="shop-card-title">Character Rig Template</div>
-            <div class="shop-card-desc">Production-ready character rig base — biped, fully scalable and documented.</div>
-            <div class="shop-card-footer"><span class="shop-card-price">— —</span><span class="shop-card-badge">Coming Soon</span></div>
+        <div class="product-card" data-cat="tool" onclick="window.location.href='/pages/product-curvelib'">
+          <div class="pc-thumb">
+            <img class="pc-img" src="/projects/AviaRigg_CurvLib/images/Main Window.png" alt="Controller Shape Menu">
+            <div class="pc-tag">// Maya Tool</div>
+          </div>
+          <div class="pc-body">
+            <div class="pc-cat">Python Tool · v2.1.0</div>
+            <div class="pc-title">Controller Shape Menu</div>
+            <div class="pc-desc">A Maya tool built by a rigger, for riggers — create, manage, and customize controllers without the headache.</div>
+            <div class="pc-footer">
+              <span class="pc-price">&#8364;4.99+</span>
+              <a href="https://payhip.com/b/bZ1mE" class="shop-buy-btn" onclick="event.preventDefault();event.stopPropagation();openCheckout('https://payhip.com/b/bZ1mE')">Buy &#8594;</a>
+            </div>
           </div>
         </div>
 
-        <div class="shop-card">
-          <div class="shop-card-thumb">// Coming Soon</div>
-          <div class="shop-card-body">
-            <div class="shop-card-cat">Script Pack</div>
-            <div class="shop-card-title">MEL &amp; Python Scripts</div>
-            <div class="shop-card-desc">Curated pack of utility scripts for riggers — deformers, attributes, naming.</div>
-            <div class="shop-card-footer"><span class="shop-card-price">— —</span><span class="shop-card-badge">Coming Soon</span></div>
+        <div class="product-card dim" data-cat="soon">
+          <div class="pc-thumb"><div class="pc-placeholder">// Coming Soon</div></div>
+          <div class="pc-body">
+            <div class="pc-cat">Rig Pack</div>
+            <div class="pc-title">Character Rig Template</div>
+            <div class="pc-desc">Production-ready character rig base — biped, fully scalable and documented.</div>
+            <div class="pc-footer">
+              <span style="font-family:'Share Tech Mono',monospace;font-size:13px;color:var(--text-dim);">— —</span>
+              <span class="pc-badge">Coming Soon</span>
+            </div>
           </div>
         </div>
+
+        <div class="product-card dim" data-cat="soon">
+          <div class="pc-thumb"><div class="pc-placeholder">// Coming Soon</div></div>
+          <div class="pc-body">
+            <div class="pc-cat">Script Pack</div>
+            <div class="pc-title">MEL &amp; Python Scripts</div>
+            <div class="pc-desc">Curated pack of utility scripts for riggers — deformers, attributes, naming.</div>
+            <div class="pc-footer">
+              <span style="font-family:'Share Tech Mono',monospace;font-size:13px;color:var(--text-dim);">— —</span>
+              <span class="pc-badge">Coming Soon</span>
+            </div>
+          </div>
+        </div>
+
       </div>
+
+      <div class="shop-notice">Products are delivered via Payhip. Prices in EUR. Pay-what-you-want where indicated.</div>
+
     </div>
+    <!-- end products tab -->
 
     <!-- ══ TAB: COMMISSIONS ══════════════════════════════════ -->
     <div class="shop-tab-panel" id="tab-commissions">
       <div class="comm-wrap">
 
-        <!-- Availability -->
-        <div class="comm-avail-badge">Currently Available for Commissions</div>
+        <div class="comm-avail-badge">&#9679; &nbsp;Currently Available for Commissions</div>
         <div class="comm-unavail-badge">&#9679; &nbsp;Currently Unavailable — Check Back Soon</div>
 
-        <!-- Talk banner -->
         <div class="comm-talk-banner">
           <div class="comm-talk-text">
             <strong>Not sure what you need?</strong> Reach out before purchasing — I'll look at your project and point you toward the right tier, or scope something custom. No upselling.
@@ -636,13 +782,12 @@
           <a href="/pages/contact" class="comm-btn-outline">&#9993; &nbsp;Talk to me first</a>
         </div>
 
-        <!-- ── STEP 01: Character Rigs ── -->
+        <!-- Step 01 -->
         <div class="comm-step">Step 01</div>
         <div class="comm-section-title">Character Rigs</div>
         <div class="comm-section-sub">All rigs delivered as Maya source files (.mb) with full documentation.</div>
 
         <div class="comm-tiers-grid">
-          <!-- Starter -->
           <div class="comm-tier">
             <div class="comm-tier-name">Starter</div>
             <div class="comm-tier-headline">Prop / Simple Character</div>
@@ -667,7 +812,6 @@
             <a href="https://payhip.com/b/zLKWk" target="_blank" class="comm-btn-outline" style="text-align:center;">Order Starter &#8594;</a>
           </div>
 
-          <!-- Humanoid -->
           <div class="comm-tier featured">
             <div class="comm-tier-name">Humanoid</div>
             <div class="comm-tier-headline">Full Biped Rig</div>
@@ -692,7 +836,6 @@
             <a href="https://payhip.com/b/j3d6i" target="_blank" class="comm-btn-primary" style="text-align:center;">Order Humanoid &#8594;</a>
           </div>
 
-          <!-- Production -->
           <div class="comm-tier">
             <div class="comm-tier-name">Production</div>
             <div class="comm-tier-headline">Full Production Rig</div>
@@ -724,7 +867,7 @@
           <div>
             <div class="comm-tier-name" style="margin-bottom:8px;">Facial Only</div>
             <div class="comm-tier-headline">Standalone Facial Rig</div>
-            <div style="font-size:clamp(12px,0.95vw,14px);color:var(--text);line-height:1.65;font-weight:300;max-width:380px;">Standalone facial rig for characters that already have a body rig. FACS-based blendshapes, full facial controls, project file delivery.</div>
+            <div style="font-size:clamp(11px,0.9vw,13px);color:var(--text);line-height:1.65;font-weight:300;">Standalone facial rig for characters that already have a body rig. FACS-based blendshapes, full facial controls, project file delivery.</div>
           </div>
           <div>
             <div class="comm-addon-days" style="margin-bottom:10px;">Includes</div>
@@ -735,15 +878,15 @@
               <li class="incl">5 Revisions included</li>
             </ul>
           </div>
-          <div style="text-align:right;">
+          <div style="text-align:right;flex-shrink:0;">
             <div class="comm-tier-price" style="margin-bottom:4px;">&#8364;79</div>
             <div class="comm-tier-delivery" style="margin-bottom:3px;">Max 30 Day Delivery</div>
-            <div class="comm-tier-delivery-note" style="margin-bottom:20px;">Often delivered sooner</div>
+            <div class="comm-tier-delivery-note" style="margin-bottom:16px;">Often delivered sooner</div>
             <a href="https://payhip.com/b/HXM95" target="_blank" class="comm-btn-outline">Order Facial Rig &#8594;</a>
           </div>
         </div>
 
-        <!-- Revision policy -->
+        <!-- Policy -->
         <div class="comm-policy">
           <div class="comm-policy-icon">!</div>
           <div>
@@ -755,13 +898,12 @@
 
         <hr class="comm-divider">
 
-        <!-- ── STEP 02: Add-ons ── -->
+        <!-- Step 02 -->
         <div class="comm-step">Step 02</div>
         <div class="comm-section-title">Add-ons</div>
         <div class="comm-section-sub">Stack extras on top of any character package. Order separately via Payhip.</div>
 
         <div class="comm-addons-grid">
-          <!-- Fast delivery - full width -->
           <div class="comm-addon-full">
             <div class="comm-addon-name">Extra Fast Delivery</div>
             <div class="comm-addon-desc">Need it sooner? Rush delivery available for all tiers.</div>
@@ -787,89 +929,51 @@
             </div>
           </div>
 
-          <!-- Individual add-ons -->
           <div class="comm-addon">
-            <div>
-              <div class="comm-addon-name">Props &amp; Assets Rigging</div>
-              <div class="comm-addon-desc">Per prop. Weapons, tools, accessories — rigged and ready to attach.</div>
-            </div>
-            <div class="comm-addon-meta">
-              <div class="comm-addon-price">+&#8364;9</div>
-              <div class="comm-addon-days">+2 Days / Prop</div>
-            </div>
+            <div><div class="comm-addon-name">Props &amp; Assets Rigging</div><div class="comm-addon-desc">Per prop. Weapons, tools, accessories — rigged and ready to attach.</div></div>
+            <div class="comm-addon-meta"><div class="comm-addon-price">+&#8364;9</div><div class="comm-addon-days">+2 Days / Prop</div></div>
             <a href="https://payhip.com/b/6DAU8" target="_blank" class="comm-btn-outline">Add to Order</a>
           </div>
 
           <div class="comm-addon">
-            <div>
-              <div class="comm-addon-name">IK/FK Switch</div>
-              <div class="comm-addon-desc">Add IK/FK switching to a Starter rig. Essential for animation flexibility.</div>
-            </div>
-            <div class="comm-addon-meta">
-              <div class="comm-addon-price">+&#8364;19</div>
-              <div class="comm-addon-days">+1 Day</div>
-            </div>
+            <div><div class="comm-addon-name">IK/FK Switch</div><div class="comm-addon-desc">Add IK/FK switching to a Starter rig. Essential for animation flexibility.</div></div>
+            <div class="comm-addon-meta"><div class="comm-addon-price">+&#8364;19</div><div class="comm-addon-days">+1 Day</div></div>
             <a href="https://payhip.com/b/TdvmS" target="_blank" class="comm-btn-outline">Add to Order</a>
           </div>
 
           <div class="comm-addon">
-            <div>
-              <div class="comm-addon-name">MGPicker UI</div>
-              <div class="comm-addon-desc">Custom animator picker panel built for your rig. Namespace-portable, production-ready.</div>
-            </div>
-            <div class="comm-addon-meta">
-              <div class="comm-addon-price">+&#8364;29</div>
-              <div class="comm-addon-days">+3 Days</div>
-            </div>
+            <div><div class="comm-addon-name">MGPicker UI</div><div class="comm-addon-desc">Custom animator picker panel built for your rig. Namespace-portable, production-ready.</div></div>
+            <div class="comm-addon-meta"><div class="comm-addon-price">+&#8364;29</div><div class="comm-addon-days">+3 Days</div></div>
             <a href="https://payhip.com/b/joOQX" target="_blank" class="comm-btn-outline">Add to Order</a>
           </div>
 
           <div class="comm-addon">
-            <div>
-              <div class="comm-addon-name">Cartoon Deformation</div>
-              <div class="comm-addon-desc">Stretchy limbs, squash &amp; stretch, tweak controls. Full cartoon rig setup.</div>
-            </div>
-            <div class="comm-addon-meta">
-              <div class="comm-addon-price">+&#8364;39</div>
-              <div class="comm-addon-days">+5 Days</div>
-            </div>
+            <div><div class="comm-addon-name">Cartoon Deformation</div><div class="comm-addon-desc">Stretchy limbs, squash &amp; stretch, tweak controls. Full cartoon rig setup.</div></div>
+            <div class="comm-addon-meta"><div class="comm-addon-price">+&#8364;39</div><div class="comm-addon-days">+5 Days</div></div>
             <a href="https://payhip.com/b/S3Zn1" target="_blank" class="comm-btn-outline">Add to Order</a>
           </div>
 
           <div class="comm-addon">
-            <div>
-              <div class="comm-addon-name">Additional Revision Pack</div>
-              <div class="comm-addon-desc">Extra revision bundle if you've used your included revisions.</div>
-            </div>
-            <div class="comm-addon-meta">
-              <div class="comm-addon-price">+&#8364;19</div>
-              <div class="comm-addon-days">+3 Days</div>
-            </div>
+            <div><div class="comm-addon-name">Additional Revision Pack</div><div class="comm-addon-desc">Extra revision bundle if you've used your included revisions.</div></div>
+            <div class="comm-addon-meta"><div class="comm-addon-price">+&#8364;19</div><div class="comm-addon-days">+3 Days</div></div>
             <a href="https://payhip.com/b/GF1hr" target="_blank" class="comm-btn-outline">Add to Order</a>
           </div>
 
           <div class="comm-addon">
-            <div>
-              <div class="comm-addon-name">Rig Documentation</div>
-              <div class="comm-addon-desc">Full written breakdown — control naming, features, limitations, delivery specs, and usage notes. Essential for studio pipelines.</div>
-            </div>
-            <div class="comm-addon-meta">
-              <div class="comm-addon-price">+&#8364;19</div>
-              <div class="comm-addon-days">+2 Days</div>
-            </div>
+            <div><div class="comm-addon-name">Rig Documentation</div><div class="comm-addon-desc">Full written breakdown — control naming, features, limitations, delivery specs, and usage notes. Essential for studio pipelines.</div></div>
+            <div class="comm-addon-meta"><div class="comm-addon-price">+&#8364;19</div><div class="comm-addon-days">+2 Days</div></div>
             <a href="https://payhip.com/b/1plwz" target="_blank" class="comm-btn-outline">Add to Order</a>
           </div>
         </div>
 
         <hr class="comm-divider">
 
-        <!-- ── STEP 03: Hard Surface ── -->
+        <!-- Step 03 -->
         <div class="comm-step">Step 03</div>
         <div class="comm-section-title">Hard Surface &amp; Mechanical Rigs</div>
         <div class="comm-section-sub">Vehicles, objects, mechanical assemblies. No character required.</div>
 
         <div class="comm-hs-grid">
-          <!-- Simple Object -->
           <div class="comm-tier">
             <div class="comm-tier-name">Simple Object</div>
             <div class="comm-tier-headline">Prop Rig</div>
@@ -890,7 +994,6 @@
             <a href="/pages/contact" class="comm-btn-outline" style="text-align:center;">Order Simple Object &#8594;</a>
           </div>
 
-          <!-- Mechanical -->
           <div class="comm-tier featured">
             <div class="comm-tier-name">Mechanical</div>
             <div class="comm-tier-headline">Mechanical Rig</div>
@@ -911,7 +1014,6 @@
             <a href="/pages/contact" class="comm-btn-primary" style="text-align:center;">Order Mechanical &#8594;</a>
           </div>
 
-          <!-- Vehicle -->
           <div class="comm-tier">
             <div class="comm-tier-name">Vehicle</div>
             <div class="comm-tier-headline">Vehicle Rig</div>
@@ -935,7 +1037,7 @@
 
         <hr class="comm-divider">
 
-        <!-- ── STEP 04: Not Sure ── -->
+        <!-- Step 04 -->
         <div class="comm-step">Step 04</div>
         <div class="comm-section-title" style="text-align:center;">Not Sure? Let's Talk.</div>
         <div class="comm-section-sub" style="text-align:center;">Message me before buying anything. I'll look at your project and tell you honestly what you need.</div>
@@ -950,7 +1052,7 @@
           <div class="comm-contact-option">
             <div class="comm-contact-icon">&#127959;</div>
             <div class="comm-contact-title">Custom or unusual project</div>
-            <div class="comm-contact-desc">Creature rig, quadruped, specific pipeline requirement, bulk order, or something else entirely — let's scope it together.</div>
+            <div class="comm-contact-desc">Creature rig, quadruped, pipeline requirement, bulk order, or something else — let's scope it together.</div>
             <a href="/pages/contact" class="comm-btn-outline" style="width:100%;text-align:center;">Let's scope it</a>
           </div>
           <div class="comm-contact-option">
@@ -961,7 +1063,7 @@
           </div>
         </div>
 
-        <div style="text-align:center;margin-top:8px;padding-bottom:8px;">
+        <div style="text-align:center;margin-top:8px;padding-bottom:40px;">
           <a href="/pages/contact" class="btn-primary">&#9993; &nbsp;contact@aviarigg.com</a>
         </div>
 
@@ -981,11 +1083,20 @@ function toggleMobileNav() {
   btn.classList.toggle('open', !isOpen);
 }
 
-function switchTab(tab) {
+function switchTab(tab, el) {
   document.querySelectorAll('.shop-tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.shop-tab-panel').forEach(p => p.classList.remove('active'));
   document.getElementById('tab-' + tab).classList.add('active');
-  event.currentTarget.classList.add('active');
+  el.classList.add('active');
+}
+
+function filterProducts(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.product-card').forEach(card => {
+    if (cat === 'all' || card.dataset.cat === cat) card.classList.remove('hidden');
+    else card.classList.add('hidden');
+  });
 }
 
 function updateScanHeights() {
@@ -996,13 +1107,8 @@ function updateScanHeights() {
 window.addEventListener('resize', updateScanHeights);
 document.addEventListener('DOMContentLoaded', () => {
   updateScanHeights();
-  if (window.ResizeObserver) {
-    const ro = new ResizeObserver(updateScanHeights);
-    document.querySelectorAll('.shop-card-thumb--img').forEach(el => ro.observe(el));
-  }
-  // Open commissions tab if URL has #commissions
   if (window.location.hash === '#commissions') {
-    document.querySelectorAll('.shop-tab')[1].click();
+    switchTab('commissions', document.getElementById('tab-btn-commissions'));
   }
 });
 
