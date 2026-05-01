@@ -69,7 +69,7 @@
   }
 
   .shop-tab-panel { display: none; }
-  .shop-tab-panel.active { display: block; animation: pgIn 0.25s ease; }
+  .shop-tab-panel.active { display: block; animation: pgIn 0.25s ease; padding-top: 40px; }
 
   /* ══════════════════════════════════════════
      OPTION A — PRODUCTS TAB
@@ -298,10 +298,6 @@
   /* ══════════════════════════════════════════
      COMMISSIONS TAB — centered + redesigned
   ══════════════════════════════════════════ */
-  .comm-wrap {
-    max-width: 960px;
-    margin: 0 auto;
-  }
 
   /* Availability badge */
   .comm-avail-badge {
@@ -585,8 +581,29 @@
   }
   .comm-btn-primary:hover { background: var(--accent2); border-color: var(--accent2); }
 
+  /* ── CENTERED 2/3 CONTAINER ── */
+  .shop-inner {
+    max-width: 1100px;
+    width: 66.666%;
+    margin: 0 auto;
+  }
+  .shop-tabs-wrap {
+    max-width: 1100px;
+    width: 66.666%;
+    margin: 0 auto;
+  }
+  .comm-wrap {
+    max-width: 1100px;
+    width: 66.666%;
+    margin: 0 auto;
+  }
+
   /* Responsive */
-  @media (max-width: 1000px) {
+  @media (max-width: 1400px) {
+    .shop-inner, .shop-tabs-wrap, .comm-wrap { width: 75%; }
+  }
+  @media (max-width: 1100px) {
+    .shop-inner, .shop-tabs-wrap, .comm-wrap { width: 90%; }
     .hero-card { grid-template-columns: 1fr; }
     .hero-card-img { border-right: none; border-bottom: 1px solid var(--border); }
     .product-grid { grid-template-columns: repeat(2,1fr); }
@@ -596,7 +613,8 @@
     .comm-facial-card { grid-template-columns: 1fr; }
     .comm-fd-tiers { grid-template-columns: 1fr; }
   }
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
+    .shop-inner, .shop-tabs-wrap, .comm-wrap { width: 100%; }
     .product-grid { grid-template-columns: 1fr; }
     .filter-row { overflow-x: auto; }
     .shop-tab { padding: 12px 16px; }
@@ -657,6 +675,7 @@
     </div>
 
     <!-- ── TAB SWITCHER ── -->
+    <div class="shop-tabs-wrap">
     <div class="shop-tabs">
       <div class="shop-tab active" id="tab-btn-products" onclick="switchTab('products',this)">
         <span class="shop-tab-icon">&#9632;</span> Products
@@ -666,9 +685,11 @@
       </div>
     </div>
     <div class="shop-tab-underline"></div>
+    </div><!-- end shop-tabs-wrap -->
 
     <!-- ══ TAB: PRODUCTS ══════════════════════════════════════ -->
     <div class="shop-tab-panel active" id="tab-products">
+      <div class="shop-inner">
 
       <!-- Hero featured card -->
       <div class="hero-card" onclick="window.location.href='/pages/product-f1'">
@@ -765,6 +786,7 @@
 
       <div class="shop-notice">Products are delivered via Payhip. Prices in EUR. Pay-what-you-want where indicated.</div>
 
+      </div><!-- end shop-inner -->
     </div>
     <!-- end products tab -->
 
