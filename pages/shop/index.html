@@ -764,6 +764,10 @@
       <button onclick="closeCheckout()" style="background:none;border:none;color:#666680;font-size:20px;cursor:pointer;line-height:1;padding:0 4px;transition:color 0.2s;" onmouseover="this.style.color='#eeeef8'" onmouseout="this.style.color='#666680'">&#10005;</button>
     </div>
     <iframe id="checkout-iframe" src="" style="flex:1;border:none;width:100%;"></iframe>
+    <div style="padding:12px 18px;border-top:1px solid rgba(255,255,255,0.07);background:#0d0d12;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+      <span style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:#555570;text-transform:uppercase;">If Payhip does not load, open directly ↓</span>
+      <a id="checkout-fallback-btn" href="#" target="_blank" style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#00e87a;border:1px solid rgba(0,232,122,0.4);padding:7px 16px;text-decoration:none;white-space:nowrap;transition:background 0.2s;" onmouseover="this.style.background='rgba(0,232,122,0.1)'" onmouseout="this.style.background='transparent'">Open in Browser ↗</a>
+    </div>
   </div>
 </div>
 
@@ -1237,6 +1241,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function openCheckout(url) {
   const modal = document.getElementById('checkout-modal');
   document.getElementById('checkout-iframe').src = url;
+  document.getElementById('checkout-fallback-btn').href = url;
   modal.style.display = 'flex';
   document.body.style.overflow = 'hidden';
 }
