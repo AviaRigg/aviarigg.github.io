@@ -4,7 +4,7 @@
 //  0 = hidden (work) or "Closed" (commissions)
 // ══════════════════════════════════════════
 const AVAILABLE_FOR_WORK        = 1;
-const AVAILABLE_FOR_COMMISSIONS = 1;
+const AVAILABLE_FOR_COMMISSIONS = 0;
 
 // ── Run after DOM is ready ──
 document.addEventListener('DOMContentLoaded', function () {
