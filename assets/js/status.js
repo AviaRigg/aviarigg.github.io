@@ -4,7 +4,7 @@
 //  0 = hidden (work) or "Closed" (commissions)
 // ══════════════════════════════════════════
 const AVAILABLE_FOR_WORK        = 1;
-const AVAILABLE_FOR_COMMISSIONS = 0;
+const AVAILABLE_FOR_COMMISSIONS = 1;
 
 // ── Run after DOM is ready ──
 document.addEventListener('DOMContentLoaded', function () {
@@ -47,14 +47,13 @@ document.addEventListener('DOMContentLoaded', function () {
         el.style.cursor = 'not-allowed';
       }
     });
-    // Add a closed banner inside commissions tab panel if it exists
-    const commTab = document.getElementById('tab-commissions');
-    if (commTab) {
-      const banner = document.createElement('div');
-      banner.style.cssText = 'font-family:Share Tech Mono,monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#ff6b6b;border:1px solid rgba(255,107,107,0.3);background:rgba(255,107,107,0.06);padding:14px 20px;margin-bottom:32px;';
-      banner.textContent = '// Commissions are currently closed — check back soon.';
-      commTab.insertBefore(banner, commTab.firstChild);
-    }
+    // Replace "Currently Available for Commissions" green badge with closed message
+    document.querySelectorAll('.comm-avail-badge').forEach(el => {
+      el.style.color = '#ff6b6b';
+      el.style.borderColor = 'rgba(255,107,107,0.4)';
+      el.style.background = 'rgba(255,107,107,0.06)';
+      el.textContent = '// Commissions are currently closed — check back soon.';
+    });
   }
 
 });
