@@ -61,19 +61,20 @@
     .port-grid { grid-template-columns: 1fr !important; }
     .port-card:first-child { grid-column: span 1; }
   }
-  /* Glow effect on featured, reel and grid */
+  /* Glow on featured only */
   .port-featured {
     box-shadow: 0 0 60px rgba(139,79,200,0.18);
     border: 1px solid rgba(139,79,200,0.35);
   }
-  .reel-section .showreel {
-    box-shadow: 0 0 60px rgba(139,79,200,0.18);
-    border: 1px solid rgba(139,79,200,0.35) !important;
+  /* Vertical rule lines on reel and grid center-wraps */
+  .center-wrap.rules { position: relative; }
+  .center-wrap.rules::before, .center-wrap.rules::after {
+    content: ''; position: absolute; top: 0; bottom: 0;
+    width: 1px; opacity: 0.4;
+    background: linear-gradient(to bottom, transparent, var(--accent) 20%, var(--accent) 80%, transparent);
   }
-  .port-grid {
-    box-shadow: 0 0 60px rgba(139,79,200,0.18);
-    outline: 1px solid rgba(139,79,200,0.35);
-  }
+  .center-wrap.rules::before { left: -1px; }
+  .center-wrap.rules::after  { right: -1px; }
 </style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-RYTKYEPJG2"></script>
@@ -157,7 +158,7 @@
       <span style="color:var(--text-dim);">2023–2024</span>
     </div>
 
-    <div class="center-wrap">
+    <div class="center-wrap rules">
       <div class="reel-section">
         <div class="showreel" style="padding:0;overflow:hidden;position:relative;aspect-ratio:16/9;background:#000;">
           <iframe
@@ -178,7 +179,7 @@
       <span>06 entries</span>
     </div>
 
-    <div class="center-wrap">
+    <div class="center-wrap rules">
       <div class="port-grid">
 
         <!-- 01 — spans 2 cols -->
