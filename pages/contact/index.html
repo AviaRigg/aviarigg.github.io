@@ -10,7 +10,6 @@
   .page { display: block !important; }
   .nav-logo, .nav-link, .nav-badge, .nav-drawer a { text-decoration: none; }
 
-  /* ── Contact Form ── */
   .contact-form-section {
     margin-top: 48px;
     padding-top: 40px;
@@ -19,7 +18,6 @@
     margin-left: auto;
     margin-right: auto;
   }
-
   .contact-form-label {
     font-family: 'Share Tech Mono', monospace;
     font-size: 11px;
@@ -29,7 +27,6 @@
     margin-bottom: 6px;
     display: block;
   }
-
   .contact-form-title {
     font-family: 'Rajdhani', sans-serif;
     font-size: clamp(22px, 3vw, 30px);
@@ -37,23 +34,13 @@
     color: var(--text, #f0f0f0);
     margin-bottom: 28px;
   }
-
   .cform {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px;
   }
-
-  .cform-field {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .cform-field.full {
-    grid-column: 1 / -1;
-  }
-
+  .cform-field { display: flex; flex-direction: column; gap: 6px; }
+  .cform-field.full { grid-column: 1 / -1; }
   .cform-field label {
     font-family: 'Share Tech Mono', monospace;
     font-size: 10px;
@@ -61,7 +48,6 @@
     text-transform: uppercase;
     color: rgba(255,255,255,0.45);
   }
-
   .cform-field input,
   .cform-field select,
   .cform-field textarea {
@@ -79,7 +65,6 @@
     -webkit-appearance: none;
     appearance: none;
   }
-
   .cform-field select {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.35)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
@@ -87,29 +72,16 @@
     padding-right: 34px;
     cursor: pointer;
   }
-
-  .cform-field select option {
-    background: #1a1625;
-    color: #f0f0f0;
-  }
-
+  .cform-field select option { background: #1a1625; color: #f0f0f0; }
   .cform-field input:focus,
   .cform-field select:focus,
   .cform-field textarea:focus {
     border-color: var(--accent, #a78bfa);
     background: rgba(167,139,250,0.05);
   }
-
-  .cform-field textarea {
-    resize: vertical;
-    min-height: 120px;
-  }
-
+  .cform-field textarea { resize: vertical; min-height: 120px; }
   .cform-field input::placeholder,
-  .cform-field textarea::placeholder {
-    color: rgba(255,255,255,0.2);
-  }
-
+  .cform-field textarea::placeholder { color: rgba(255,255,255,0.2); }
   .cform-submit-row {
     grid-column: 1 / -1;
     display: flex;
@@ -118,13 +90,7 @@
     gap: 16px;
     flex-wrap: wrap;
   }
-
-  .cform-note {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 11px;
-    color: rgba(255,255,255,0.25);
-  }
-
+  .cform-note { font-family: 'Share Tech Mono', monospace; font-size: 11px; color: rgba(255,255,255,0.25); }
   .cform-status {
     font-family: 'Share Tech Mono', monospace;
     font-size: 12px;
@@ -133,21 +99,8 @@
     display: none;
     grid-column: 1 / -1;
   }
-
-  .cform-status.success {
-    display: block;
-    background: rgba(74,222,128,0.08);
-    border: 1px solid rgba(74,222,128,0.25);
-    color: #4ade80;
-  }
-
-  .cform-status.error {
-    display: block;
-    background: rgba(248,113,113,0.08);
-    border: 1px solid rgba(248,113,113,0.25);
-    color: #f87171;
-  }
-
+  .cform-status.success { display: block; background: rgba(74,222,128,0.08); border: 1px solid rgba(74,222,128,0.25); color: #4ade80; }
+  .cform-status.error { display: block; background: rgba(248,113,113,0.08); border: 1px solid rgba(248,113,113,0.25); color: #f87171; }
   .btn-submit {
     font-family: 'Rajdhani', sans-serif;
     font-size: 13px;
@@ -163,11 +116,9 @@
     transition: opacity 0.2s, transform 0.15s;
     white-space: nowrap;
   }
-
   .btn-submit:hover { opacity: 0.85; transform: translateY(-1px); }
   .btn-submit:active { transform: translateY(0); }
   .btn-submit:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
-
   @media (max-width: 600px) {
     .cform { grid-template-columns: 1fr; }
     .cform-field.full { grid-column: 1; }
@@ -182,11 +133,14 @@
     gtag('js', new Date());
     gtag('config', 'G-RYTKYEPJG2');
   </script>
+  <link rel="icon" type="image/png" href="/assets/icons/SiteIcon.png">
+  <link rel="shortcut icon" href="/assets/icons/SiteIcon.png">
+  <link rel="apple-touch-icon" href="/assets/icons/SiteIcon.png">
 </head>
 <body>
 
 <nav class="topnav">
-  <a class="nav-logo" href="/">Avia<span>Rigg</span></a>
+  <a class="nav-logo" href="/"><img src="/assets/icons/SiteIcon.png" alt="AviaRigg Logo" style="height:clamp(24px,2.2vw,36px);width:auto;display:inline-block;vertical-align:middle;margin-right:clamp(8px,0.8vw,14px);"><span style="display:inline-block;width:1px;height:clamp(18px,1.6vw,26px);background:rgba(139,79,200,0.4);vertical-align:middle;margin-right:clamp(8px,0.8vw,14px);"></span>Avia<span>Rigg</span></a>
   <div class="nav-links">
     <a class="nav-link" href="/">Home</a>
     <a class="nav-link" href="/pages/portfolio">Portfolio</a>
@@ -214,7 +168,6 @@
     <div class="eyebrow">Get in Touch</div>
     <div class="section-h">Contact</div>
 
-    <!-- Existing grid: social links + opportunity panel -->
     <div class="contact-grid">
       <div class="contact-links">
         <a class="clink" href="mailto:contact@aviarigg.com">
@@ -247,11 +200,9 @@
       </div>
     </div>
 
-    <!-- Contact Form -->
     <div class="contact-form-section">
       <span class="contact-form-label">// Direct Message</span>
       <div class="contact-form-title">Send a Message</div>
-
       <form class="cform" id="contact-form">
         <div class="cform-field">
           <label for="cf-name">Name</label>
@@ -296,30 +247,25 @@ function toggleMobileNav() {
   btn.classList.toggle('open', !isOpen);
 }
 
-// Formspree async submission
 document.getElementById('contact-form').addEventListener('submit', async function(e) {
   e.preventDefault();
   const form = e.target;
   const btn = document.getElementById('cform-btn');
   const status = document.getElementById('cform-status');
-
   btn.disabled = true;
   btn.textContent = 'Sending...';
   status.className = 'cform-status';
   status.style.display = 'none';
-
   const data = new FormData(form);
-
   try {
     const res = await fetch('https://formspree.io/f/xzdobkjp', {
       method: 'POST',
       body: data,
       headers: { 'Accept': 'application/json' }
     });
-
     if (res.ok) {
       status.className = 'cform-status success';
-      status.textContent = '// Message sent. I\'ll get back to you within 48h.';
+      status.textContent = "// Message sent. I'll get back to you within 48h.";
       form.reset();
     } else {
       throw new Error('Server error');
@@ -328,7 +274,6 @@ document.getElementById('contact-form').addEventListener('submit', async functio
     status.className = 'cform-status error';
     status.textContent = '// Something went wrong. Email me directly at contact@aviarigg.com';
   }
-
   status.style.display = 'block';
   btn.disabled = false;
   btn.innerHTML = 'Send Message &#9654;';
