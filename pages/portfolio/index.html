@@ -9,6 +9,58 @@
 <style>
   .page { display: block !important; }
   .nav-logo, .nav-link, .nav-badge, .nav-drawer a { text-decoration: none; }
+
+  /* ── 2/3 centered container ── */
+  .center-wrap {
+    width: 66.666%;
+    margin: 0 auto;
+  }
+  @media (max-width: 1400px) { .center-wrap { width: 78%; } }
+  @media (max-width: 1100px) { .center-wrap { width: 90%; } }
+  @media (max-width: 768px)  { .center-wrap { width: 100%; } }
+
+  /* ── Section label strip (between blocks) ── */
+  .port-new-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: clamp(9px, 0.8vw, 11px);
+    letter-spacing: 4px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    padding: 14px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0;
+  }
+
+  /* ── Override: reel no max-width, no margin centering (center-wrap handles it) ── */
+  .reel-section {
+    max-width: 100% !important;
+    margin: 0 0 0 0 !important;
+  }
+
+  /* ── Override: port-grid to 3-col asymmetric, first card spans 2 ── */
+  .port-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    width: 100% !important;
+  }
+  .port-card {
+    width: 100% !important;
+  }
+  .port-card:first-child {
+    grid-column: span 2;
+  }
+
+  @media (max-width: 1024px) {
+    .port-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    .port-card:first-child { grid-column: span 2; }
+  }
+  @media (max-width: 600px) {
+    .port-grid { grid-template-columns: 1fr !important; }
+    .port-card:first-child { grid-column: span 1; }
+  }
 </style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-RYTKYEPJG2"></script>
@@ -47,23 +99,76 @@
 
 <div class="page active" id="page-portfolio">
   <div class="port-wrap">
+
+    <!-- ══ TITLE — untouched ══ -->
     <div class="port-header">
       <div class="eyebrow">Work</div>
       <div class="section-h">Portfolio</div>
     </div>
-    <div class="reel-section">
-      <div class="showreel" style="padding:0;overflow:hidden;position:relative;aspect-ratio:16/9;background:#000;">
-        <iframe
-          src="https://www.youtube.com/embed/vkeLPcO5DqU"
-          title="AviaRigg Demoreel"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-          style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;">
-        </iframe>
+
+    <!-- ══ FEATURED PROJECT ══ -->
+    <div class="port-new-label">
+      <span>// Featured Project</span>
+      <span style="color:var(--accent);">&#9679; Featured</span>
+    </div>
+
+    <div class="center-wrap">
+      <div class="port-featured" onclick="window.location.href='/pages/portfolio-f1'">
+        <div class="port-featured-img">
+          <img src="/projects/f1_SF25/images/F1_Rendered.png" alt="Formula 1 SF-25">
+          <div class="port-featured-overlay">
+            <div class="port-featured-tag">Hard Surface</div>
+            <div class="port-featured-cta">View Breakdown &#9654;</div>
+          </div>
+        </div>
+        <div class="port-featured-body">
+          <div class="port-featured-meta">
+            <div class="port-featured-cat">// Maya Rig</div>
+            <div class="port-featured-year">2025</div>
+          </div>
+          <div class="port-featured-title">Formula 1<br><span style="color:var(--accent2);">SF-25 Livery</span></div>
+          <div class="port-featured-desc">Production-ready F1 car rig — DRS system, dual livery switching between Hamilton and Leclerc, auto wheel spin, full AnimSchool Picker support.</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <span class="ptag">Maya 2022+</span>
+            <span class="ptag">DRS System</span>
+            <span class="ptag">Dual Livery</span>
+            <span class="ptag">AnimSchool Picker</span>
+          </div>
+        </div>
       </div>
-      <div class="port-section-label">// Projects</div>
+    </div>
+
+    <!-- ══ DEMOREEL ══ -->
+    <div class="port-new-label" style="margin-top:48px;">
+      <span>// Demoreel</span>
+      <span style="color:var(--text-dim);">2023–2024</span>
+    </div>
+
+    <div class="center-wrap">
+      <div class="reel-section">
+        <div class="showreel" style="padding:0;overflow:hidden;position:relative;aspect-ratio:16/9;background:#000;">
+          <iframe
+            src="https://www.youtube.com/embed/vkeLPcO5DqU"
+            title="AviaRigg Demoreel"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;">
+          </iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ ALL PROJECTS GRID ══ -->
+    <div class="port-new-label" style="margin-top:48px;">
+      <span>// All Projects</span>
+      <span>06 entries</span>
+    </div>
+
+    <div class="center-wrap">
       <div class="port-grid">
+
+        <!-- 01 — spans 2 cols -->
         <div class="port-card" style="opacity:1;cursor:pointer;" onclick="window.location.href='/pages/portfolio-f1'">
           <div class="pc-thumb" style="padding:0;overflow:hidden;position:relative;">
             <img src="/projects/f1_SF25/images/F1_Rendered.png" alt="F1 SF-25" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.3s ease;">
@@ -75,30 +180,63 @@
             <div class="pc-desc">Production-ready F1 car rig — DRS system, dual livery, auto wheel spin, AnimSchool picker.</div>
           </div>
         </div>
+
+        <!-- 02 -->
         <div class="port-card placeholder">
           <div class="pc-thumb">// Coming Soon</div>
-          <div class="pc-body"><div class="pc-cat">Character Rig</div><div class="pc-title">Nordic Bandit</div><div class="pc-desc">Full character rig breakdown — uploading soon.</div></div>
+          <div class="pc-body">
+            <div class="pc-cat">Character Rig</div>
+            <div class="pc-title">Nordic Bandit</div>
+            <div class="pc-desc">Full character rig breakdown — uploading soon.</div>
+          </div>
         </div>
+
+        <!-- 03 -->
         <div class="port-card placeholder">
           <div class="pc-thumb">// Coming Soon</div>
-          <div class="pc-body"><div class="pc-cat">Tool</div><div class="pc-title">AviaRigg Toolkit</div><div class="pc-desc">Full toolkit documentation — coming soon.</div></div>
+          <div class="pc-body">
+            <div class="pc-cat">Tool</div>
+            <div class="pc-title">AviaRigg Toolkit</div>
+            <div class="pc-desc">Full toolkit documentation — coming soon.</div>
+          </div>
         </div>
+
+        <!-- 04 -->
         <div class="port-card placeholder">
           <div class="pc-thumb">// Coming Soon</div>
-          <div class="pc-body"><div class="pc-cat">Facial Rig</div><div class="pc-title">Project Incoming</div><div class="pc-desc">Facial rig breakdown — coming soon.</div></div>
+          <div class="pc-body">
+            <div class="pc-cat">Facial Rig</div>
+            <div class="pc-title">Project Incoming</div>
+            <div class="pc-desc">Facial rig breakdown — coming soon.</div>
+          </div>
         </div>
+
+        <!-- 05 -->
         <div class="port-card placeholder">
           <div class="pc-thumb">// Coming Soon</div>
-          <div class="pc-body"><div class="pc-cat">Workshop Project</div><div class="pc-title">HatRigs Project</div><div class="pc-desc">Project from HatRigs workshop — coming soon.</div></div>
+          <div class="pc-body">
+            <div class="pc-cat">Workshop Project</div>
+            <div class="pc-title">HatRigs Project</div>
+            <div class="pc-desc">Project from HatRigs workshop — coming soon.</div>
+          </div>
         </div>
+
+        <!-- 06 -->
         <div class="port-card placeholder">
           <div class="pc-thumb">// Coming Soon</div>
-          <div class="pc-body"><div class="pc-cat">Workshop Project</div><div class="pc-title">Rigging Dojo Project</div><div class="pc-desc">Project from Rigging Dojo workshop — coming soon.</div></div>
+          <div class="pc-body">
+            <div class="pc-cat">Workshop Project</div>
+            <div class="pc-title">Rigging Dojo Project</div>
+            <div class="pc-desc">Project from Rigging Dojo workshop — coming soon.</div>
+          </div>
         </div>
+
       </div>
     </div>
+
   </div>
 </div>
+
 <script>
 function toggleMobileNav() {
   const drawer = document.getElementById('nav-drawer');
