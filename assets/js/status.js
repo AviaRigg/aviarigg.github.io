@@ -4,7 +4,7 @@
 //  0 = hidden (work) or "Closed" (commissions)
 // ══════════════════════════════════════════
 const AVAILABLE_FOR_WORK        = 1;
-const AVAILABLE_FOR_COMMISSIONS = 0;
+const AVAILABLE_FOR_COMMISSIONS = 1;
 
 // ── Run after DOM is ready ──
 document.addEventListener('DOMContentLoaded', function () {
@@ -32,14 +32,18 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // ── COMMISSIONS STATUS ──
-  if (AVAILABLE_FOR_COMMISSIONS === 0) {
-    // Commissions tab label in shop
-    document.querySelectorAll('.shop-tab').forEach(el => {
-      if (el.textContent.includes('Commissions')) {
+  // Always add status pill to commissions tab
+  document.querySelectorAll('.shop-tab').forEach(el => {
+    if (el.textContent.includes('Commissions')) {
+      if (AVAILABLE_FOR_COMMISSIONS === 1) {
+        el.innerHTML = el.innerHTML.replace('Commissions', 'Commissions <span style="font-size:8px;letter-spacing:1px;color:#00e87a;border:1px solid rgba(0,232,122,0.4);padding:1px 6px;margin-left:4px;vertical-align:middle;">Open</span>');
+      } else {
         el.innerHTML = el.innerHTML.replace('Commissions', 'Commissions <span style="font-size:8px;letter-spacing:1px;color:#ff6b6b;border:1px solid rgba(255,107,107,0.4);padding:1px 6px;margin-left:4px;vertical-align:middle;">Closed</span>');
       }
-    });
-    // Commission order buttons in shop commissions tab
+    }
+  });
+
+  if (AVAILABLE_FOR_COMMISSIONS === 0) {
     document.querySelectorAll('.comm-btn-primary, .comm-btn-outline').forEach(el => {
       if (el.href && el.href.includes('contact') || el.textContent.includes('Order') || el.textContent.includes('Commission')) {
         el.style.opacity = '0.4';
